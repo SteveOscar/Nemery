@@ -8,12 +8,12 @@ import {
     StyleSheet,
 } from 'react-native';
 
-var BoardView = require('./boardview.js')
+import GameView from './GameView.js'
 
 var Main = React.createClass({
   render() {
     return <View style={styles.container}>
-            <BoardView/>
+            <GameView/>
            </View>
   },
 });

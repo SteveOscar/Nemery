@@ -1,5 +1,3 @@
-'use-strict'
-
 import React from 'react';
 import {
     Text,
@@ -9,40 +7,56 @@ import {
     Easing
 } from 'react-native';
 
-
-
 var {width, height} = require('Dimensions').get('window');
-var SIZE = 2; // four-by-four grid
-var CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
-var CELL_PADDING = Math.floor(CELL_SIZE * .05); // 5% of the cell size
-var BORDER_RADIUS = CELL_PADDING * 2;
-var TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
-var LETTER_SIZE = Math.floor(TILE_SIZE * .75);
+const SIZE = 2; // four-by-four grid
+const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
+const CELL_PADDING = Math.floor(CELL_SIZE * .05); // 5% of the cell size
+const BORDER_RADIUS = CELL_PADDING * 2;
+const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
+const LETTER_SIZE = Math.floor(TILE_SIZE * .75);
 
-var BoardView = React.createClass({
-  getInitialState() {
+class BoardView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      board: this.makeBoard(),
+      layer: 0,
+      letters: ['X', 'T', 'L', 'Z']
+    }
+  }
+
+  makeBoard() {
     var tilt = new Array(16)
     for (var i = 0; i < tilt.length; i++) {
       tilt[i] = new Animated.Value(0)
     }
     return {tilt}
-  },
+  }
 
   render() {
     return <View style={styles.container}>
             {this.renderTiles()}
            </View>
-  },
+  }
+
+  secondaryLetter(id) {
+    let { letters } = this.state
+    const toMutate = letters[id]
+    let mutated = (toMutate.charCodeAt(0) + 2) % 91
+    mutated = mutated < 65 ? mutated + 65 : mutated
+    newLetter = String.fromCharCode(mutated)
+    letters[id] = newLetter
+    return letters
+  }
 
   renderTiles() {
-    var level = ['L', 'T', 'L', 'T']
     var result = []
     for (var row = 0; row < SIZE; row++) {
       for (var col = 0; col < SIZE; col++) {
         var id = row * SIZE + col
         // var letter = String.fromCharCode(65 + id)
-        var letter = level[id]
-        var tilt = this.state.tilt[id].interpolate({
+        var letter = this.state.letters[id]
+        var tilt = this.state.board.tilt[id].interpolate({
           inputRange: [0, 1],
           outputRange: ['0deg', '-180deg']
         })
@@ -56,7 +70,7 @@ var BoardView = React.createClass({
       }
     }
     return result
-  },
+  }
 
   renderTile(id, style, letter) {
     return (
@@ -64,11 +78,13 @@ var BoardView = React.createClass({
         <Text style={styles.letter}>{letter}</Text>
       </Animated.View>
     )
-  },
+  }
 
   clickTile(id) {
-    this.setState({ layer: 1 })
-    var tilt = this.state.tilt[id];
+    this.setState({ layer: this.state.layer == 0 ? 1 : 0,
+                    letters: this.secondaryLetter(id)
+                   })
+    var tilt = this.state.board.tilt[id];
     tilt.setValue(1);
     Animated.timing(tilt, {
       toValue: 0,
@@ -76,7 +92,7 @@ var BoardView = React.createClass({
       easing: Easing.spring
     }).start();
   }
-})
+}
 
 var styles = StyleSheet.create({
   container: {
@@ -100,4 +116,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = BoardView;
+export default BoardView;
