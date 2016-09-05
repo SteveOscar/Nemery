@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
-const SIZE = 2; // four-by-four grid
+const SIZE = 3; // four-by-four grid
 const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
 const CELL_PADDING = Math.floor(CELL_SIZE * .05); // 5% of the cell size
-const BORDER_RADIUS = CELL_PADDING * 2;
+const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 const LETTER_SIZE = Math.floor(TILE_SIZE * .75);
 
@@ -21,12 +21,65 @@ class BoardView extends React.Component {
     this.state = {
       board: this.makeBoard(),
       layer: 0,
-      letters: ['X', 'T', 'L', 'Z']
+      letters: ''
     }
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.initialTileRender(0)
+      this.initialTileRender(1)
+      this.initialTileRender(2)
+    }, 500);
+    setTimeout(() => {
+      this.initialTileRender(3)
+      this.initialTileRender(4)
+      this.initialTileRender(5)
+    }, 1000);
+    setTimeout(() => {
+      this.initialTileRender(6)
+      this.initialTileRender(7)
+      this.initialTileRender(8)
+    }, 1500);
+  }
+
+  initialTileRender(id) {
+    var tilt = this.state.board.tilt[id];
+    tilt.setValue(1);
+    Animated.timing(tilt, {
+      toValue: 0,
+      duration: 900,
+      easing: Easing.spring
+    }).start(this.showLetter(id));
+  }
+
+  showLetter(id) {
+    setTimeout(() => {
+      this.setState({ letters: this.makeSomeLetters(id) })
+    }, 500);
+  }
+
+  makeSomeLetters(id) {
+    let letters = this.state.letters || new Array(SIZE * SIZE)
+    letters[id] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
+    // letters[i] = ''
+    // letters[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
+    return letters
+  }
+
+  makeLetters() {
+    let letters = new Array(SIZE * SIZE)
+    for (var i = 0; i < SIZE * SIZE; i++) {
+      letters[i] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
+      // letters[i] = ''
+      // letters[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
+    }
+    return letters
+
+  }
+
   makeBoard() {
-    var tilt = new Array(16)
+    var tilt = new Array(SIZE * SIZE)
     for (var i = 0; i < tilt.length; i++) {
       tilt[i] = new Animated.Value(0)
     }
