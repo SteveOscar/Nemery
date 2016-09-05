@@ -9,7 +9,8 @@ import {
 
 var {width, height} = require('Dimensions').get('window');
 const SIZE = 3; // four-by-four grid
-const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
+const COUNT = SIZE * SIZE
+const CELL_SIZE = Math.floor(width * .18); // 20% of the screen width
 const CELL_PADDING = Math.floor(CELL_SIZE * .05); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
@@ -21,26 +22,54 @@ class BoardView extends React.Component {
     this.state = {
       board: this.makeBoard(),
       layer: 0,
-      letters: ''
+      letters: '',
+      hiddenLetters: ['a', 'z', 'e', 'a', 's', 'a', 'f', 's', 'a']
     }
   }
 
   componentDidMount() {
     setTimeout(() => {
-      this.initialTileRender(0)
-      this.initialTileRender(1)
-      this.initialTileRender(2)
+      for (var i = 0; i < SIZE; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.initialTileRender(i)
+        }
+      }
     }, 500);
     setTimeout(() => {
-      this.initialTileRender(3)
-      this.initialTileRender(4)
-      this.initialTileRender(5)
+      for (var i = SIZE; i < SIZE*2; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.initialTileRender(i)
+        }
+      }
     }, 1000);
     setTimeout(() => {
-      this.initialTileRender(6)
-      this.initialTileRender(7)
-      this.initialTileRender(8)
+      for (var i = SIZE*2; i < SIZE*3; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.initialTileRender(i)
+        }
+      }
     }, 1500);
+    setTimeout(() => {
+      for (var i = 0; i < SIZE; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.tileHide(i)
+        }
+      }
+    }, 2300);
+    setTimeout(() => {
+      for (var i = SIZE; i < SIZE*2; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.tileHide(i)
+        }
+      }
+    }, 2800);
+    setTimeout(() => {
+      for (var i = SIZE*2; i < SIZE*3; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.tileHide(i)
+        }
+      }
+    }, 3300);
   }
 
   initialTileRender(id) {
@@ -53,6 +82,24 @@ class BoardView extends React.Component {
     }).start(this.showLetter(id));
   }
 
+  tileHide(id) {
+    var tilt = this.state.board.tilt[id];
+    tilt.setValue(0);
+    Animated.timing(tilt, {
+      toValue: 1,
+      duration: 900,
+      easing: Easing.spring
+    }).start(this.hideLetter(id));
+  }
+
+  hideLetter(id) {
+    setTimeout(() => {
+      let letters = this.state.letters
+      letters[id] = ''
+      this.setState({ letters: letters })
+    }, 400);
+  }
+
   showLetter(id) {
     setTimeout(() => {
       this.setState({ letters: this.makeSomeLetters(id) })
@@ -61,9 +108,10 @@ class BoardView extends React.Component {
 
   makeSomeLetters(id) {
     let letters = this.state.letters || new Array(SIZE * SIZE)
-    letters[id] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
+    // letters[id] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
     // letters[i] = ''
     // letters[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
+    letters[id] = this.state.hiddenLetters[id]
     return letters
   }
 
@@ -94,11 +142,11 @@ class BoardView extends React.Component {
 
   secondaryLetter(id) {
     let { letters } = this.state
-    const toMutate = letters[id]
-    let mutated = (toMutate.charCodeAt(0) + 2) % 91
-    mutated = mutated < 65 ? mutated + 65 : mutated
-    newLetter = String.fromCharCode(mutated)
-    letters[id] = newLetter
+    // const toMutate = letters[id]
+    // let mutated = (toMutate.charCodeAt(0) + 2) % 91
+    // mutated = mutated < 65 ? mutated + 65 : mutated
+    // newLetter = String.fromCharCode(mutated)
+    letters[id] = this.state.hiddenLetters[id]
     return letters
   }
 
@@ -134,13 +182,11 @@ class BoardView extends React.Component {
   }
 
   clickTile(id) {
-    this.setState({ layer: this.state.layer == 0 ? 1 : 0,
-                    letters: this.secondaryLetter(id)
-                   })
+    this.setState({ letters: this.secondaryLetter(id) })
     var tilt = this.state.board.tilt[id];
     tilt.setValue(1);
     Animated.timing(tilt, {
-      toValue: 0,
+      toValue: 4,
       duration: 400,
       easing: Easing.spring
     }).start();
