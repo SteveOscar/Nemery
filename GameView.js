@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
-const SIZE = 3; // four-by-four grid
+const SIZE = 2; // four-by-four grid
 const COUNT = SIZE * SIZE
-const CELL_SIZE = Math.floor(width * .18); // 20% of the screen width
-const CELL_PADDING = Math.floor(CELL_SIZE * .05); // 5% of the cell size
+const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
+const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 const LETTER_SIZE = Math.floor(TILE_SIZE * .75);
@@ -23,8 +23,14 @@ class BoardView extends React.Component {
       board: this.makeBoard(),
       layer: 0,
       letters: '',
-      hiddenLetters: ['a', 'z', 'e', 'a', 's', 'a', 'f', 's', 'a']
+      hiddenLetters: this.generateNumbers()
     }
+  }
+
+  generateNumbers() {
+    const length = SIZE * SIZE
+    const max = 20
+    return randomArray = [...new Array(length)].map((_, i) => Math.round(Math.random() * max));
   }
 
   componentDidMount() {
@@ -43,12 +49,25 @@ class BoardView extends React.Component {
       }
     }, 1000);
     setTimeout(() => {
+      if(SIZE < 3) { return }
       for (var i = SIZE*2; i < SIZE*3; i++) {
         for (var j = 0; j < SIZE; j++) {
           this.initialTileRender(i)
         }
       }
     }, 1500);
+    setTimeout(() => {
+      if(SIZE < 4) { return }
+      for (var i = SIZE*3; i < SIZE*4; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.initialTileRender(i)
+        }
+      }
+    }, 2000);
+    this.hideTiles()
+  }
+
+  hideTiles() {
     setTimeout(() => {
       for (var i = 0; i < SIZE; i++) {
         for (var j = 0; j < SIZE; j++) {
@@ -64,12 +83,21 @@ class BoardView extends React.Component {
       }
     }, 2800);
     setTimeout(() => {
+      if(SIZE < 3) { return }
       for (var i = SIZE*2; i < SIZE*3; i++) {
         for (var j = 0; j < SIZE; j++) {
           this.tileHide(i)
         }
       }
     }, 3300);
+    setTimeout(() => {
+      if(SIZE < 4) { return }
+      for (var i = SIZE*3; i < SIZE*4; i++) {
+        for (var j = 0; j < SIZE; j++) {
+          this.tileHide(i)
+        }
+      }
+    }, 3800);
   }
 
   initialTileRender(id) {
@@ -79,7 +107,7 @@ class BoardView extends React.Component {
       toValue: 0,
       duration: 900,
       easing: Easing.spring
-    }).start(this.showLetter(id));
+    }).start(this.showNumber(id));
   }
 
   tileHide(id) {
@@ -87,20 +115,20 @@ class BoardView extends React.Component {
     tilt.setValue(0);
     Animated.timing(tilt, {
       toValue: 1,
-      duration: 900,
+      duration: 500,
       easing: Easing.spring
-    }).start(this.hideLetter(id));
+    }).start(this.hideNumber(id));
   }
 
-  hideLetter(id) {
+  hideNumber(id) {
     setTimeout(() => {
       let letters = this.state.letters
       letters[id] = ''
       this.setState({ letters: letters })
-    }, 400);
+    }, 100);
   }
 
-  showLetter(id) {
+  showNumber(id) {
     setTimeout(() => {
       this.setState({ letters: this.makeSomeLetters(id) })
     }, 500);
@@ -108,9 +136,6 @@ class BoardView extends React.Component {
 
   makeSomeLetters(id) {
     let letters = this.state.letters || new Array(SIZE * SIZE)
-    // letters[id] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
-    // letters[i] = ''
-    // letters[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
     letters[id] = this.state.hiddenLetters[id]
     return letters
   }
@@ -142,10 +167,6 @@ class BoardView extends React.Component {
 
   secondaryLetter(id) {
     let { letters } = this.state
-    // const toMutate = letters[id]
-    // let mutated = (toMutate.charCodeAt(0) + 2) % 91
-    // mutated = mutated < 65 ? mutated + 65 : mutated
-    // newLetter = String.fromCharCode(mutated)
     letters[id] = this.state.hiddenLetters[id]
     return letters
   }
@@ -155,7 +176,6 @@ class BoardView extends React.Component {
     for (var row = 0; row < SIZE; row++) {
       for (var col = 0; col < SIZE; col++) {
         var id = row * SIZE + col
-        // var letter = String.fromCharCode(65 + id)
         var letter = this.state.letters[id]
         var tilt = this.state.board.tilt[id].interpolate({
           inputRange: [0, 1],
@@ -184,10 +204,10 @@ class BoardView extends React.Component {
   clickTile(id) {
     this.setState({ letters: this.secondaryLetter(id) })
     var tilt = this.state.board.tilt[id];
-    tilt.setValue(1);
+    tilt.setValue(0);
     Animated.timing(tilt, {
-      toValue: 4,
-      duration: 400,
+      toValue: 2,
+      duration: 300,
       easing: Easing.spring
     }).start();
   }
@@ -207,6 +227,8 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#BEE1D2',
+    borderColor: 'white',
+    borderWidth: 3
   },
   letter: {
     color: '#333',
@@ -216,3 +238,12 @@ var styles = StyleSheet.create({
 });
 
 export default BoardView;
+
+// letters[id] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
+// letters[i] = ''
+// letters[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
+
+// const toMutate = letters[id]
+// let mutated = (toMutate.charCodeAt(0) + 2) % 91
+// mutated = mutated < 65 ? mutated + 65 : mutated
+// newLetter = String.fromCharCode(mutated)
