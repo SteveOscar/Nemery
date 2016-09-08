@@ -220,6 +220,7 @@ class BoardView extends React.Component {
     const selected = this.state.numbers[id]
     if(selected > this.state.prevSelection) {
       this.setState({ prevSelection: selected })
+      this.props.updateScore()
       // continue or finish level
     }else {
       this.showAllTiles()

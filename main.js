@@ -2,6 +2,7 @@
 
 import React from 'react';
 import GameView from './GameView.js'
+import Menu from './Menu.js'
 
 import {
     Text,
@@ -14,18 +15,48 @@ var {width, height} = require('Dimensions').get('window');
 var Main = React.createClass({
   getInitialState: function() {
     return {
-      txt: 'Hi State',
-      difficulty: 0,
+      txt: '',
+      difficulty: 'Easy',
       level: 1,
-      playing: true
+      score: 0,
+      playing: false
     };
+  },
+
+  startGame() {
+    this.setState({ playing: true, txt: this.showScore()  })
+  },
+
+  showScore() {
+    return "Score: " + this.state.score
+  },
+
+  upDifficulty() {
+    let newDiff
+    if(this.state.difficulty === 'Easy'){
+      newDiff = 'Medium'
+    }else if (this.state.difficulty === 'Medium') {
+      newDiff = 'Hard'
+    }else {
+      newDiff = 'Easy'
+    }
+    this.setState({ difficulty: newDiff })
+  },
+
+  updateScore() {
+    const currentScore = this.state.score
+    this.setState({ score: currentScore + 1, txt: "Score " + this.state.score })
   },
 
   render() {
     const gameBoard = <GameView difficulty={this.state.difficulty}
+                                updateScore={this.updateScore}
                                 level={this.state.level}
                       />
-    const menu = <Text style={styles.text}>Menu</Text>
+    const menu = <Menu startGame={this.startGame}
+                       difficulty={this.state.difficulty}
+                       upDifficulty={this.upDifficulty}
+                       />
     let component = this.state.playing ? gameBoard : menu
     return <View style={styles.container}>
              {component}
@@ -54,7 +85,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#644B62',
   },
   text: {
-    fontSize: 40,
+    fontSize: 20,
     color: 'white'
   }
 });
