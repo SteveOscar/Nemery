@@ -38,14 +38,14 @@ class BoardView extends React.Component {
     setTimeout(() => {
       for (var i = 0; i < SIZE; i++) {
         for (var j = 0; j < SIZE; j++) {
-          this.initialSingleTileRender(i)
+          this.initialSingleTileShow(i)
         }
       }
     }, 500);
     setTimeout(() => {
       for (var i = SIZE; i < SIZE*2; i++) {
         for (var j = 0; j < SIZE; j++) {
-          this.initialSingleTileRender(i)
+          this.initialSingleTileShow(i)
         }
       }
     }, 1000);
@@ -53,7 +53,7 @@ class BoardView extends React.Component {
       if(SIZE < 3) { return }
       for (var i = SIZE*2; i < SIZE*3; i++) {
         for (var j = 0; j < SIZE; j++) {
-          this.initialSingleTileRender(i)
+          this.initialSingleTileShow(i)
         }
       }
     }, 1500);
@@ -61,7 +61,7 @@ class BoardView extends React.Component {
       if(SIZE < 4) { return }
       for (var i = SIZE*3; i < SIZE*4; i++) {
         for (var j = 0; j < SIZE; j++) {
-          this.initialSingleTileRender(i)
+          this.initialSingleTileShow(i)
         }
       }
     }, 2000);
@@ -101,7 +101,9 @@ class BoardView extends React.Component {
     }, 3800);
   }
 
-  initialSingleTileRender(id) {
+  initialSingleTileShow(id) {
+    // return if tile is already shown
+    if(this.state.beenClicked.indexOf(id) !== -1) { return }
     var tilt = this.state.board.tilt[id];
     tilt.setValue(1);
     Animated.timing(tilt, {
@@ -220,7 +222,7 @@ class BoardView extends React.Component {
       this.setState({ prevSelection: selected })
       // continue or finish level
     }else {
-      this.hideTiles()
+      this.showAllTiles()
     }
   }
 
@@ -229,6 +231,17 @@ class BoardView extends React.Component {
     numbers[id] = this.state.hiddenLetters[id]
     return numbers
   }
+
+  showAllTiles() {
+    setTimeout(() => {
+      for (var i = 0; i < SIZE * SIZE; i++) {
+        for (var j = 0; j < SIZE * SIZE; j++) {
+          this.initialSingleTileShow(i)
+        }
+      }
+    }, 500);
+  }
+
 }
 
 var styles = StyleSheet.create({
