@@ -27,6 +27,10 @@ var Main = React.createClass({
     this.setState({ playing: true, txt: this.showScore()  })
   },
 
+  endGame() {
+    this.setState({ playing: false, score: 0, txt: 'Score: 0' })
+  },
+
   showScore() {
     return "Score: " + this.state.score
   },
@@ -43,14 +47,30 @@ var Main = React.createClass({
     this.setState({ difficulty: newDiff })
   },
 
-  updateScore() {
+  updateScore(tilesTurned) {
     const currentScore = this.state.score
     this.setState({ score: currentScore + 1, txt: "Score " + this.state.score })
+    const win = this.checkForWin(tilesTurned)
+    if(win) {
+      console.log('win detected')
+      setTimeout(() => {
+        this.setState({ level: this.state.level + 1, playing: false })
+      }, 500)
+    }
+  },
+
+  checkForWin(num) {
+    const { difficulty } = this.state
+    if(difficulty === "Easy") { return num === 4 }
+    if(difficulty === "Medium") { return num === 9 }
+    if(difficulty === "Hard") { return num === 16 }
   },
 
   render() {
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
+                                endGame={this.endGame}
+                                size={["Easy", "Medium", "Hard"].indexOf(this.state.difficulty) + 2}
                                 level={this.state.level}
                       />
     const menu = <Menu startGame={this.startGame}

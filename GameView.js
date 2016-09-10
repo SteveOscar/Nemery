@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
-const SIZE = 2; // four-by-four grid
-const COUNT = SIZE * SIZE
+// const this.props.size = 2; // four-by-four grid
+// const COUNT = this.props.size * this.props.size
 const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
 const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
@@ -24,43 +24,44 @@ class BoardView extends React.Component {
       prevSelection: '',
       numbers: '',
       hiddenLetters: this.generateNumbers(),
-      beenClicked: []
+      beenClicked: [],
+      size: this.props.size
     }
   }
 
   generateNumbers() {
-    const length = SIZE * SIZE
+    const length = this.props.size * this.props.size
     const max = 20
     return randomArray = [...new Array(length)].map((_, i) => Math.round(Math.random() * max));
   }
 
   componentDidMount() {
     setTimeout(() => {
-      for (var i = 0; i < SIZE; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      for (var i = 0; i < this.props.size; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 500);
     setTimeout(() => {
-      for (var i = SIZE; i < SIZE*2; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      for (var i = this.props.size; i < this.props.size*2; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 1000);
     setTimeout(() => {
-      if(SIZE < 3) { return }
-      for (var i = SIZE*2; i < SIZE*3; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      if(this.props.size < 3) { return }
+      for (var i = this.props.size*2; i < this.props.size*3; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 1500);
     setTimeout(() => {
-      if(SIZE < 4) { return }
-      for (var i = SIZE*3; i < SIZE*4; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      if(this.props.size < 4) { return }
+      for (var i = this.props.size*3; i < this.props.size*4; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
         }
       }
@@ -70,31 +71,31 @@ class BoardView extends React.Component {
 
   hideTiles() {
     setTimeout(() => {
-      for (var i = 0; i < SIZE; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      for (var i = 0; i < this.props.size; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
     }, 2300);
     setTimeout(() => {
-      for (var i = SIZE; i < SIZE*2; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      for (var i = this.props.size; i < this.props.size*2; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
     }, 2800);
     setTimeout(() => {
-      if(SIZE < 3) { return }
-      for (var i = SIZE*2; i < SIZE*3; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      if(this.props.size < 3) { return }
+      for (var i = this.props.size*2; i < this.props.size*3; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
     }, 3300);
     setTimeout(() => {
-      if(SIZE < 4) { return }
-      for (var i = SIZE*3; i < SIZE*4; i++) {
-        for (var j = 0; j < SIZE; j++) {
+      if(this.props.size < 4) { return }
+      for (var i = this.props.size*3; i < this.props.size*4; i++) {
+        for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
@@ -138,13 +139,13 @@ class BoardView extends React.Component {
   }
 
   makeSomeLetters(id) {
-    let numbers = this.state.numbers || new Array(SIZE * SIZE)
+    let numbers = this.state.numbers || new Array(this.props.size * this.props.size)
     numbers[id] = this.state.hiddenLetters[id]
     return numbers
   }
 
   makeBoard() {
-    var tilt = new Array(SIZE * SIZE)
+    var tilt = new Array(this.props.size * this.props.size)
     for (var i = 0; i < tilt.length; i++) {
       tilt[i] = new Animated.Value(0)
     }
@@ -152,8 +153,8 @@ class BoardView extends React.Component {
   }
 
   // makeLetters() {
-  //   let numbers = new Array(SIZE * SIZE)
-  //   for (var i = 0; i < SIZE * SIZE; i++) {
+  //   let numbers = new Array(this.props.size * this.props.size)
+  //   for (var i = 0; i < this.props.size * this.props.size; i++) {
   //     numbers[i] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
   //     // numbers[i] = ''
   //     // numbers[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
@@ -162,16 +163,17 @@ class BoardView extends React.Component {
   // }
 
   render() {
-    return <View style={styles.container}>
+    const dimension = CELL_SIZE * this.props.size
+    return <View style={[styles.container, {width: dimension, height: dimension}]}>
             {this.renderTiles()}
            </View>
   }
 
   renderTiles() {
     var result = []
-    for (var row = 0; row < SIZE; row++) {
-      for (var col = 0; col < SIZE; col++) {
-        var id = row * SIZE + col
+    for (var row = 0; row < this.props.size; row++) {
+      for (var col = 0; col < this.props.size; col++) {
+        var id = row * this.props.size + col
         var letter = this.state.numbers[id]
         var tilt = this.state.board.tilt[id].interpolate({
           inputRange: [0, 1],
@@ -220,8 +222,7 @@ class BoardView extends React.Component {
     const selected = this.state.numbers[id]
     if(selected > this.state.prevSelection) {
       this.setState({ prevSelection: selected })
-      this.props.updateScore()
-      // continue or finish level
+      this.props.updateScore(this.state.numbers.filter((n) => n !== "").length)
     }else {
       this.showAllTiles()
     }
@@ -234,21 +235,26 @@ class BoardView extends React.Component {
   }
 
   showAllTiles() {
+    this.endGame()
     setTimeout(() => {
-      for (var i = 0; i < SIZE * SIZE; i++) {
-        for (var j = 0; j < SIZE * SIZE; j++) {
+      for (var i = 0; i < this.props.size * this.props.size; i++) {
+        for (var j = 0; j < this.props.size * this.props.size; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 500);
   }
 
+  endGame() {
+    setTimeout(() => {
+      this.props.endGame()
+    }, 1500)
+  }
+
 }
 
 var styles = StyleSheet.create({
   container: {
-    width: CELL_SIZE * SIZE,
-    height: CELL_SIZE * SIZE,
     backgroundColor: 'transparent',
   },
   tile: {
