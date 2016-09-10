@@ -36,6 +36,10 @@ class BoardView extends React.Component {
   }
 
   componentDidMount() {
+    this.showTiles(true)
+  }
+
+  showTiles(shouldHide) {
     setTimeout(() => {
       for (var i = 0; i < this.props.size; i++) {
         for (var j = 0; j < this.props.size; j++) {
@@ -49,7 +53,7 @@ class BoardView extends React.Component {
           this.initialSingleTileShow(i)
         }
       }
-    }, 1000);
+    }, 1200);
     setTimeout(() => {
       if(this.props.size < 3) { return }
       for (var i = this.props.size*2; i < this.props.size*3; i++) {
@@ -57,7 +61,7 @@ class BoardView extends React.Component {
           this.initialSingleTileShow(i)
         }
       }
-    }, 1500);
+    }, 1700);
     setTimeout(() => {
       if(this.props.size < 4) { return }
       for (var i = this.props.size*3; i < this.props.size*4; i++) {
@@ -65,8 +69,8 @@ class BoardView extends React.Component {
           this.initialSingleTileShow(i)
         }
       }
-    }, 2000);
-    this.hideTiles()
+    }, 2200);
+    if(shouldHide) { this.hideTiles() }
   }
 
   hideTiles() {
@@ -76,14 +80,14 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 2300);
+    }, 2500);
     setTimeout(() => {
       for (var i = this.props.size; i < this.props.size*2; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
-    }, 2800);
+    }, 3200);
     setTimeout(() => {
       if(this.props.size < 3) { return }
       for (var i = this.props.size*2; i < this.props.size*3; i++) {
@@ -91,7 +95,7 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 3300);
+    }, 3700);
     setTimeout(() => {
       if(this.props.size < 4) { return }
       for (var i = this.props.size*3; i < this.props.size*4; i++) {
@@ -99,7 +103,7 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 3800);
+    }, 4200);
   }
 
   initialSingleTileShow(id) {
@@ -224,7 +228,8 @@ class BoardView extends React.Component {
       this.setState({ prevSelection: selected })
       this.props.updateScore(this.state.numbers.filter((n) => n !== "").length)
     }else {
-      this.showAllTiles()
+      this.showTiles(false)
+      this.endGame()
     }
   }
 
@@ -248,7 +253,7 @@ class BoardView extends React.Component {
   endGame() {
     setTimeout(() => {
       this.props.endGame()
-    }, 1500)
+    }, 3500)
   }
 
 }
