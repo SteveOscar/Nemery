@@ -25,14 +25,22 @@ class BoardView extends React.Component {
       numbers: '',
       hiddenLetters: this.generateNumbers(),
       beenClicked: [],
-      size: this.props.size
+      size: this.props.size,
+      delay: 500
     }
   }
 
   generateNumbers() {
     const length = this.props.size * this.props.size
-    const max = 20
-    return randomArray = [...new Array(length)].map((_, i) => Math.round(Math.random() * max));
+    const max = this.props.size * 6
+    return randomArray = [...new Array(length)].map((_, i) => Math.round(Math.random() * max + 1));
+  }
+
+  timeAdjustment() {
+    const { difficulty } = this.props
+    if(difficulty === "Easy") { return 1 }
+    if(difficulty === "Medium") { return 2 }
+    if(difficulty === "Hard") { return 3 }
   }
 
   componentDidMount() {
@@ -40,6 +48,8 @@ class BoardView extends React.Component {
   }
 
   showTiles(shouldHide) {
+    const { delay } = this.state
+    const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
       for (var i = 0; i < this.props.size; i++) {
         for (var j = 0; j < this.props.size; j++) {
@@ -74,20 +84,21 @@ class BoardView extends React.Component {
   }
 
   hideTiles() {
+    const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
       for (var i = 0; i < this.props.size; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
-    }, 2500);
+    }, 2500 * difficultyFactor);
     setTimeout(() => {
       for (var i = this.props.size; i < this.props.size*2; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
         }
       }
-    }, 3200);
+    }, 3200 * difficultyFactor);
     setTimeout(() => {
       if(this.props.size < 3) { return }
       for (var i = this.props.size*2; i < this.props.size*3; i++) {
@@ -95,7 +106,7 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 3700);
+    }, 3700 * difficultyFactor);
     setTimeout(() => {
       if(this.props.size < 4) { return }
       for (var i = this.props.size*3; i < this.props.size*4; i++) {
@@ -103,7 +114,7 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 4200);
+    }, 4200 * difficultyFactor);
   }
 
   initialSingleTileShow(id) {
@@ -224,7 +235,7 @@ class BoardView extends React.Component {
 
   checkSelection(id) {
     const selected = this.state.numbers[id]
-    if(selected > this.state.prevSelection) {
+    if(selected >= this.state.prevSelection) {
       this.setState({ prevSelection: selected })
       this.props.updateScore(this.state.numbers.filter((n) => n !== "").length)
     }else {
