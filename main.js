@@ -19,7 +19,8 @@ var Main = React.createClass({
       difficulty: 'Easy',
       level: 1,
       score: 0,
-      playing: false
+      playing: false,
+      Message: 'Hi'
     };
   },
 
@@ -28,7 +29,7 @@ var Main = React.createClass({
   },
 
   endGame() {
-    this.setState({ playing: false, score: 0, txt: 'Score: 0' })
+    this.setState({ playing: false, score: 0, txt: 'Score: 0', message: '' })
   },
 
   showScore() {
@@ -66,10 +67,16 @@ var Main = React.createClass({
     if(difficulty === "Hard") { return num === 16 }
   },
 
+  showMessage(didWin) {
+    if(!didWin) { this.setState({ message: 'LOST' }) }
+    if(didWin) { this.setState({ message: 'WIN' }) }
+  },
+
   render() {
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
                                 endGame={this.endGame}
+                                deliverVerdict={this.showMessage}
                                 size={["Easy", "Medium", "Hard"].indexOf(this.state.difficulty) + 2}
                                 level={this.state.level}
                       />
@@ -81,8 +88,9 @@ var Main = React.createClass({
     return <View style={styles.container}>
              {component}
              <View style={styles.textContainer}>
-              <Text style={styles.text}>{this.state.txt}</Text>
-              </View>
+               <Text style={styles.text}>{this.state.message}</Text>
+               <Text style={styles.text}>{this.state.txt}</Text>
+             </View>
            </View>
   },
 });

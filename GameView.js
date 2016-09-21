@@ -26,7 +26,8 @@ class BoardView extends React.Component {
       hiddenLetters: this.generateNumbers(),
       beenClicked: [],
       size: this.props.size,
-      delay: 500
+      delay: 500,
+      inPlay: false,
     }
   }
 
@@ -115,6 +116,9 @@ class BoardView extends React.Component {
         }
       }
     }, 4200 * difficultyFactor);
+    setTimeout(() => {
+      this.setState({ inPlay: true })
+    }, 4500 * difficultyFactor);
   }
 
   initialSingleTileShow(id) {
@@ -222,6 +226,7 @@ class BoardView extends React.Component {
   }
 
   clickTile(id) {
+    if(!this.state.inPlay) { return }
     if(this.alreadyClicked(id)) { return }
     setTimeout(() => { this.setState({ numbers: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
     var tilt = this.state.board.tilt[id];
@@ -239,6 +244,8 @@ class BoardView extends React.Component {
       this.setState({ prevSelection: selected })
       this.props.updateScore(this.state.numbers.filter((n) => n !== "").length)
     }else {
+      this.props.deliverVerdict(false)
+      this.setState({ inPlay: false })
       this.showTiles(false)
       this.endGame()
     }
