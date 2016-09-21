@@ -54,9 +54,13 @@ var Main = React.createClass({
     const win = this.checkForWin(tilesTurned)
     if(win) {
       console.log('win detected')
+      this.setState({ message: 'WIN' })
       setTimeout(() => {
         this.setState({ level: this.state.level + 1, playing: false })
       }, 500)
+      setTimeout(() => {
+        this.setState({ message: '' })
+      }, 1500)
     }
   },
 
@@ -88,7 +92,7 @@ var Main = React.createClass({
     return <View style={styles.container}>
              {component}
              <View style={styles.textContainer}>
-               <Text style={styles.text}>{this.state.message}</Text>
+               <Text style={styles.message}>{this.state.message}</Text>
                <Text style={styles.text}>{this.state.txt}</Text>
              </View>
            </View>
@@ -107,7 +111,7 @@ var styles = StyleSheet.create({
     position: 'absolute',
     width: width,
     bottom: height/10,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#644B62',
@@ -115,6 +119,10 @@ var styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: 'white'
+  },
+  message: {
+    fontSize: 40,
+    color: 'red'
   }
 });
 
