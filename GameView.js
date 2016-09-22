@@ -20,6 +20,7 @@ class BoardView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      fadeAnim: new Animated.Value(0),
       board: this.makeBoard(),
       prevSelection: '',
       numbers: '',
@@ -45,6 +46,13 @@ class BoardView extends React.Component {
   }
 
   componentDidMount() {
+    Animated.timing(
+      this.state.fadeAnim,
+      {
+        toValue: 1,
+        duration: 1300
+      }
+    ).start();
     this.showTiles(true)
   }
 
@@ -183,9 +191,13 @@ class BoardView extends React.Component {
 
   render() {
     const dimension = CELL_SIZE * this.props.size
-    return <View style={[styles.container, {width: dimension, height: dimension}]}>
-            {this.renderTiles()}
-           </View>
+    return (
+      <Animated.View style={{opacity: this.state.fadeAnim}}>
+        <View style={[styles.container, {width: dimension, height: dimension}]}>
+          {this.renderTiles()}
+        </View>
+      </Animated.View>
+    )
   }
 
   renderTiles() {
