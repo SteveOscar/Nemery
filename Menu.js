@@ -13,36 +13,58 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fadeAnim: new Animated.Value(0)
+      fadeAnim1: new Animated.Value(0),
+      fadeAnim2: new Animated.Value(0),
+      fadeAnim3: new Animated.Value(0)
     }
   }
 
   componentDidMount() {
     Animated.timing(
-      this.state.fadeAnim,
+      this.state.fadeAnim1,
       {
         toValue: 1,
-        duration: 1300
+        duration: 1000
+      }
+    ).start();
+    Animated.timing(
+      this.state.fadeAnim2,
+      {
+        toValue: 1,
+        duration: 1000,
+        delay: 500
+      }
+    ).start();
+    Animated.timing(
+      this.state.fadeAnim3,
+      {
+        toValue: 1,
+        duration: 1000,
+        delay: 1000
       }
     ).start();
   }
 
   render() {
     return (
-      <Animated.View style={{opacity: this.state.fadeAnim}}>
         <View style={styles.container}>
           {this.renderButtons()}
         </View>
-      </Animated.View>
         )
   }
 
   renderButtons() {
     return (
       <View>
-        <Text style={styles.buttonText} onPress={this.props.startGame}>Start</Text>
-        <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {this.props.difficulty}</Text>
-        <Text style={styles.buttonText}>Button 3</Text>
+        <Animated.View style={{opacity: this.state.fadeAnim1}}>
+          <Text style={styles.buttonText} onPress={this.props.startGame}>Start</Text>
+        </Animated.View>
+        <Animated.View style={{opacity: this.state.fadeAnim2}}>
+          <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {this.props.difficulty}</Text>
+        </Animated.View>
+        <Animated.View style={{opacity: this.state.fadeAnim3}}>
+          <Text style={styles.buttonText} onPress={this.props.highScores}>High Scores</Text>
+        </Animated.View>
       </View>
     )
   }

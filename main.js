@@ -7,7 +7,8 @@ import Menu from './Menu.js'
 import {
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    Vibration
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -26,6 +27,10 @@ var Main = React.createClass({
 
   startGame() {
     this.setState({ playing: true, txt: this.showScore()  })
+  },
+
+  highScores() {
+    console.log('build it')
   },
 
   endGame() {
@@ -53,7 +58,7 @@ var Main = React.createClass({
     this.setState({ score: currentScore + 1, txt: "Score " + this.state.score })
     const win = this.checkForWin(tilesTurned)
     if(win) {
-      console.log('win detected')
+      Vibration.vibrate()
       this.setState({ message: 'WIN' })
       setTimeout(() => {
         this.setState({ level: this.state.level + 1, playing: false })
@@ -72,6 +77,7 @@ var Main = React.createClass({
   },
 
   showMessage(didWin) {
+    Vibration.vibrate()
     if(!didWin) { this.setState({ message: 'LOST' }) }
     if(didWin) { this.setState({ message: 'WIN' }) }
   },
@@ -85,6 +91,7 @@ var Main = React.createClass({
                                 level={this.state.level}
                       />
     const menu = <Menu startGame={this.startGame}
+                       highScores={this.highScores}
                        difficulty={this.state.difficulty}
                        upDifficulty={this.upDifficulty}
                        />
