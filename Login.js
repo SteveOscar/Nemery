@@ -1,5 +1,6 @@
 import React from 'react';
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
+const DeviceInfo = require('react-native-device-info');
 import {
     Text,
     View,
@@ -22,7 +23,8 @@ class Login extends React.Component {
       fadeAnim2: new Animated.Value(0),
       fadeAnim3: new Animated.Value(0),
       text: '',
-      isLoading: false
+      isLoading: false,
+      message: ''
     }
   }
 
@@ -64,6 +66,31 @@ class Login extends React.Component {
   onButtonPressed() {
     if(this.state.isLoading) { return }
     this.setState({ isLoading: true })
+    this._executeQuery()
+  }
+
+  _executeQuery() {
+  const uuid = DeviceInfo.getUniqueID()
+  this.setState({isLoading: true});
+    fetch("http://localhost:3000/users", {method: "POST", body: JSON.stringify({name: this.state.text, device: uuid})})
+      .then(response => response.json())
+      .then((response) => {
+        this._handleResponse(response);
+      })
+  }
+
+  _handleResponse(response) {
+    if (response !== undefined) {
+      this.setState({isLoading: false});
+      if(response.errors) {
+        this.setState({ message: 'Name already taken' })
+      }else {
+        this.props.setUser(response)
+      }
+    } else {
+      console.log(response)
+      this.setState({isLoading: false, message: 'Server error'});
+    }
   }
 
   render() {
@@ -104,6 +131,7 @@ class Login extends React.Component {
               <Text style={styles.buttonText2}>Submit</Text>
             </TouchableHighlight>
         </Animated.View>
+        <Text style={styles.message}>{this.state.message}</Text>
       </ScrollView>
     )
   }
@@ -155,6 +183,12 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   spinner: {
+  },
+  message: {
+    alignSelf: 'center',
+    margin: 10,
+    fontSize: 25,
+    color: 'white'
   }
 });
 

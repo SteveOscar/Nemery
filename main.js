@@ -12,7 +12,8 @@ import {
     Text,
     View,
     StyleSheet,
-    Vibration
+    Vibration,
+    ActivityIndicator
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -25,8 +26,44 @@ var Main = React.createClass({
       level: 1,
       score: 0,
       playing: false,
-      Message: 'Hi'
+      isLoading: true,
+      Message: 'Hi',
+      currentUser: ''
     };
+  },
+
+  componentDidMount() {
+    this.checkForUser()
+  },
+
+  checkForUser() {
+    const uuid = DeviceInfo.getUniqueID()
+    fetch("http://localhost:3000/users/" + uuid)
+      .then(response => response.json())
+      .then((response) => {
+        this._handleResponse(response);
+      })
+      .catch(error =>
+         this.setState({
+          isLoading: false,
+          message: 'Something bad happened ' + error
+       }));
+  },
+
+  _handleResponse(response) {
+    if(response !== undefined) {
+      if(response === null) {
+        this.setState({isLoading: false})
+      }else {
+        this.setState({isLoading: false, currentUser: response});
+      }
+    } else {
+      this.setState({isLoading: false, message: 'Server Error'});
+    }
+  },
+
+  setUser(response) {
+    this.setState({ currentUser: response })
   },
 
   startGame() {
@@ -88,8 +125,8 @@ var Main = React.createClass({
 
   render() {
     var uuid = DeviceInfo.getUniqueID()
-
-    const loginScreen = <Login/>
+    let { currentUser } = this.state
+    const loginScreen = <Login setUser={this.setUser}/>
 
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
@@ -104,14 +141,19 @@ var Main = React.createClass({
                        upDifficulty={this.upDifficulty}
                        />
 
-    // let component = this.state.playing ? gameBoard : menu
-    let component = loginScreen
+    let spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)
+
+    let component = this.state.playing ? gameBoard : (this.state.currentUser ? menu : loginScreen)
+
+    if(this.state.isLoading) { let component = spinner }
+
+    if(!currentUser) { let component = loginScreen }
 
     return <View style={styles.container}>
              {component}
              <View style={styles.textContainer}>
                <Text style={styles.message}>{this.state.message}</Text>
-               <Text style={styles.text}>{this.state.txt}</Text>
+               <Text style={styles.user}>{currentUser ? currentUser.name : ''}</Text>
              </View>
            </View>
   },
@@ -141,6 +183,12 @@ var styles = StyleSheet.create({
   message: {
     fontSize: 40,
     color: 'red'
+  },
+  user: {
+    fontSize: 20,
+    color: 'white',
+    position: 'absolute',
+    top: 5
   }
 });
 
