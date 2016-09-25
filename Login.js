@@ -7,7 +7,9 @@ import {
     Animated,
     Easing,
     TextInput,
-    ScrollView
+    ScrollView,
+    TouchableHighlight,
+    ActivityIndicator,
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -19,7 +21,8 @@ class Login extends React.Component {
       fadeAnim1: new Animated.Value(0),
       fadeAnim2: new Animated.Value(0),
       fadeAnim3: new Animated.Value(0),
-      text: ''
+      text: '',
+      isLoading: false
     }
   }
 
@@ -58,17 +61,25 @@ class Login extends React.Component {
     this.refs.scroll.scrollTo({x: 0, y: 0, animated: true})
   }
 
+  onButtonPressed() {
+    if(this.state.isLoading) { return }
+    this.setState({ isLoading: true })
+  }
+
   render() {
     return (
-        <View style={styles.container}>
-          {this.renderButtons()}
-        </View>
-        )
+      <View style={styles.container}>
+        {this.renderButtons()}
+      </View>
+    )
   }
 
   renderButtons() {
+    var spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)
+
     return (
       <ScrollView ref='scroll' style={styles.scrollContainer}>
+                  {spinner}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
           <Text style={styles.buttonText} onPress={this.props.startGame}>Welcome to Numery</Text>
         </Animated.View>
@@ -77,13 +88,21 @@ class Login extends React.Component {
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <TextInput
-            style={{height: 40, borderColor: 'white', borderWidth: 5}}
+            style={styles.inputStyle}
             onChangeText={(text) => this.setState({text})}
             value={this.state.text}
+            autoCorrect={false}
+            maxLength={20}
+            selectionColor={'tan'}
             keyboardType={'default'}
             onFocus={this.textInputFocused.bind(this)}
             onBlur={this.textInputBlur.bind(this)}
             />
+            <TouchableHighlight onPress={this.onButtonPressed.bind(this)}
+                      style={styles.button}
+                      underlayColor='#99d9f4'>
+              <Text style={styles.buttonText2}>Submit</Text>
+            </TouchableHighlight>
         </Animated.View>
       </ScrollView>
     )
@@ -95,10 +114,21 @@ var styles = StyleSheet.create({
   container: {
     height: height,
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
     // flexDirection: 'column',
   },
   scrollContainer: {
-    paddingTop: height*.4,
+    paddingTop: height*.3,
+  },
+  inputStyle: {
+    height: 40,
+    borderColor: 'tan',
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 4,
+    color: 'white',
+    justifyContent: 'center'
   },
   buttonText: {
     alignSelf: 'center',
@@ -106,6 +136,26 @@ var styles = StyleSheet.create({
     fontSize: 30,
     color: 'tan'
   },
+  buttonText2: {
+    alignSelf: 'center',
+    margin: 10,
+    fontSize: 25,
+    color: '#644B62'
+  },
+  button: {
+    height: 36,
+    flexDirection: 'row',
+    backgroundColor: 'tan',
+    borderColor: 'white',
+    borderWidth: 3,
+    borderRadius: 8,
+    marginTop: 10,
+    justifyContent: 'center',
+    width: 250,
+    alignSelf: 'center'
+  },
+  spinner: {
+  }
 });
 
 export default Login;
