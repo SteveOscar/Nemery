@@ -3,6 +3,9 @@
 import React from 'react';
 import GameView from './GameView.js'
 import Menu from './Menu.js'
+import DeviceUUID from "react-native-device-uuid"
+// var Device = require('react-native-device')
+var DeviceInfo = require('react-native-device-info');
 
 import {
     Text,
@@ -83,6 +86,8 @@ var Main = React.createClass({
   },
 
   render() {
+    var uuid = DeviceInfo.getUniqueID()
+
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
                                 endGame={this.endGame}
