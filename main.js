@@ -3,6 +3,7 @@
 import React from 'react';
 import GameView from './GameView.js'
 import Menu from './Menu.js'
+import Login from './Login.js'
 import DeviceUUID from "react-native-device-uuid"
 // var Device = require('react-native-device')
 var DeviceInfo = require('react-native-device-info');
@@ -88,6 +89,8 @@ var Main = React.createClass({
   render() {
     var uuid = DeviceInfo.getUniqueID()
 
+    const loginScreen = <Login/>
+
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
                                 endGame={this.endGame}
@@ -100,7 +103,10 @@ var Main = React.createClass({
                        difficulty={this.state.difficulty}
                        upDifficulty={this.upDifficulty}
                        />
-    let component = this.state.playing ? gameBoard : menu
+
+    // let component = this.state.playing ? gameBoard : menu
+    let component = loginScreen
+
     return <View style={styles.container}>
              {component}
              <View style={styles.textContainer}>
