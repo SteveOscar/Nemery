@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from './Logo.js'
 import {
     Text,
     View,
@@ -56,6 +57,7 @@ class Menu extends React.Component {
   renderButtons() {
     return (
       <View>
+        <Logo />
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
           <Text style={styles.buttonText} onPress={this.props.startGame}>Start</Text>
         </Animated.View>
