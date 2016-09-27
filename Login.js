@@ -120,7 +120,7 @@ class Login extends React.Component {
             value={this.state.text}
             autoCorrect={false}
             maxLength={20}
-            selectionColor={'tan'}
+            selectionColor={'#fff4e6'}
             keyboardType={'default'}
             onFocus={this.textInputFocused.bind(this)}
             onBlur={this.textInputBlur.bind(this)}
@@ -151,7 +151,7 @@ var styles = StyleSheet.create({
   },
   inputStyle: {
     height: 40,
-    borderColor: 'tan',
+    borderColor: '#fff4e6',
     borderWidth: 2,
     borderRadius: 5,
     padding: 4,
@@ -162,18 +162,18 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 10,
     fontSize: 30,
-    color: 'tan'
+    color: '#fff4e6'
   },
   buttonText2: {
     alignSelf: 'center',
     margin: 10,
     fontSize: 25,
-    color: '#644B62'
+    color: '#854442'
   },
   button: {
     height: 36,
     flexDirection: 'row',
-    backgroundColor: 'tan',
+    backgroundColor: '#fff4e6',
     borderColor: 'white',
     borderWidth: 3,
     borderRadius: 8,

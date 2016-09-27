@@ -165,7 +165,7 @@ var styles = StyleSheet.create({
     // flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#644B62',
+    backgroundColor: '#854442',
   },
   textContainer: {
     position: 'absolute',
@@ -174,7 +174,7 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#644B62',
+    backgroundColor: '#854442',
   },
   text: {
     fontSize: 20,
@@ -182,14 +182,19 @@ var styles = StyleSheet.create({
   },
   message: {
     fontSize: 40,
-    color: 'red'
+    color: '#3c2f2f',
+    fontFamily: 'American Typewriter'
   },
   user: {
     fontSize: 20,
-    color: 'white',
+    color: '#3c2f2f',
+    fontFamily: 'American Typewriter',
     position: 'absolute',
     top: 5
   }
 });
 
 module.exports = Main;
+
+// original background: #854442
+// original text:

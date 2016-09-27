@@ -14,7 +14,7 @@ const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
 const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
-const LETTER_SIZE = Math.floor(TILE_SIZE * .75);
+const LETTER_SIZE = Math.floor(TILE_SIZE * .70);
 
 class BoardView extends React.Component {
   constructor(props) {
@@ -299,14 +299,15 @@ var styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#BEE1D2',
-    borderColor: 'white',
+    backgroundColor: '#fff4e6',
+    borderColor: '#be9b7b',
     borderWidth: 3
   },
   letter: {
-    color: '#644B62',
+    color: '#854442',
     fontSize: LETTER_SIZE,
     backgroundColor: 'transparent',
+    fontFamily: 'American Typewriter'
   },
 });
 
