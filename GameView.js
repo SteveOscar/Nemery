@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from 'react-native-progress/Bar'
+
 import {
     Text,
     View,
@@ -31,7 +31,7 @@ class BoardView extends React.Component {
       size: this.props.size,
       delay: 500,
       inPlay: false,
-      progress: 1
+      progress: new Animated.Value(width)
     }
   }
 
@@ -138,9 +138,22 @@ class BoardView extends React.Component {
   }
 
   startTimer() {
-    current = this.state.progress
-    console.log('TIME, ', current)
-    timer.setInterval(this.setState({progress: current-.5}))
+    Animated.timing(          // Uses easing functions
+      this.state.progress,    // The value to drive
+      {toValue: 0, duration: 4000}            // Configuration
+    ).start();
+    setTimeout(() => {
+      this.handleTimerEnd()
+    }, 4000)
+  }
+
+  handleTimerEnd() {
+    const length = this.props.size * this.props.size
+    if(this.state.beenClicked.length == length) { return }
+    this.props.deliverVerdict(false)
+    this.setState({ inPlay: false })
+    this.showTiles(false)
+    this.endGame()
   }
 
   initialSingleTileShow(id) {
@@ -193,25 +206,14 @@ class BoardView extends React.Component {
     return {tilt}
   }
 
-  // makeLetters() {
-  //   let numbers = new Array(this.props.size * this.props.size)
-  //   for (var i = 0; i < this.props.size * this.props.size; i++) {
-  //     numbers[i] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
-  //     // numbers[i] = ''
-  //     // numbers[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
-  //   }
-  //   return numbers
-  // }
-
   render() {
     const dimension = CELL_SIZE * this.props.size
     const time = this.state.progress
     return (
       <View style={{width: width}}>
         <Animated.View style={{opacity: this.state.fadeAnim}}>
-          <View style={{position: 'absolute', right: 0, left: 0, top:-(height*.1)}}>
-            <ProgressBar progress={1} width={width} height={15} borderRadiu={28} color={'#fff4e6'} />
-          </View>
+          <Animated.View style={{position: 'absolute', left: 0, right: 0, top:-(height*.1), height: 10, backgroundColor: '#fff4e6', width: this.state.progress, borderRadius: 10}}>
+          </Animated.View>
           <View style={{width: dimension, height: dimension, alignSelf: 'center'}}>
             {this.renderTiles()}
           </View>
