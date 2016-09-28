@@ -1,4 +1,5 @@
 import React from 'react';
+import ProgressBar from 'react-native-progress/Bar'
 import {
     Text,
     View,
@@ -15,6 +16,7 @@ const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 const LETTER_SIZE = Math.floor(TILE_SIZE * .70);
+const timer = require('react-native-timer');
 
 class BoardView extends React.Component {
   constructor(props) {
@@ -29,6 +31,7 @@ class BoardView extends React.Component {
       size: this.props.size,
       delay: 500,
       inPlay: false,
+      progress: 1
     }
   }
 
@@ -54,6 +57,10 @@ class BoardView extends React.Component {
       }
     ).start();
     this.showTiles(true)
+  }
+
+  componentWillUnmount() {
+    timer.clearInterval(this);
   }
 
   showTiles(shouldHide) {
@@ -126,7 +133,14 @@ class BoardView extends React.Component {
     }, 4200 * difficultyFactor);
     setTimeout(() => {
       this.setState({ inPlay: true })
+      this.startTimer()
     }, 4500 * difficultyFactor);
+  }
+
+  startTimer() {
+    current = this.state.progress
+    console.log('TIME, ', current)
+    timer.setInterval(this.setState({progress: current-.5}))
   }
 
   initialSingleTileShow(id) {
@@ -191,12 +205,18 @@ class BoardView extends React.Component {
 
   render() {
     const dimension = CELL_SIZE * this.props.size
+    const time = this.state.progress
     return (
-      <Animated.View style={{opacity: this.state.fadeAnim}}>
-        <View style={[styles.container, {width: dimension, height: dimension}]}>
-          {this.renderTiles()}
-        </View>
-      </Animated.View>
+      <View style={{width: width}}>
+        <Animated.View style={{opacity: this.state.fadeAnim}}>
+          <View style={{position: 'absolute', right: 0, left: 0, top:-(height*.1)}}>
+            <ProgressBar progress={1} width={width} height={15} borderRadiu={28} color={'#fff4e6'} />
+          </View>
+          <View style={{width: dimension, height: dimension, alignSelf: 'center'}}>
+            {this.renderTiles()}
+          </View>
+        </Animated.View>
+      </View>
     )
   }
 
@@ -289,9 +309,6 @@ class BoardView extends React.Component {
 }
 
 var styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'transparent',
-  },
   tile: {
     position: 'absolute',
     width: TILE_SIZE,
@@ -309,6 +326,9 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontFamily: 'American Typewriter'
   },
+  timer: {
+
+  }
 });
 
 export default BoardView;

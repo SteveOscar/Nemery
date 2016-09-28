@@ -151,10 +151,8 @@ var Main = React.createClass({
 
     return <View style={styles.container}>
              {component}
-             <View style={styles.textContainer}>
-               <Text style={styles.message}>{this.state.message}</Text>
-               <Text style={styles.user}>{currentUser ? currentUser.name : ''}</Text>
-             </View>
+              <Text style={styles.message}>{this.state.message}</Text>
+              {/*<Text style={styles.user}>{currentUser ? 'Good Day, '+ currentUser.name : ''}</Text>*/}
            </View>
   },
 });
@@ -162,15 +160,6 @@ var Main = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#854442',
-  },
-  textContainer: {
-    position: 'absolute',
-    width: width,
-    bottom: height/10,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -189,8 +178,7 @@ var styles = StyleSheet.create({
     fontSize: 20,
     color: '#3c2f2f',
     fontFamily: 'American Typewriter',
-    position: 'absolute',
-    top: 5
+    paddingTop: height*.1
   }
 });
 
