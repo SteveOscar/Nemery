@@ -55,7 +55,34 @@ var Main = React.createClass({
       if(response === null) {
         this.setState({isLoading: false})
       }else {
-        this.setState({isLoading: false, currentUser: response});
+        this.setState({isLoading: false, currentUser: response}, this.getScores());
+      }
+    } else {
+      this.setState({isLoading: false, message: 'Server Error'});
+    }
+  },
+
+  getScores() {
+    const uuid = DeviceInfo.getUniqueID()
+    fetch("http://localhost:3000/scores/" + uuid)
+      .then(response => response.json())
+      .then((response) => {
+        this._handleScoreResponse(response);
+      })
+      .catch(error =>
+         this.setState({
+          isLoading: false,
+          message: 'Something bad happened ' + error
+       }));
+  },
+
+  _handleScoreResponse(response) {
+    if(response !== undefined) {
+      if(response === null) {
+        this.setState({scores: false})
+      }else {
+        console.log('SCORES ', response)
+        this.setState({isLoading: false, scores: response});
       }
     } else {
       this.setState({isLoading: false, message: 'Server Error'});
