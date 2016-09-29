@@ -4,6 +4,7 @@ import React from 'react';
 import GameView from './GameView.js'
 import Menu from './Menu.js'
 import Login from './Login.js'
+import ScoreBoard from './ScoreBoard.js'
 import DeviceUUID from "react-native-device-uuid"
 // var Device = require('react-native-device')
 var DeviceInfo = require('react-native-device-info');
@@ -13,7 +14,8 @@ import {
     View,
     StyleSheet,
     Vibration,
-    ActivityIndicator
+    ActivityIndicator,
+    AsyncStorage
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -28,12 +30,20 @@ var Main = React.createClass({
       playing: false,
       isLoading: true,
       Message: 'Hi',
-      currentUser: ''
+      currentUser: '',
+      highScores: '',
+      showingScores: false
     };
   },
 
   componentDidMount() {
-    this.checkForUser()
+    AsyncStorage.getItem("User").then((user) => {
+      if (user !== null){
+        this.setState({isLoading: false, currentUser: JSON.parse(user)}, this.getScores())
+      }else {
+        this.checkForUser()
+      }
+    }).done();
   },
 
   checkForUser() {
@@ -55,6 +65,7 @@ var Main = React.createClass({
       if(response === null) {
         this.setState({isLoading: false})
       }else {
+        AsyncStorage.setItem('User', JSON.stringify(response))
         this.setState({isLoading: false, currentUser: response}, this.getScores());
       }
     } else {
@@ -79,10 +90,10 @@ var Main = React.createClass({
   _handleScoreResponse(response) {
     if(response !== undefined) {
       if(response === null) {
-        this.setState({scores: false})
+        this.setState({highScores: ''})
       }else {
         console.log('SCORES ', response)
-        this.setState({isLoading: false, scores: response});
+        this.setState({isLoading: false, highScores: response});
       }
     } else {
       this.setState({isLoading: false, message: 'Server Error'});
@@ -152,8 +163,10 @@ var Main = React.createClass({
 
   render() {
     var uuid = DeviceInfo.getUniqueID()
-    let { currentUser } = this.state
+    let { currentUser, highScores, showingScores } = this.state
     const loginScreen = <Login setUser={this.setUser}/>
+
+    const scoreBoard = <ScoreBoard highScores={highScores}/>
 
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
@@ -172,9 +185,9 @@ var Main = React.createClass({
 
     let component = this.state.playing ? gameBoard : (this.state.currentUser ? menu : loginScreen)
 
-    if(this.state.isLoading) { let component = spinner }
-
+    if(showingScores) { let component = scoreBoard }
     if(!currentUser) { let component = loginScreen }
+    if(this.state.isLoading) { let component = spinner }
 
     return <View style={styles.container}>
              {component}

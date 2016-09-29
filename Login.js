@@ -10,7 +10,7 @@ import {
     TextInput,
     ScrollView,
     TouchableHighlight,
-    ActivityIndicator,
+    ActivityIndicator
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
