@@ -54,8 +54,20 @@ class ScoreBoard extends React.Component {
         )
   }
 
+  renderHighScores() {
+    const { highScores } = this.props
+    toShow = highScores.high_scores.sort((a, b) => b[1] - a[1])
+    return toShow.map(function(score, index) {
+      return (
+        <View key={index}>
+          <Text style={styles.buttonText}>{score[0]}: {score[1]}</Text>
+        </View>
+      )
+    })
+  }
+
   renderButtons() {
-    const { scores } = this.props
+    const { highScores } = this.props
     return (
       <View>
         {/*<Logo />*/}
@@ -63,7 +75,11 @@ class ScoreBoard extends React.Component {
           <Text style={styles.buttonText}>High Scores</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText}>scores['user_score']</Text>
+          {this.renderHighScores()}
+          <Text style={styles.buttonText}>You: {highScores['user_score']}</Text>
+        </Animated.View>
+        <Animated.View style={{opacity: this.state.fadeAnim3}}>
+          <Text style={styles.buttonText} onPress={this.props.backToMenu}>Back</Text>
         </Animated.View>
       </View>
     )

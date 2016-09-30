@@ -108,8 +108,12 @@ var Main = React.createClass({
     this.setState({ playing: true, txt: this.showScore()  })
   },
 
-  highScores() {
-    console.log('build it')
+  highScoresPage() {
+    this.setState({ showingScores: true })
+  },
+
+  backToMenu() {
+    this.setState({ showingScores: false })
   },
 
   endGame() {
@@ -166,7 +170,9 @@ var Main = React.createClass({
     let { currentUser, highScores, showingScores } = this.state
     const loginScreen = <Login setUser={this.setUser}/>
 
-    const scoreBoard = <ScoreBoard highScores={highScores}/>
+    const scoreBoard = <ScoreBoard highScores={highScores}
+                                   backToMenu={this.backToMenu}
+                                   />
 
     const gameBoard = <GameView difficulty={this.state.difficulty}
                                 updateScore={this.updateScore}
@@ -176,19 +182,23 @@ var Main = React.createClass({
                                 level={this.state.level}
                       />
     const menu = <Menu startGame={this.startGame}
-                       highScores={this.highScores}
+                       highScoresPage={this.highScoresPage}
                        difficulty={this.state.difficulty}
                        upDifficulty={this.upDifficulty}
                        />
 
     let spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)
+    let component
+    if(this.state.playing) { component = gameBoard }
+    if(!this.state.playing && this.state.currentUser) { component = menu }
+    if(!this.state.playing && !this.state.currentUser) { component = loginScreen }
+    if(!currentUser) { component = loginScreen }
+    if(currentUser && showingScores) { component = scoreBoard }
+    if(this.state.isLoading) { component = spinner }
+    // let component = this.state.playing ? gameBoard : (this.state.currentUser ? menu : loginScreen)
 
-    let component = this.state.playing ? gameBoard : (this.state.currentUser ? menu : loginScreen)
-
-    if(showingScores) { let component = scoreBoard }
-    if(!currentUser) { let component = loginScreen }
-    if(this.state.isLoading) { let component = spinner }
-
+    // if(!currentUser) { let component = loginScreen }
+    // let component = scoreBoard
     return <View style={styles.container}>
              {component}
               <Text style={styles.message}>{this.state.message}</Text>

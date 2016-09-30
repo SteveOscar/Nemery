@@ -65,7 +65,7 @@ class Menu extends React.Component {
           <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {this.props.difficulty}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <Text style={styles.buttonText} onPress={this.props.highScores}>High Scores</Text>
+          <Text style={styles.buttonText} onPress={this.props.highScoresPage}>High Scores</Text>
         </Animated.View>
       </View>
     )
