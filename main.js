@@ -100,6 +100,20 @@ var Main = React.createClass({
     }
   },
 
+  saveScore(points) {
+    console.log('SAVING SCORE!!!!!')
+    const { currentUser } = this.state
+    const uuid = DeviceInfo.getUniqueID()
+    fetch("http://localhost:3000/scores/new/" + uuid, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user: currentUser.id, score: points })
+    }).then((response) => console.log("SCORE SAVED ", response))
+  },
+
   setUser(response) {
     this.setState({ currentUser: response })
   },
@@ -117,6 +131,7 @@ var Main = React.createClass({
   },
 
   endGame() {
+    this.saveScore(this.state.score)
     this.setState({ playing: false, score: 0, txt: 'Score: 0', message: '' })
   },
 
@@ -202,7 +217,7 @@ var Main = React.createClass({
     return <View style={styles.container}>
              {component}
               <Text style={styles.message}>{this.state.message}</Text>
-              {/*<Text style={styles.user}>{currentUser ? 'Good Day, '+ currentUser.name : ''}</Text>*/}
+              <Text style={styles.user}>{currentUser ? 'Good Day , '+ this.state.score : ''}</Text>
            </View>
   },
 });
