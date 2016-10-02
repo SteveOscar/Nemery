@@ -72,14 +72,14 @@ class ScoreBoard extends React.Component {
       <View>
         {/*<Logo />*/}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.buttonText}>High Scores</Text>
+          <Text style={styles.headerText}>The Legends</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           {this.renderHighScores()}
-          <Text style={styles.buttonText}>You: {highScores['user_score']}</Text>
+          <Text style={styles.userText}>You: {highScores['user_score']}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <Text style={styles.buttonText} onPress={this.props.backToMenu}>Back</Text>
+          <Text style={styles.headerText} onPress={this.props.backToMenu}>{'\u2190 Back'}</Text>
         </Animated.View>
       </View>
     )
@@ -95,6 +95,20 @@ var styles = StyleSheet.create({
     color: 	'#fff4e6',
     fontFamily: 'American Typewriter'
   },
+  headerText: {
+    alignSelf: 'center',
+    margin: 20,
+    fontSize: 40,
+    color: 	'black',
+    fontFamily: 'American Typewriter'
+  },
+  userText: {
+    alignSelf: 'center',
+    margin: 10,
+    fontSize: 30,
+    color: 	'yellow',
+    fontFamily: 'American Typewriter'
+  }
 });
 
 export default ScoreBoard;

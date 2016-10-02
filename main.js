@@ -101,7 +101,6 @@ var Main = React.createClass({
   },
 
   saveScore(points) {
-    console.log('SAVING SCORE!!!!!')
     const { currentUser } = this.state
     const uuid = DeviceInfo.getUniqueID()
     fetch("http://localhost:3000/scores/new/" + uuid, {
@@ -111,7 +110,7 @@ var Main = React.createClass({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ user: currentUser.id, score: points })
-    }).then((response) => console.log("SCORE SAVED ", response))
+    }).then((response) => console.log('SCORE SAVED ', response))
   },
 
   setUser(response) {
@@ -162,7 +161,7 @@ var Main = React.createClass({
         this.setState({ level: this.state.level + 1, playing: false })
       }, 500)
       setTimeout(() => {
-        this.setState({ message: '' })
+        this.setState({ message: '', playing: true })
       }, 1500)
     }
   },
