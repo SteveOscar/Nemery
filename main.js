@@ -5,6 +5,7 @@ import GameView from './GameView.js'
 import Menu from './Menu.js'
 import Login from './Login.js'
 import ScoreBoard from './ScoreBoard.js'
+import Transition from './Transition.js'
 import DeviceUUID from "react-native-device-uuid"
 // var Device = require('react-native-device')
 var DeviceInfo = require('react-native-device-info');
@@ -15,7 +16,8 @@ import {
     StyleSheet,
     Vibration,
     ActivityIndicator,
-    AsyncStorage
+    AsyncStorage,
+    StatusBar
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -23,23 +25,26 @@ var {width, height} = require('Dimensions').get('window');
 var Main = React.createClass({
   getInitialState: function() {
     return {
-      txt: '',
+      txt: '...',
       difficulty: 'Easy',
       level: 1,
       score: 0,
       playing: false,
       isLoading: true,
-      Message: 'Hi',
+      message: '...',
       currentUser: '',
       highScores: '',
-      showingScores: false
+      showingScores: false,
+      showingTransition: false,
     };
   },
 
   componentDidMount() {
     AsyncStorage.getItem("User").then((user) => {
       if (user !== null){
-        this.setState({isLoading: false, currentUser: JSON.parse(user)}, this.getScores())
+        let person = JSON.parse(user)
+        this.setState({isLoading: false, currentUser: person, txt: 'Welcome ' + person.name}, this.getScores())
+        console.log(JSON.parse(user))
       }else {
         this.checkForUser()
       }
@@ -56,20 +61,17 @@ var Main = React.createClass({
       .catch(error =>
          this.setState({
           isLoading: false,
-          message: 'Something bad happened ' + error
-       }));
+          currentUser: 'Anonymous',
+          txt: 'Offline Mode'
+       }))
   },
 
   _handleResponse(response) {
     if(response !== undefined) {
-      if(response === null) {
-        this.setState({isLoading: false})
-      }else {
-        AsyncStorage.setItem('User', JSON.stringify(response))
-        this.setState({isLoading: false, currentUser: response}, this.getScores());
-      }
+      AsyncStorage.setItem('User', JSON.stringify(response))
+      this.setState({isLoading: false, currentUser: response, txt: 'Welcome ' + this.state.currentUser.name}, this.getScores());
     } else {
-      this.setState({isLoading: false, message: 'Server Error'});
+      this.setState({isLoading: false, txt: 'Login unavailable :(', currentUser: 'Anonymous'});
     }
   },
 
@@ -81,22 +83,32 @@ var Main = React.createClass({
         this._handleScoreResponse(response);
       })
       .catch(error =>
-         this.setState({
-          isLoading: false,
-          message: 'Something bad happened ' + error
-       }));
+        AsyncStorage.getItem("highScores").then((scores) => {
+          if (scores !== null){
+            this.setState({
+             isLoading: false,
+             highScores: scores
+           })
+         } else {
+           this.setState({
+             isLoading: false,
+             highScores: []
+           })
+         }
+      })
+    )
   },
 
   _handleScoreResponse(response) {
-    if(response !== undefined) {
-      if(response === null) {
-        this.setState({highScores: ''})
-      }else {
-        console.log('SCORES ', response)
-        this.setState({isLoading: false, highScores: response});
-      }
+    if(response === null || response === undefined) {
+      AsyncStorage.getItem("highScores").then((scores) => {
+        if (scores !== null){ this.setState({ highScores: scores }) }
+        if (scores === null){ this.setState({ highScores: [] }) }
+      })
     } else {
-      this.setState({isLoading: false, message: 'Server Error'});
+      console.log('SCORES ', response)
+      AsyncStorage.setItem('highScores', JSON.stringify(response))
+      this.setState({isLoading: false, highScores: response});
     }
   },
 
@@ -111,6 +123,11 @@ var Main = React.createClass({
       },
       body: JSON.stringify({ user: currentUser.id, score: points })
     }).then((response) => console.log('SCORE SAVED ', response))
+    .catch(error =>
+       this.setState({
+        isLoading: false,
+        txt: 'Offline Mode'
+     }))
   },
 
   setUser(response) {
@@ -131,7 +148,7 @@ var Main = React.createClass({
 
   endGame() {
     this.saveScore(this.state.score)
-    this.setState({ playing: false, score: 0, txt: 'Score: 0', message: '' })
+    this.setState({ playing: false, score: 0, txt: 'Score: 0' })
   },
 
   showScore() {
@@ -156,13 +173,13 @@ var Main = React.createClass({
     const win = this.checkForWin(tilesTurned)
     if(win) {
       Vibration.vibrate()
-      this.setState({ message: 'WIN' })
+      this.setState({ txt: 'WIN' })
       setTimeout(() => {
-        this.setState({ level: this.state.level + 1, playing: false })
+        this.setState({ level: this.state.level + 1, playing: false, showingTransition: true })
       }, 500)
       setTimeout(() => {
-        this.setState({ message: '', playing: true })
-      }, 1500)
+        this.setState({ txt: '', playing: true, showingTransition: false })
+      }, 3500)
     }
   },
 
@@ -175,17 +192,21 @@ var Main = React.createClass({
 
   showMessage(didWin) {
     Vibration.vibrate()
-    if(!didWin) { this.setState({ message: 'LOST' }) }
-    if(didWin) { this.setState({ message: 'WIN' }) }
+    if(!didWin) { this.setState({ txt: 'LOST' }) }
+    if(didWin) { this.setState({ txt: 'WIN' }) }
   },
 
   render() {
     var uuid = DeviceInfo.getUniqueID()
-    let { currentUser, highScores, showingScores } = this.state
+    let { currentUser, highScores, showingScores, showingTransition, playing } = this.state
     const loginScreen = <Login setUser={this.setUser}/>
 
     const scoreBoard = <ScoreBoard highScores={highScores}
                                    backToMenu={this.backToMenu}
+                                   />
+
+    const transitionScreen = <Transition level={this.state.level}
+                                         score={this.state.score}
                                    />
 
     const gameBoard = <GameView difficulty={this.state.difficulty}
@@ -203,20 +224,20 @@ var Main = React.createClass({
 
     let spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)
     let component
-    if(this.state.playing) { component = gameBoard }
-    if(!this.state.playing && this.state.currentUser) { component = menu }
-    if(!this.state.playing && !this.state.currentUser) { component = loginScreen }
+    if(playing) { component = gameBoard }
+    if(!playing && this.state.currentUser) { component = menu }
+    if(!playing && !this.state.currentUser) { component = loginScreen }
     if(!currentUser) { component = loginScreen }
     if(currentUser && showingScores) { component = scoreBoard }
+    if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
-    // let component = this.state.playing ? gameBoard : (this.state.currentUser ? menu : loginScreen)
-
-    // if(!currentUser) { let component = loginScreen }
-    // let component = scoreBoard
     return <View style={styles.container}>
              {component}
-              <Text style={styles.message}>{this.state.message}</Text>
-              <Text style={styles.user}>{currentUser ? 'Good Day , '+ this.state.score : ''}</Text>
+             <View style={styles.messageBox}>
+               <StatusBar hidden={true} />
+               <Text style={styles.text}>{this.state.txt}</Text>
+               {/*<Text style={styles.user}>{currentUser ? 'Good Day , '+ this.state.score : ''}</Text>*/}
+             </View>
            </View>
   },
 });
@@ -231,12 +252,17 @@ var styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: 'white'
-  },
-  message: {
-    fontSize: 40,
-    color: '#3c2f2f',
+    color: 'white',
     fontFamily: 'American Typewriter'
+  },
+  messageBox: {
+    height: height * .1,
+    width: width,
+    backgroundColor: '#3c2f2f',
+    bottom: 0,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   user: {
     fontSize: 20,

@@ -10,14 +10,13 @@ import {
 
 var {width, height} = require('Dimensions').get('window');
 
-class Menu extends React.Component {
+class Transition extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       fadeAnim1: new Animated.Value(0),
       fadeAnim2: new Animated.Value(0),
-      fadeAnim3: new Animated.Value(0),
-      fadeAnim4: new Animated.Value(0)
+      fadeAnim3: new Animated.Value(0)
     }
   }
 
@@ -45,39 +44,23 @@ class Menu extends React.Component {
         delay: 1000
       }
     ).start();
-    Animated.timing(
-      this.state.fadeAnim4,
-      {
-        toValue: 1,
-        duration: 1000,
-        delay: 1500
-      }
-    ).start();
   }
 
   render() {
     return (
-      <View>
-        {this.renderButtons()}
-      </View>
-    )
+        <View style={styles.container}>
+          {this.renderStats()}
+        </View>
+        )
   }
 
-  renderButtons() {
+  renderStats() {
+    const { level, score } = this.props
     return (
       <View>
-        <Logo />
-        <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.buttonText} onPress={this.props.startGame}>Start</Text>
-        </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {this.props.difficulty}</Text>
-        </Animated.View>
-        <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <Text style={styles.buttonText} onPress={this.props.highScoresPage}>High Scores</Text>
-        </Animated.View>
-        <Animated.View style={{opacity: this.state.fadeAnim4}}>
-          <Text style={styles.buttonText} onPress={this.props.highScoresPage}>?</Text>
+          <Text style={styles.userText}>Level: {level}</Text>
+          <Text style={styles.userText}>Score: {score}</Text>
         </Animated.View>
       </View>
     )
@@ -86,16 +69,27 @@ class Menu extends React.Component {
 }
 
 var styles = StyleSheet.create({
-  continer: {
-    paddingBottom: 200
-  },
   buttonText: {
     alignSelf: 'center',
-    margin: height * .03,
+    margin: 10,
     fontSize: 30,
     color: 	'#fff4e6',
     fontFamily: 'American Typewriter'
   },
+  headerText: {
+    alignSelf: 'center',
+    margin: 20,
+    fontSize: 40,
+    color: 	'black',
+    fontFamily: 'American Typewriter'
+  },
+  userText: {
+    alignSelf: 'center',
+    margin: 10,
+    fontSize: 30,
+    color: 	'yellow',
+    fontFamily: 'American Typewriter'
+  }
 });
 
-export default Menu;
+export default Transition;

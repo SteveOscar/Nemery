@@ -35,11 +35,23 @@ class Logo extends React.Component {
       }
     ).start();
 
-    setTimeout(() => { this.moveTile(1) }, 400)
-    setTimeout(() => { this.moveTileBack(1) }, 1200);
+    const first = this.randomIndex(0, 5)
+    const second = this.randomIndex(0, 5, first)
 
-    setTimeout(() => { this.moveTile(4) }, 1000)
-    setTimeout(() => { this.moveTileBack(4) }, 1800);
+    setTimeout(() => { this.moveTile(first) }, 400)
+    setTimeout(() => { this.moveTileBack(first) }, 1200);
+
+    setTimeout(() => { this.moveTile(second) }, 1300)
+    setTimeout(() => { this.moveTileBack(second) }, 2200);
+  }
+
+  randomIndex(min, max, first) {
+    if(!first) { return Math.floor(Math.random() * (max - min + 1)) + min }
+    let second = first
+    while (second == first) {
+      second = Math.floor(Math.random() * (max - min + 1)) + min
+    }
+    return second
   }
 
   makeBoard() {
@@ -118,7 +130,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 150
+    paddingBottom: height * .25
   },
   tile: {
     position: 'absolute',
