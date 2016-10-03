@@ -5,7 +5,8 @@ import {
     View,
     StyleSheet,
     Animated,
-    Easing
+    Easing,
+    LayoutAnimation
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -55,6 +56,13 @@ class Menu extends React.Component {
     ).start();
   }
 
+  renderDifficulty() {
+    const { difficulty } = this.props
+    if(difficulty === "Easy") { return "\uD83D\uDE00" }
+    if(difficulty === "Medium") { return "\uD83D\uDE10" }
+    if(difficulty === "Hard") { return "\uD83D\uDE33" }
+  }
+
   render() {
     return (
       <View>
@@ -64,6 +72,8 @@ class Menu extends React.Component {
   }
 
   renderButtons() {
+    let howHard = this.renderDifficulty()
+
     return (
       <View>
         <Logo />
@@ -71,7 +81,7 @@ class Menu extends React.Component {
           <Text style={styles.buttonText} onPress={this.props.startGame}>Start</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {this.props.difficulty}</Text>
+          <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {howHard}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <Text style={styles.buttonText} onPress={this.props.highScoresPage}>High Scores</Text>

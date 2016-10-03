@@ -147,12 +147,14 @@ var Main = React.createClass({
   },
 
   endGame() {
+    console.log('SAVE SCORE!!! ', this.state.score)
     this.saveScore(this.state.score)
     this.setState({ playing: false, score: 0, txt: 'Score: 0' })
   },
 
   showScore() {
-    return "Score: " + this.state.score
+    const { score } = this.state
+    return "Score: " + score
   },
 
   upDifficulty() {
@@ -169,7 +171,7 @@ var Main = React.createClass({
 
   updateScore(tilesTurned) {
     const currentScore = this.state.score
-    this.setState({ score: currentScore + 1, txt: "Score " + this.state.score })
+    this.setState({ score: currentScore + 1, txt: "Score " + (this.state.score + 1) })
     const win = this.checkForWin(tilesTurned)
     if(win) {
       Vibration.vibrate()
@@ -192,8 +194,8 @@ var Main = React.createClass({
 
   showMessage(didWin) {
     Vibration.vibrate()
-    if(!didWin) { this.setState({ txt: 'LOST' }) }
-    if(didWin) { this.setState({ txt: 'WIN' }) }
+    if(!didWin) { this.setState({ txt: 'Game Over' }) }
+    if(didWin) { this.setState({ txt: 'Next Level' }) }
   },
 
   render() {
