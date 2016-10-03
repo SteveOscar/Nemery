@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Animated,
     Easing,
-    LayoutAnimation
+    LayoutAnimation,
+    TouchableHighlight
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -18,7 +19,9 @@ class Menu extends React.Component {
       fadeAnim1: new Animated.Value(0),
       fadeAnim2: new Animated.Value(0),
       fadeAnim3: new Animated.Value(0),
-      fadeAnim4: new Animated.Value(0)
+      fadeAnim4: new Animated.Value(0),
+      spinValue: new Animated.Value(0),
+      pressed: false
     }
   }
 
@@ -56,6 +59,24 @@ class Menu extends React.Component {
     ).start();
   }
 
+  spin () {
+    this.state.spinValue.setValue(0)
+    Animated.timing(
+      this.state.spinValue,
+      {
+        toValue: 1,
+        duration: 4000,
+        easing: Easing.linear
+      }
+    ).start(() => this.spin())
+  }
+
+  handlePress() {
+    this.setState({ pressed: true })
+    this.spin()
+    this.props.highScoresPage()
+  }
+
   renderDifficulty() {
     const { difficulty } = this.props
     if(difficulty === "Easy") { return "\uD83D\uDE00" }
@@ -64,8 +85,22 @@ class Menu extends React.Component {
   }
 
   render() {
+    const spin = this.state.spinValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg']
+    })
+
     return (
       <View>
+        {/*<View style={styles.spinner}>
+          <Animated.Image
+            style={{
+              width: 227,
+              height: 200,
+              transform: [{rotate: spin}] }}
+              source={{uri: 'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png'}}
+          />
+        </View>*/}
         {this.renderButtons()}
       </View>
     )
@@ -84,7 +119,9 @@ class Menu extends React.Component {
           <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {howHard}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <Text style={styles.buttonText} onPress={this.props.highScoresPage}>High Scores</Text>
+          <TouchableHighlight underlayColor="blue">
+            <Text style={styles.buttonText} onPress={this.handlePress.bind(this)}>High Scores</Text>
+          </TouchableHighlight>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
           <Text style={styles.buttonText} onPress={this.props.highScoresPage}>?</Text>
@@ -106,6 +143,12 @@ var styles = StyleSheet.create({
     color: 	'#fff4e6',
     fontFamily: 'American Typewriter'
   },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50
+  }
 });
 
 export default Menu;
