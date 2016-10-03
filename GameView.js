@@ -147,15 +147,6 @@ class BoardView extends React.Component {
     }, 4000)
   }
 
-  handleTimerEnd() {
-    const length = this.props.size * this.props.size
-    if(this.state.beenClicked.length == length) { return }
-    this.props.deliverVerdict(false)
-    this.setState({ inPlay: false })
-    this.showTiles(false)
-    this.endGame()
-  }
-
   initialSingleTileShow(id) {
     // return if tile is already shown
     if(this.state.beenClicked.indexOf(id) !== -1) { return }
@@ -188,11 +179,11 @@ class BoardView extends React.Component {
 
   showNumber(id) {
     setTimeout(() => {
-      this.setState({ numbers: this.makeSomeLetters(id) })
+      this.setState({ numbers: this.makeSomeNumbers(id) })
     }, 500);
   }
 
-  makeSomeLetters(id) {
+  makeSomeNumbers(id) {
     let numbers = this.state.numbers || new Array(this.props.size * this.props.size)
     numbers[id] = this.state.hiddenLetters[id]
     return numbers
@@ -291,15 +282,14 @@ class BoardView extends React.Component {
     return numbers
   }
 
-  showAllTiles() {
+  handleTimerEnd() {
+    // if(!this.state.inPlay) { return }
+    const length = this.props.size * this.props.size
+    if(!this.state.inPlay || this.state.beenClicked.length == length) { return }
+    this.props.deliverVerdict(false)
+    this.setState({ inPlay: false })
+    this.showTiles(false)
     this.endGame()
-    setTimeout(() => {
-      for (var i = 0; i < this.props.size * this.props.size; i++) {
-        for (var j = 0; j < this.props.size * this.props.size; j++) {
-          this.initialSingleTileShow(i)
-        }
-      }
-    }, 500);
   }
 
   endGame() {
@@ -308,6 +298,16 @@ class BoardView extends React.Component {
     }, 3500)
   }
 
+  // showAllTiles() {
+  //   this.endGame()
+  //   setTimeout(() => {
+  //     for (var i = 0; i < this.props.size * this.props.size; i++) {
+  //       for (var j = 0; j < this.props.size * this.props.size; j++) {
+  //         this.initialSingleTileShow(i)
+  //       }
+  //     }
+  //   }, 500);
+  // }
 }
 
 var styles = StyleSheet.create({

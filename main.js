@@ -149,7 +149,7 @@ var Main = React.createClass({
   endGame() {
     console.log('SAVE SCORE!!! ', this.state.score)
     this.saveScore(this.state.score)
-    this.setState({ playing: false, score: 0, txt: 'Score: 0' })
+    this.setState({ playing: false, score: 0, txt: 'Score: 0', level: 0 })
   },
 
   showScore() {
