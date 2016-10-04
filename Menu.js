@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './Logo.js'
+import Button from './Button.js'
 import {
     Text,
     View,
@@ -112,21 +113,19 @@ class Menu extends React.Component {
     let howHard = this.renderDifficulty()
 
     return (
-      <View>
+      <View style={styles.container}>
         <Logo />
-        <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.buttonText} onPress={this.props.startGame}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>Start</Text>
+        <Animated.View style={{opacity: this.state.fadeAnim1}} >
+          <Button action={this.props.startGame} text={'Start'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText} onPress={this.props.upDifficulty}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>{howHard}</Text>
+          <Button action={this.props.upDifficulty} text={howHard}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <TouchableHighlight underlayColor="blue">
-            <Text style={styles.buttonText} onPress={this.handlePress.bind(this)}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>High Scores</Text>
-          </TouchableHighlight>
+          <Button action={this.props.highScoresPage} text={'High Scores'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
-          <Text style={styles.buttonText} onPress={this.props.highScoresPage}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>???</Text>
+          <Button action={this.props.highScoresPage} text={'???'}/>
         </Animated.View>
       </View>
     )
@@ -136,7 +135,7 @@ class Menu extends React.Component {
 
 var styles = StyleSheet.create({
   continer: {
-    paddingBottom: 200
+    flexDirection: 'column'
   },
   buttonText: {
     alignSelf: 'center',
