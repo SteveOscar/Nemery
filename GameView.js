@@ -31,7 +31,8 @@ class BoardView extends React.Component {
       size: this.props.size,
       delay: 500,
       inPlay: false,
-      progress: new Animated.Value(width)
+      progress: new Animated.Value(width),
+      timerHeight: new Animated.Value(0)
     }
   }
 
@@ -101,7 +102,13 @@ class BoardView extends React.Component {
 
   hideTiles() {
     const difficultyFactor = this.timeAdjustment()
+    // shows timer bar first
     setTimeout(() => {
+      Animated.timing(
+        this.state.timerHeight,
+        {toValue: 20, duration: 2000}
+      ).start();
+
       for (var i = 0; i < this.props.size; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
@@ -138,9 +145,9 @@ class BoardView extends React.Component {
   }
 
   startTimer() {
-    Animated.timing(          // Uses easing functions
-      this.state.progress,    // The value to drive
-      {toValue: 0, duration: 4000}            // Configuration
+    Animated.timing(
+      this.state.progress,
+      {toValue: 0, duration: 4000}
     ).start();
     setTimeout(() => {
       this.handleTimerEnd()
@@ -203,7 +210,7 @@ class BoardView extends React.Component {
     return (
       <View style={{width: width}}>
         <Animated.View style={{opacity: this.state.fadeAnim}}>
-          <Animated.View style={{position: 'absolute', left: 0, right: 0, top:-(height*.1), height: 10, backgroundColor: '#fff4e6', width: this.state.progress, borderRadius: 10}}>
+          <Animated.View style={{position: 'absolute', left: 0, right: 0, top:-(height*.1), backgroundColor: 'black', height: this.state.timerHeight, width: this.state.progress, borderRadius: 5, opacity: .5}}>
           </Animated.View>
           <View style={{width: dimension, height: dimension, alignSelf: 'center'}}>
             {this.renderTiles()}

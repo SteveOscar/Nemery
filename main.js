@@ -6,6 +6,7 @@ import Menu from './Menu.js'
 import Login from './Login.js'
 import ScoreBoard from './ScoreBoard.js'
 import Transition from './Transition.js'
+import quotes from './quotes.js'
 import DeviceUUID from "react-native-device-uuid"
 // var Device = require('react-native-device')
 var DeviceInfo = require('react-native-device-info');
@@ -147,9 +148,9 @@ var Main = React.createClass({
   },
 
   endGame() {
-    console.log('SAVE SCORE!!! ', this.state.score)
+    const random = quotes()
     this.saveScore(this.state.score)
-    this.setState({ playing: false, score: 0, txt: 'Score: 0', level: 0 })
+    this.setState({ playing: false, score: 0, txt: random, level: 0 })
   },
 
   showScore() {
@@ -170,8 +171,8 @@ var Main = React.createClass({
   },
 
   updateScore(tilesTurned) {
-    const currentScore = this.state.score
-    this.setState({ score: currentScore + 1, txt: "Score " + (this.state.score + 1) })
+    const currentScore = this.state.score + 1
+    this.setState({ score: currentScore, txt: "Score " + (this.state.score + 1) })
     const win = this.checkForWin(tilesTurned)
     if(win) {
       Vibration.vibrate()
@@ -180,7 +181,7 @@ var Main = React.createClass({
         this.setState({ level: this.state.level + 1, playing: false, showingTransition: true })
       }, 500)
       setTimeout(() => {
-        this.setState({ txt: '', playing: true, showingTransition: false })
+        this.setState({ txt: 'Score: ' + currentScore, playing: true, showingTransition: false })
       }, 3500)
     }
   },

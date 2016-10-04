@@ -66,7 +66,7 @@ class Menu extends React.Component {
       this.state.spinValue,
       {
         toValue: 1,
-        duration: 4000,
+        duration: 5000,
         easing: Easing.spring
       }
     ).start(() => this.spin())
@@ -96,8 +96,8 @@ class Menu extends React.Component {
         <View style={styles.spinner}>
           <Animated.Image
             style={{
-              width: 100,
-              height: 100,
+              width: 50,
+              height: 50,
               opacity: .7,
               transform: [{rotate: spin}] }}
               source={require('./gear.png')}
@@ -115,18 +115,18 @@ class Menu extends React.Component {
       <View>
         <Logo />
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.buttonText} onPress={this.props.startGame}>Start</Text>
+          <Text style={styles.buttonText} onPress={this.props.startGame}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>Start</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText} onPress={this.props.upDifficulty}>Difficulty: {howHard}</Text>
+          <Text style={styles.buttonText} onPress={this.props.upDifficulty}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>{howHard}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <TouchableHighlight underlayColor="blue">
-            <Text style={styles.buttonText} onPress={this.handlePress.bind(this)}>High Scores</Text>
+            <Text style={styles.buttonText} onPress={this.handlePress.bind(this)}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>High Scores</Text>
           </TouchableHighlight>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
-          <Text style={styles.buttonText} onPress={this.props.highScoresPage}>?</Text>
+          <Text style={styles.buttonText} onPress={this.props.highScoresPage}><Text style={{color: '#be9b7b'}}>{"\u204D"}  </Text>???</Text>
         </Animated.View>
       </View>
     )
