@@ -57,6 +57,7 @@ class Menu extends React.Component {
         delay: 1500
       }
     ).start();
+    this.spin()
   }
 
   spin () {
@@ -66,7 +67,7 @@ class Menu extends React.Component {
       {
         toValue: 1,
         duration: 4000,
-        easing: Easing.linear
+        easing: Easing.spring
       }
     ).start(() => this.spin())
   }
@@ -92,15 +93,16 @@ class Menu extends React.Component {
 
     return (
       <View>
-        {/*<View style={styles.spinner}>
+        <View style={styles.spinner}>
           <Animated.Image
             style={{
-              width: 227,
-              height: 200,
+              width: 100,
+              height: 100,
+              opacity: .7,
               transform: [{rotate: spin}] }}
-              source={{uri: 'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png'}}
+              source={require('./gear.png')}
           />
-        </View>*/}
+        </View>
         {this.renderButtons()}
       </View>
     )
