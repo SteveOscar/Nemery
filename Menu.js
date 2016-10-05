@@ -119,7 +119,7 @@ class Menu extends React.Component {
           <Button action={this.props.startGame} text={'Start'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Button action={this.props.upDifficulty} text={howHard}/>
+          <Button action={this.props.upDifficulty} text={'Difficulty: ' + howHard}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <Button action={this.props.highScoresPage} text={'High Scores'}/>
@@ -134,8 +134,7 @@ class Menu extends React.Component {
 }
 
 var styles = StyleSheet.create({
-  continer: {
-    flexDirection: 'column'
+  container: {
   },
   buttonText: {
     alignSelf: 'center',

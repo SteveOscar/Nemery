@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './Logo.js'
+import Button from './Button.js'
 import {
     Text,
     View,
@@ -57,10 +58,16 @@ class Transition extends React.Component {
   renderStats() {
     const { level, score } = this.props
     return (
-      <View>
+      <View style={styles.container}>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           <Text style={styles.userText}>Level: {level}</Text>
           <Text style={styles.userText}>Score: {score}</Text>
+        </Animated.View>
+        <Animated.View style={{opacity: this.state.fadeAnim2}}>
+          <Button action={this.props.continue} text={'Continue'}/>
+        </Animated.View>
+        <Animated.View style={{opacity: this.state.fadeAnim3}}>
+          <Button action={this.props.quit} text={'Quit'}/>
         </Animated.View>
       </View>
     )
@@ -69,6 +76,9 @@ class Transition extends React.Component {
 }
 
 var styles = StyleSheet.create({
+  container: {
+    width: width
+  },
   buttonText: {
     alignSelf: 'center',
     margin: 10,

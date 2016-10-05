@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './Logo.js'
+import Button from './Button.js'
 import {
     Text,
     View,
@@ -79,7 +80,7 @@ class ScoreBoard extends React.Component {
           <Text style={styles.userText}>You: {highScores['user_score']}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <Text style={styles.headerText} onPress={this.props.backToMenu}>{'\u2190 Back'}</Text>
+          <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>
         </Animated.View>
       </View>
     )

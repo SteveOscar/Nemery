@@ -150,7 +150,7 @@ var Main = React.createClass({
   endGame() {
     const random = quotes()
     this.saveScore(this.state.score)
-    this.setState({ playing: false, score: 0, txt: random, level: 0 })
+    this.setState({ playing: false, score: 0, txt: random, level: 0, showingTransition: false })
   },
 
   showScore() {
@@ -180,10 +180,12 @@ var Main = React.createClass({
       setTimeout(() => {
         this.setState({ level: this.state.level + 1, playing: false, showingTransition: true })
       }, 500)
-      setTimeout(() => {
-        this.setState({ txt: 'Score: ' + currentScore, playing: true, showingTransition: false })
-      }, 3500)
     }
+  },
+
+  continueGame() {
+    const currentScore = this.state.score
+    this.setState({ txt: 'Score: ' + currentScore, playing: true, showingTransition: false })
   },
 
   checkForWin(num) {
@@ -210,6 +212,8 @@ var Main = React.createClass({
 
     const transitionScreen = <Transition level={this.state.level}
                                          score={this.state.score}
+                                         continue={this.continueGame}
+                                         quit={this.endGame}
                                    />
 
     const gameBoard = <GameView difficulty={this.state.difficulty}

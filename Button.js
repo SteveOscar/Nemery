@@ -16,7 +16,7 @@ class Button extends React.Component {
 
   render() {
     return (
-      <TouchableHighlight style={styles.container} onPress={this.props.action} underlayColor={'#4b3832'}>
+      <TouchableHighlight style={styles.container} onPress={this.props.action} underlayColor={'#fff4e6'}>
         <Text style={styles.buttonText} >{this.props.text}</Text>
       </TouchableHighlight>
     )
@@ -29,8 +29,8 @@ class Button extends React.Component {
       borderRadius: 20,
       borderWidth: 1,
       borderColor: '#fff4e6',
-      margin: 2,
-      height: height * .09,
+      margin: 4,
+      height: height * .07,
       alignItems:'center',
       justifyContent:'center'
     },
