@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './Logo.js'
+import Sound from 'react-native-sound'
 import {
     Text,
     View,
@@ -14,9 +15,18 @@ var {width, height} = require('Dimensions').get('window');
 
 class Button extends React.Component {
 
+  playButton() {
+    var s = new Sound('click.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+  }
+
+  handlePress() {
+    this.playButton()
+    this.props.action()
+  }
+
   render() {
     return (
-      <TouchableHighlight style={styles.container} onPress={this.props.action} underlayColor={'#fff4e6'}>
+      <TouchableHighlight style={styles.container} onPress={this.handlePress.bind(this)} underlayColor={'#fff4e6'}>
         <Text style={styles.buttonText} >{this.props.text}</Text>
       </TouchableHighlight>
     )

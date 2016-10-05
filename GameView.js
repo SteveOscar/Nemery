@@ -1,4 +1,5 @@
 import React from 'react';
+import Sound from 'react-native-sound'
 
 import {
     Text,
@@ -36,6 +37,18 @@ class BoardView extends React.Component {
     }
   }
 
+  playClick() {
+    var s = new Sound('click.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+  }
+
+  playWhoosh() {
+    var s = new Sound('whoosh.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+  }
+
+  playWhoosh2() {
+    var s = new Sound('whoosh2.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+  }
+
   generateNumbers() {
     const length = this.props.size * this.props.size
     const max = this.props.size * 6
@@ -68,6 +81,7 @@ class BoardView extends React.Component {
     const { delay } = this.state
     const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
+      this.playWhoosh2()
       for (var i = 0; i < this.props.size; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -75,6 +89,7 @@ class BoardView extends React.Component {
       }
     }, 500);
     setTimeout(() => {
+      this.playWhoosh2()
       for (var i = this.props.size; i < this.props.size*2; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -83,6 +98,7 @@ class BoardView extends React.Component {
     }, 1200);
     setTimeout(() => {
       if(this.props.size < 3) { return }
+      this.playWhoosh2()
       for (var i = this.props.size*2; i < this.props.size*3; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -91,6 +107,7 @@ class BoardView extends React.Component {
     }, 1700);
     setTimeout(() => {
       if(this.props.size < 4) { return }
+      this.playWhoosh2()
       for (var i = this.props.size*3; i < this.props.size*4; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -104,6 +121,7 @@ class BoardView extends React.Component {
     const difficultyFactor = this.timeAdjustment()
     // shows timer bar first
     setTimeout(() => {
+      this.playWhoosh()
       Animated.timing(
         this.state.timerHeight,
         {toValue: 20, duration: 2000}
@@ -116,6 +134,7 @@ class BoardView extends React.Component {
       }
     }, 2500 * difficultyFactor);
     setTimeout(() => {
+      this.playWhoosh()
       for (var i = this.props.size; i < this.props.size*2; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
@@ -124,6 +143,7 @@ class BoardView extends React.Component {
     }, 3200 * difficultyFactor);
     setTimeout(() => {
       if(this.props.size < 3) { return }
+      this.playWhoosh()
       for (var i = this.props.size*2; i < this.props.size*3; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
@@ -132,6 +152,7 @@ class BoardView extends React.Component {
     }, 3700 * difficultyFactor);
     setTimeout(() => {
       if(this.props.size < 4) { return }
+      this.playWhoosh()
       for (var i = this.props.size*3; i < this.props.size*4; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.tileHide(i)
@@ -260,6 +281,7 @@ class BoardView extends React.Component {
   clickTile(id) {
     if(!this.state.inPlay) { return }
     if(this.alreadyClicked(id)) { return }
+    this.playClick()
     setTimeout(() => { this.setState({ numbers: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
     var tilt = this.state.board.tilt[id];
     tilt.setValue(1);

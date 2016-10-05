@@ -25,6 +25,12 @@
 		2DA36E2FA7BC4284A68A9511 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73290D9ADB7C4797A588445D /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8CF3D15E1D973E9500F63302 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3D15D1D973E9500F63302 /* DeviceUtil.m */; };
+		8CFD6F681DA495E3004E8397 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFD6F671DA495A1004E8397 /* libRNSound.a */; };
+		8CFD6F6A1DA49805004E8397 /* Wood_Rattle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F691DA49805004E8397 /* Wood_Rattle.mp3 */; };
+		8CFD6F6C1DA49F33004E8397 /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F6B1DA49F33004E8397 /* click.mp3 */; };
+		8CFD6F6E1DA49FFB004E8397 /* whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */; };
+		8CFD6F701DA4A071004E8397 /* whoosh2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */; };
+		8CFD6F721DA4A314004E8397 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F711DA4A314004E8397 /* button.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +118,13 @@
 			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
 			remoteInfo = RNDeviceInfo;
 		};
+		8CFD6F661DA495A1004E8397 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CFD6F571DA495A1004E8397 /* RNSound.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
+			remoteInfo = RNSound;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +152,12 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8CF3D15D1D973E9500F63302 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceUtil.m; path = AlphaReflex/DeviceUtil.m; sourceTree = "<group>"; };
 		8CF3D1691D973E9D00F63302 /* DeviceUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = "../node_modules/react-native-device/DeviceUtil.h"; sourceTree = "<group>"; };
+		8CFD6F571DA495A1004E8397 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
+		8CFD6F691DA49805004E8397 /* Wood_Rattle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Wood_Rattle.mp3; path = ../../../../Downloads/Wood_Rattle.mp3; sourceTree = "<group>"; };
+		8CFD6F6B1DA49F33004E8397 /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = click.mp3; path = ../../../../Downloads/click.mp3; sourceTree = "<group>"; };
+		8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whoosh.mp3; path = ../../../../Downloads/whoosh.mp3; sourceTree = "<group>"; };
+		8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whoosh2.mp3; path = ../../../../Downloads/whoosh2.mp3; sourceTree = "<group>"; };
+		8CFD6F711DA4A314004E8397 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = button.mp3; path = ../../../../Downloads/button.mp3; sourceTree = "<group>"; };
 		A63F8CB930704569BC6407DF /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CFD6F681DA495E3004E8397 /* libRNSound.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -280,6 +300,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8CFD6F571DA495A1004E8397 /* RNSound.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -310,6 +331,11 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* AlphaReflexTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				8CFD6F691DA49805004E8397 /* Wood_Rattle.mp3 */,
+				8CFD6F711DA4A314004E8397 /* button.mp3 */,
+				8CFD6F6B1DA49F33004E8397 /* click.mp3 */,
+				8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */,
+				8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -328,6 +354,14 @@
 			isa = PBXGroup;
 			children = (
 				8CE363501D9785CC0083D6C4 /* libRNDeviceInfo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CFD6F581DA495A1004E8397 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CFD6F671DA495A1004E8397 /* libRNSound.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -446,6 +480,10 @@
 					ProductGroup = 8CE363421D9785CC0083D6C4 /* Products */;
 					ProjectRef = A63F8CB930704569BC6407DF /* RNDeviceInfo.xcodeproj */;
 				},
+				{
+					ProductGroup = 8CFD6F581DA495A1004E8397 /* Products */;
+					ProjectRef = 8CFD6F571DA495A1004E8397 /* RNSound.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -533,6 +571,13 @@
 			remoteRef = 8CE3634F1D9785CC0083D6C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8CFD6F671DA495A1004E8397 /* libRNSound.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSound.a;
+			remoteRef = 8CFD6F661DA495A1004E8397 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -547,8 +592,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CFD6F701DA4A071004E8397 /* whoosh2.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				8CFD6F6E1DA49FFB004E8397 /* whoosh.mp3 in Resources */,
+				8CFD6F6A1DA49805004E8397 /* Wood_Rattle.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				8CFD6F721DA4A314004E8397 /* button.mp3 in Resources */,
+				8CFD6F6C1DA49F33004E8397 /* click.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

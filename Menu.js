@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo.js'
 import Button from './Button.js'
+import Sound from 'react-native-sound'
 import {
     Text,
     View,
@@ -59,6 +60,13 @@ class Menu extends React.Component {
       }
     ).start();
     this.spin()
+    // this.playButton()
+  }
+
+  playButton() {
+    var s = new Sound('button.mp3', Sound.MAIN_BUNDLE, (e) => {
+        s.play();
+    });
   }
 
   spin () {
