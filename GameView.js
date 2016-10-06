@@ -45,8 +45,21 @@ class BoardView extends React.Component {
     var s = new Sound('whoosh.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
   }
 
-  playWhoosh2() {
-    var s = new Sound('whoosh2.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+  playWhoosh2(row) {
+    if(this.confirmSoundEffect(row)) { var s = new Sound('whoosh2.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() }) }
+  }
+
+  confirmSoundEffect(row) {
+    const { beenClicked } = this.state
+    if(beenClicked.length === 0 ) { return true }
+
+    let rowAdjustment = (row === 1 ? 0 : (row - 1) * this.props.size)
+    let clicked = []
+    for (var i = 0; i < this.props.size; i++) {
+      clicked.push((beenClicked.indexOf(i + rowAdjustment) !== -1))
+    }
+    let results = [...new Set(clicked)]
+    return results.length > 1 || !results[0]
   }
 
   generateNumbers() {
@@ -81,7 +94,7 @@ class BoardView extends React.Component {
     const { delay } = this.state
     const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
-      this.playWhoosh2()
+      this.playWhoosh2(1)
       for (var i = 0; i < this.props.size; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -89,7 +102,7 @@ class BoardView extends React.Component {
       }
     }, 500);
     setTimeout(() => {
-      this.playWhoosh2()
+      this.playWhoosh2(2)
       for (var i = this.props.size; i < this.props.size*2; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -98,7 +111,7 @@ class BoardView extends React.Component {
     }, 1200);
     setTimeout(() => {
       if(this.props.size < 3) { return }
-      this.playWhoosh2()
+      this.playWhoosh2(3)
       for (var i = this.props.size*2; i < this.props.size*3; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -107,7 +120,7 @@ class BoardView extends React.Component {
     }, 1700);
     setTimeout(() => {
       if(this.props.size < 4) { return }
-      this.playWhoosh2()
+      this.playWhoosh2(4)
       for (var i = this.props.size*3; i < this.props.size*4; i++) {
         for (var j = 0; j < this.props.size; j++) {
           this.initialSingleTileShow(i)
@@ -363,12 +376,3 @@ var styles = StyleSheet.create({
 });
 
 export default BoardView;
-
-// numbers[id] = String.fromCharCode(97 + Math.floor(Math.random() * 26)).toUpperCase()
-// numbers[i] = ''
-// numbers[i] = Math.floor(Math.random() * (10 - 0 + 1)) + 0
-
-// const toMutate = numbers[id]
-// let mutated = (toMutate.charCodeAt(0) + 2) % 91
-// mutated = mutated < 65 ? mutated + 65 : mutated
-// newLetter = String.fromCharCode(mutated)
