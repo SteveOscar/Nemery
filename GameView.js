@@ -137,7 +137,7 @@ class BoardView extends React.Component {
       this.playWhoosh()
       Animated.timing(
         this.state.timerHeight,
-        {toValue: 20, duration: 2000}
+        {toValue: height * .05, duration: 1800}
       ).start();
 
       for (var i = 0; i < this.props.size; i++) {
@@ -179,13 +179,17 @@ class BoardView extends React.Component {
   }
 
   startTimer() {
+    const baseTime = 3500
+    const levelFactor = (this.props.level / 10) * baseTime
+    const difficultyFactor = this.timeAdjustment()
+    const timer = (baseTime * difficultyFactor) - levelFactor
     Animated.timing(
       this.state.progress,
-      {toValue: 0, duration: 4000}
+      {toValue: 0, duration: timer }
     ).start();
     setTimeout(() => {
       this.handleTimerEnd()
-    }, 4000)
+    }, timer)
   }
 
   initialSingleTileShow(id) {
@@ -244,7 +248,7 @@ class BoardView extends React.Component {
     return (
       <View style={{width: width}}>
         <Animated.View style={{opacity: this.state.fadeAnim}}>
-          <Animated.View style={{position: 'absolute', left: 0, right: 0, top:-(height*.1), backgroundColor: 'black', height: this.state.timerHeight, width: this.state.progress, borderRadius: 5, opacity: .5}}>
+          <Animated.View style={[ styles.timer, { height: this.state.timerHeight, width: this.state.progress}]}>
           </Animated.View>
           <View style={{width: dimension, height: dimension, alignSelf: 'center'}}>
             {this.renderTiles()}
@@ -267,7 +271,7 @@ class BoardView extends React.Component {
         var style = {
           left: col * CELL_SIZE + CELL_PADDING,
           top: row * CELL_SIZE + CELL_PADDING,
-          transform: [{perspective: CELL_SIZE * .9},
+          transform: [{perspective: CELL_SIZE * .95},
                        {rotateX: tilt}]
         }
         result.push(this.renderTile(id, style, letter))
@@ -371,7 +375,13 @@ var styles = StyleSheet.create({
     fontFamily: 'American Typewriter'
   },
   timer: {
-
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: -(height*.2),
+    backgroundColor: 'white',
+    borderRadius: 5,
+    opacity: .5,
   }
 });
 
