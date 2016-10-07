@@ -63,9 +63,20 @@ class BoardView extends React.Component {
   }
 
   generateNumbers() {
-    const length = this.props.size * this.props.size
-    const max = this.props.size * 6
-    return randomArray = [...new Array(length)].map((_, i) => Math.round(Math.random() * max + 1));
+    const { size, difficulty } = this.props
+    const length = size * size
+    const max = difficulty === "Extreme" ? 99 : length * 2
+    // return [...new Array(length)].map((_, i) => Math.round(Math.random() * max + 1));
+    let random = []
+    for (var i = 0; i < length; i++){
+      var temp = Math.floor(Math.random()*max);
+      if(random.indexOf(temp) == -1){
+        random.push(temp);
+      } else {
+        i--;
+      }
+    }
+    return random
   }
 
   timeAdjustment() {
@@ -73,6 +84,7 @@ class BoardView extends React.Component {
     if(difficulty === "Easy") { return 1 }
     if(difficulty === "Medium") { return 2 }
     if(difficulty === "Hard") { return 3 }
+    if(difficulty === "Extreme") { return 2.5 }
   }
 
   componentDidMount() {
@@ -131,7 +143,9 @@ class BoardView extends React.Component {
   }
 
   hideTiles() {
+    const { difficulty } = this.props
     const difficultyFactor = this.timeAdjustment()
+    const gameDelay = (difficulty === "Easy" || difficulty === "Medium") ? difficultyFactor : difficultyFactor + .2
     // shows timer bar first
     setTimeout(() => {
       this.playWhoosh()
@@ -175,7 +189,7 @@ class BoardView extends React.Component {
     setTimeout(() => {
       this.setState({ inPlay: true })
       this.startTimer()
-    }, 4500 * difficultyFactor);
+    }, 4000 * gameDelay);
   }
 
   startTimer() {

@@ -92,6 +92,7 @@ class Menu extends React.Component {
     if(difficulty === "Easy") { return "\uD83D\uDE00" }
     if(difficulty === "Medium") { return "\uD83D\uDE10" }
     if(difficulty === "Hard") { return "\uD83D\uDE33" }
+    if(difficulty === "Extreme") { return "\uD83D\uDC80" }
   }
 
   render() {

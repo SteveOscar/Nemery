@@ -130,6 +130,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     paddingBottom: height * .25
   },
   tile: {
