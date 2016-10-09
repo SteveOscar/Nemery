@@ -123,7 +123,10 @@ var Main = React.createClass({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ user: currentUser.id, score: points })
-    }).then((response) => console.log('SCORE SAVED ', response))
+    }).then((response) => {
+      console.log('SCORE SAVED ', response)
+      this.getScores()
+    })
     .catch(error =>
        this.setState({
         isLoading: false,
@@ -285,6 +288,3 @@ var styles = StyleSheet.create({
 });
 
 module.exports = Main;
-
-// original background: #854442
-// original text:
