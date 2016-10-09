@@ -199,12 +199,14 @@ var Main = React.createClass({
   },
 
   updateScore(tilesTurned) {
-    const currentScore = this.state.score + 1
-    this.setState({ score: currentScore, txt: "Score " + (this.state.score + 1) })
+    const { difficulty } = this.state
+    const added = difficulty === 'Extreme' ? 2 : 1
+    const currentScore = this.state.score + added
+    this.setState({ score: currentScore, txt: "Score " + (this.state.score + added) })
     const win = this.checkForWin(tilesTurned)
     if(win) {
       Vibration.vibrate()
-      this.setState({ txt: 'WIN' })
+      this.setState({ txt: 'Level Passed' })
       setTimeout(() => {
         this.setState({ level: this.state.level + 1, playing: false, showingTransition: true })
       }, 500)
@@ -230,6 +232,10 @@ var Main = React.createClass({
     if(didWin) { this.setState({ txt: 'Next Level' }) }
   },
 
+  levelBonus(points) {
+    this.setState({ score: points })
+  },
+
   render() {
     var uuid = DeviceInfo.getUniqueID()
     let boardSize = ["Easy", "Medium", "Hard", "Extreme"].indexOf(this.state.difficulty) + 2
@@ -245,6 +251,8 @@ var Main = React.createClass({
                                          score={this.state.score}
                                          continue={this.continueGame}
                                          quit={this.endGame}
+                                         difficulty={this.state.difficulty}
+                                         addBonus={this.levelBonus}
                                    />
 
     const gameBoard = <GameView difficulty={this.state.difficulty}

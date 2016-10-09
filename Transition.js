@@ -22,6 +22,7 @@ class Transition extends React.Component {
   }
 
   componentDidMount() {
+    this.props.addBonus(Math.floor(this.getBonus() * this.props.score))
     Animated.timing(
       this.state.fadeAnim1,
       {
@@ -47,6 +48,14 @@ class Transition extends React.Component {
     ).start();
   }
 
+  getBonus() {
+    const { difficulty } = this.props
+    if(difficulty === 'Easy') { return 1.5 }
+    if(difficulty === 'Medium') { return 2 }
+    if(difficulty === 'Hard') { return 3 }
+    if(difficulty === 'Extreme') { return 4 }
+  }
+
   render() {
     return (
         <View style={styles.container}>
@@ -57,9 +66,11 @@ class Transition extends React.Component {
 
   renderStats() {
     const { level, score } = this.props
+    const bonus = this.getBonus()
     return (
       <View style={styles.container}>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
+          <Text style={styles.userText}>Difficulty Bonus: {bonus + 'X'}</Text>
           <Text style={styles.userText}>Level: {level}</Text>
           <Text style={styles.userText}>Score: {score}</Text>
         </Animated.View>
