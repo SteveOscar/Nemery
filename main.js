@@ -98,12 +98,12 @@ var Main = React.createClass({
       .then((response) => {
         this._handleScoreResponse(response);
       })
-      .catch(error =>
+      .catch(error => {
         AsyncStorage.getItem("highScores").then((scores) => {
           if (scores !== null){
             this.setState({
              isLoading: false,
-             highScores: scores
+             highScores: JSON.parse(scores)
            })
          } else {
            this.setState({
@@ -112,13 +112,13 @@ var Main = React.createClass({
            })
          }
       })
-    )
+    })
   },
 
   _handleScoreResponse(response) {
     if(response === null || response === undefined) {
       AsyncStorage.getItem("highScores").then((scores) => {
-        if (scores !== null){ this.setState({ highScores: scores }) }
+        if (scores !== null){ this.setState({ highScores: JSON.parse(scores) }) }
         if (scores === null){ this.setState({ highScores: [] }) }
       })
     } else {
@@ -138,7 +138,7 @@ var Main = React.createClass({
     const { currentUser } = this.state
     const uuid = DeviceInfo.getUniqueID()
     if(this.scoreNotWorthy(points)) { return }
-    this.setState({ lastScore: points })
+    this.setState({ lastScore: points, txt: 'Ya done good' })
     fetch("http://localhost:3000/scores/new/" + uuid, {
       method: 'POST',
       headers: {
@@ -175,8 +175,8 @@ var Main = React.createClass({
 
   endGame() {
     const random = quotes()
-    this.saveScore(this.state.score)
     this.setState({ playing: false, score: 0, txt: random, level: 0, showingTransition: false })
+    this.saveScore(this.state.score)
   },
 
   showScore() {
