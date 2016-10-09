@@ -42,9 +42,10 @@ var Main = React.createClass({
 
   componentDidMount() {
     AsyncStorage.getItem("User").then((user) => {
-      if (user !== null){
+      if (user !== null && user !== "null"){
         let person = JSON.parse(user)
-        this.setState({isLoading: false, currentUser: person, txt: 'Welcome ' + person.name}, this.getScores())
+        const greeting = (person && person.name) ? person.name : ''
+        this.setState({isLoading: false, currentUser: person, txt: 'Welcome ' + greeting}, this.getScores())
         console.log(JSON.parse(user))
       }else {
         this.checkForUser()
@@ -59,18 +60,20 @@ var Main = React.createClass({
       .then((response) => {
         this._handleResponse(response);
       })
-      .catch(error =>
+      .catch(error => {
          this.setState({
           isLoading: false,
           currentUser: 'Anonymous',
           txt: 'Offline Mode'
-       }))
+       })
+     })
   },
 
   _handleResponse(response) {
     if(response !== undefined) {
       AsyncStorage.setItem('User', JSON.stringify(response))
-      this.setState({isLoading: false, currentUser: response, txt: 'Welcome ' + this.state.currentUser.name}, this.getScores());
+      const name = this.state.currentUser.name ? this.state.currentUser.name : ''
+      this.setState({isLoading: false, currentUser: response, txt: 'Welcome ' + name}, this.getScores());
     } else {
       this.setState({isLoading: false, txt: 'Login unavailable :(', currentUser: 'Anonymous'});
     }
@@ -122,7 +125,12 @@ var Main = React.createClass({
         if (scores === null){ this.setState({ highScores: [] }) }
       })
     } else {
-      console.log('SCORES ', response)
+      // Check if the user's highest score is in local storage, and push to remote if so
+      const s = AsyncStorage.getItem("highScores")
+      debugger
+      const score = JSON.parse(s)
+      if(score.user_score > this.state.highScores.user_score) { this.saveScore(score.user_score) }
+
       AsyncStorage.setItem('highScores', JSON.stringify(response))
       this.setState({isLoading: false, highScores: response});
     }
@@ -237,6 +245,7 @@ var Main = React.createClass({
   },
 
   render() {
+    console.log('CURRENT USER :', this.state.currentUser)
     var uuid = DeviceInfo.getUniqueID()
     let boardSize = ["Easy", "Medium", "Hard", "Extreme"].indexOf(this.state.difficulty) + 2
     boardSize = boardSize < 4 ? boardSize : 4
@@ -270,6 +279,7 @@ var Main = React.createClass({
 
     let spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)
     let component
+
     if(playing) { component = gameBoard }
     if(!playing && this.state.currentUser) { component = menu }
     if(!playing && !this.state.currentUser) { component = loginScreen }
