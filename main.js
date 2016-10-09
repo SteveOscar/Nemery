@@ -8,7 +8,6 @@ import ScoreBoard from './ScoreBoard.js'
 import Transition from './Transition.js'
 import quotes from './quotes.js'
 import DeviceUUID from "react-native-device-uuid"
-// var Device = require('react-native-device')
 var DeviceInfo = require('react-native-device-info');
 
 import {
@@ -37,6 +36,7 @@ var Main = React.createClass({
       highScores: '',
       showingScores: false,
       showingTransition: false,
+      lastScore: 0
     };
   },
 
@@ -76,7 +76,22 @@ var Main = React.createClass({
     }
   },
 
-  getScores() {
+  scoreFetchCheck(justLoaded) {
+    let { lastScore, highScores } = this.state
+    if(justLoaded) { return true }
+    if(lastScore > highScores.high_scores[4][1]) { return true }
+    if(lastScore > highScores.user_score) {
+      let scores = highScores
+      scores.user_score = lastScore
+      this.setState({ highScores: scores })
+      AsyncStorage.setItem('highScores', JSON.stringify(scores))
+    }
+    return false
+  },
+
+  getScores(justLoaded = true) {
+    let shouldGetScores = this.scoreFetchCheck(justLoaded)
+    if(!justLoaded && !shouldGetScores) { return }
     const uuid = DeviceInfo.getUniqueID()
     fetch("http://localhost:3000/scores/" + uuid)
       .then(response => response.json())
@@ -113,9 +128,17 @@ var Main = React.createClass({
     }
   },
 
+  scoreNotWorthy(points) {
+    let { lastScore, highScores } = this.state
+    if((points < highScores.high_scores[4][1]) && (points < highScores.user_score)) { return true }
+    return false
+  },
+
   saveScore(points) {
     const { currentUser } = this.state
     const uuid = DeviceInfo.getUniqueID()
+    if(this.scoreNotWorthy(points)) { return }
+    this.setState({ lastScore: points })
     fetch("http://localhost:3000/scores/new/" + uuid, {
       method: 'POST',
       headers: {
@@ -125,7 +148,7 @@ var Main = React.createClass({
       body: JSON.stringify({ user: currentUser.id, score: points })
     }).then((response) => {
       console.log('SCORE SAVED ', response)
-      this.getScores()
+      this.getScores(false)
     })
     .catch(error =>
        this.setState({
