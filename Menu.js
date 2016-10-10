@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from './Logo.js'
 import Button from './Button.js'
 import Sound from 'react-native-sound'
+import Scheme from './colorScheme.js'
 import {
     Text,
     View,
@@ -144,13 +145,6 @@ class Menu extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
-  },
-  buttonText: {
-    alignSelf: 'center',
-    margin: height * .03,
-    fontSize: 30,
-    color: 	'#fff4e6',
-    fontFamily: 'American Typewriter'
   },
   spinner: {
     flex: 1,

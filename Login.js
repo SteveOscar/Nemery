@@ -1,5 +1,6 @@
 import React from 'react';
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
+import Scheme from './colorScheme.js'
 const DeviceInfo = require('react-native-device-info');
 import {
     Text,
@@ -151,7 +152,7 @@ var styles = StyleSheet.create({
   },
   inputStyle: {
     height: 40,
-    borderColor: '#fff4e6',
+    borderColor: Scheme.color3,
     borderWidth: 2,
     borderRadius: 5,
     padding: 4,
@@ -162,18 +163,18 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 10,
     fontSize: 30,
-    color: '#fff4e6'
+    color: Scheme.color3
   },
   buttonText2: {
     alignSelf: 'center',
     margin: 10,
     fontSize: 25,
-    color: '#854442'
+    color: Scheme.color2
   },
   button: {
     height: 36,
     flexDirection: 'row',
-    backgroundColor: '#fff4e6',
+    backgroundColor: Scheme.color3,
     borderColor: 'white',
     borderWidth: 3,
     borderRadius: 8,

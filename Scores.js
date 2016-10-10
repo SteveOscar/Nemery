@@ -76,7 +76,7 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 10,
     fontSize: 30,
-    color: 	'#fff4e6',
+    color: Scheme.color3,
     fontFamily: 'American Typewriter'
   },
 });

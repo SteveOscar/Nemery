@@ -1,5 +1,6 @@
 import React from 'react';
 import Sound from 'react-native-sound'
+import Scheme from './colorScheme.js'
 
 import {
     Text,
@@ -378,12 +379,12 @@ var styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff4e6',
-    borderColor: '#be9b7b',
+    backgroundColor: Scheme.color3,
+    borderColor: Scheme.color5,
     borderWidth: 3
   },
   letter: {
-    color: '#854442',
+    color: Scheme.color2,
     fontSize: LETTER_SIZE,
     backgroundColor: 'transparent',
     fontFamily: 'American Typewriter'
@@ -393,7 +394,7 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: -(height*.2),
-    backgroundColor: 'white',
+    backgroundColor: Scheme.color3,
     borderRadius: 5,
     opacity: .5,
   }

@@ -7,6 +7,7 @@ import Login from './Login.js'
 import ScoreBoard from './ScoreBoard.js'
 import Transition from './Transition.js'
 import quotes from './quotes.js'
+import Scheme from './colorScheme.js'
 import DeviceUUID from "react-native-device-uuid"
 var DeviceInfo = require('react-native-device-info');
 
@@ -36,11 +37,13 @@ var Main = React.createClass({
       highScores: '',
       showingScores: false,
       showingTransition: false,
-      lastScore: 0
+      lastScore: 0,
+      localScore: 0
     };
   },
 
   componentDidMount() {
+    AsyncStorage.getItem("highScores").then((s) => this.setState({ localScore: (JSON.parse(s)).user_score }))
     AsyncStorage.getItem("User").then((user) => {
       if (user !== null && user !== "null"){
         let person = JSON.parse(user)
@@ -125,14 +128,16 @@ var Main = React.createClass({
         if (scores === null){ this.setState({ highScores: [] }) }
       })
     } else {
-      // Check if the user's highest score is in local storage, and push to remote if so
-      const s = AsyncStorage.getItem("highScores")
-      debugger
-      const score = JSON.parse(s)
-      if(score.user_score > this.state.highScores.user_score) { this.saveScore(score.user_score) }
-
-      AsyncStorage.setItem('highScores', JSON.stringify(response))
-      this.setState({isLoading: false, highScores: response});
+      if(this.state.localScore > this.state.highScores.user_score) {
+        this.saveScore(this.state.localScore)
+        let scores = JSON.stringify(response)
+        scores.user_score = this.state.localScore
+        AsyncStorage.setItem('highScores', scores)
+        this.setState({isLoading: false, highScores: scores})
+      } else {
+        AsyncStorage.setItem('highScores', JSON.stringify(response))
+        this.setState({isLoading: false, highScores: response});
+      }
     }
   },
 
@@ -304,7 +309,7 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#854442',
+    backgroundColor: Scheme.color2,
   },
   text: {
     fontSize: 20,

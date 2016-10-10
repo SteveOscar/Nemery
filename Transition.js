@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo.js'
 import Button from './Button.js'
+import Scheme from './colorScheme.js'
 import {
     Text,
     View,
@@ -94,7 +95,7 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 10,
     fontSize: 30,
-    color: 	'#fff4e6',
+    color: Scheme.color3,
     fontFamily: 'American Typewriter'
   },
   headerText: {

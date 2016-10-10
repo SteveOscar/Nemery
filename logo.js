@@ -1,4 +1,5 @@
 import React from 'react';
+import Scheme from './colorScheme.js'
 const DeviceInfo = require('react-native-device-info');
 
 import {
@@ -140,12 +141,12 @@ var styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff4e6',
-    borderColor: '#be9b7b',
+    backgroundColor: Scheme.color3,
+    borderColor: Scheme.color5,
     borderWidth: 3
   },
   letter: {
-    color: '#854442',
+    color: Scheme.color2,
     fontSize: LETTER_SIZE,
     backgroundColor: 'transparent',
     fontFamily: 'American Typewriter'

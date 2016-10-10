@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo.js'
 import Sound from 'react-native-sound'
+import Scheme from './colorScheme.js'
 import {
     Text,
     View,
@@ -26,7 +27,7 @@ class Button extends React.Component {
 
   render() {
     return (
-      <TouchableHighlight style={styles.container} onPress={this.handlePress.bind(this)} underlayColor={'#fff4e6'}>
+      <TouchableHighlight style={styles.container} onPress={this.handlePress.bind(this)} underlayColor={Scheme.color1}>
         <Text style={styles.buttonText} >{this.props.text}</Text>
       </TouchableHighlight>
     )
@@ -35,10 +36,11 @@ class Button extends React.Component {
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.48)',
+      // backgroundColor: 'rgba(0, 0, 0, 0.48)',
+      backgroundColor: Scheme.color4,
       borderRadius: 5,
       borderWidth: 0,
-      borderColor: '#fff4e6',
+      borderColor: Scheme.color3,
       marginBottom: height * .01,
       height: height * .07,
       alignItems:'center',
@@ -46,7 +48,7 @@ class Button extends React.Component {
     },
     buttonText: {
       fontSize: height * .045,
-      color: 	'#fff4e6',
+      color: Scheme.color3,
       fontFamily: 'American Typewriter'
     },
   });
