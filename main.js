@@ -60,7 +60,7 @@ var Main = React.createClass({
 
   checkForUser() {
     const uuid = DeviceInfo.getUniqueID()
-    fetch("http://localhost:3000/users/" + uuid)
+    fetch("https://lit-hollows-82917.herokuapp.com/users/" + uuid)
       .then(response => response.json())
       .then((response) => {
         this._handleResponse(response);
@@ -101,7 +101,7 @@ var Main = React.createClass({
     let shouldGetScores = this.scoreFetchCheck(justLoaded)
     if(!justLoaded && !shouldGetScores) { return }
     const uuid = DeviceInfo.getUniqueID()
-    fetch("http://localhost:3000/scores/" + uuid)
+    fetch("https://lit-hollows-82917.herokuapp.com/scores/" + uuid)
       .then(response => response.json())
       .then((response) => {
         this._handleScoreResponse(response);
@@ -145,6 +145,7 @@ var Main = React.createClass({
 
   scoreNotWorthy(points) {
     let { lastScore, highScores } = this.state
+    if(!highScores.high_scores) { return false }
     if((points < highScores.high_scores[4][1]) && (points < highScores.user_score)) { return true }
     return false
   },
@@ -154,7 +155,7 @@ var Main = React.createClass({
     const uuid = DeviceInfo.getUniqueID()
     if(this.scoreNotWorthy(points)) { return }
     this.setState({ lastScore: points, txt: 'Ya done good' })
-    fetch("http://localhost:3000/scores/new/" + uuid, {
+    fetch("https://lit-hollows-82917.herokuapp.com/scores/new/" + uuid, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
