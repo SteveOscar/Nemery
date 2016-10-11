@@ -101,13 +101,21 @@ class Menu extends React.Component {
     const { helpText } = this.state
     newText = helpText
     if(helpText === "???") { newText = "Turn" }
-    if(helpText === "Turn") { newText = "Them" }
-    if(helpText === "Them") { newText = "Over" }
+    if(helpText === "Turn") { newText = "Tiles" }
+    if(helpText === "Tiles") { newText = "Over" }
     if(helpText === "Over") { newText = "In" }
     if(helpText === "In") { newText = "Order" }
     if(helpText === "Order") { newText = "\uD83D\uDC4C" }
-    if(helpText === "\uD83D\uDC4C") { newText = "???" }
-
+    if(helpText === "\uD83D\uDC4C") { newText = "??" }
+    if(helpText === "??") { newText = "Don't" }
+    if(helpText === "Don't") { newText = "Make" }
+    if(helpText === "Make") { newText = "Me" }
+    if(helpText === "Me") { newText = "Repeat" }
+    if(helpText === "Repeat") { newText = "Myself" }
+    if(helpText === "Myself") { newText = "" }
+    if(helpText === "") { newText = "..." }
+    if(helpText === "...") { newText = "Okay..." }
+    if(helpText === "Okay...") { newText = "???" }
     this.setState({ helpText: newText })
   }
 
