@@ -58,14 +58,23 @@ class ScoreBoard extends React.Component {
 
   renderHighScores() {
     const { highScores } = this.props
-    toShow = highScores.high_scores.sort((a, b) => b[1] - a[1])
-    return toShow.map(function(score, index) {
+    if(highScores.high_scores) {
+      toShow = highScores.high_scores.sort((a, b) => b[1] - a[1])
+      return toShow.map(function(score, index) {
+        return (
+          <View key={index}>
+            <Text style={styles.buttonText}>{score[0]}: {score[1]}</Text>
+          </View>
+        )
+      })
+    } else {
       return (
-        <View key={index}>
-          <Text style={styles.buttonText}>{score[0]}: {score[1]}</Text>
+        <View key={1}>
+          <Text style={styles.buttonText}>Offline Mode</Text>
         </View>
       )
-    })
+    }
+
   }
 
   renderButtons() {
@@ -78,7 +87,7 @@ class ScoreBoard extends React.Component {
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           {this.renderHighScores()}
-          <Text style={styles.userText}>You: {highScores['user_score']}</Text>
+          <Text style={styles.userText}>You: {highScores['user_score'] ? highScores['user_score'] : 0}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>

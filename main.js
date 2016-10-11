@@ -43,7 +43,9 @@ var Main = React.createClass({
   },
 
   componentDidMount() {
-    AsyncStorage.getItem("highScores").then((s) => this.setState({ localScore: (JSON.parse(s)).user_score }))
+    AsyncStorage.getItem("highScores").then((s) => {
+      if(s) { this.setState({ localScore: (JSON.parse(s)).user_score }) }
+    })
     AsyncStorage.getItem("User").then((user) => {
       if (user !== null && user !== "null"){
         let person = JSON.parse(user)
@@ -188,8 +190,8 @@ var Main = React.createClass({
 
   endGame() {
     const random = quotes()
-    this.setState({ playing: false, score: 0, txt: random, level: 0, showingTransition: false })
     this.saveScore(this.state.score)
+    this.setState({ playing: false, score: 0, txt: random, level: 0, showingTransition: false })
   },
 
   showScore() {
