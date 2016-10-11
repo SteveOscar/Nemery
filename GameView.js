@@ -354,9 +354,10 @@ class BoardView extends React.Component {
   }
 
   endGame() {
+    const delay = (this.timeAdjustment()*.8) * 3000
     setTimeout(() => {
       this.props.endGame()
-    }, 3500)
+    }, delay)
   }
 
   // showAllTiles() {

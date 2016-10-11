@@ -14,7 +14,7 @@ var quotes = function() {
     'It is possible',
     'Passion. Strength. Fire.',
     'Enjoy this pain',
-    'New phone... who dis?',
+    "Don't look at me",
     'Still love ya',
     'Learn from yesterday',
     'Embrace the void',

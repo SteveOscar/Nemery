@@ -24,7 +24,8 @@ class Menu extends React.Component {
       fadeAnim3: new Animated.Value(0),
       fadeAnim4: new Animated.Value(0),
       spinValue: new Animated.Value(0),
-      pressed: false
+      pressed: false,
+      helpText: '???'
     }
   }
 
@@ -96,6 +97,20 @@ class Menu extends React.Component {
     if(difficulty === "Extreme") { return "\uD83D\uDC80" }
   }
 
+  renderHelp() {
+    const { helpText } = this.state
+    newText = helpText
+    if(helpText === "???") { newText = "Turn" }
+    if(helpText === "Turn") { newText = "Them" }
+    if(helpText === "Them") { newText = "Over" }
+    if(helpText === "Over") { newText = "In" }
+    if(helpText === "In") { newText = "Order" }
+    if(helpText === "Order") { newText = "\uD83D\uDC4C" }
+    if(helpText === "\uD83D\uDC4C") { newText = "???" }
+
+    this.setState({ helpText: newText })
+  }
+
   render() {
     const spin = this.state.spinValue.interpolate({
       inputRange: [0, 1],
@@ -121,6 +136,7 @@ class Menu extends React.Component {
 
   renderButtons() {
     let howHard = this.renderDifficulty()
+    let { helpText } = this.state
 
     return (
       <View style={styles.container}>
@@ -135,7 +151,7 @@ class Menu extends React.Component {
           <Button action={this.props.highScoresPage} text={'High Scores'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
-          <Button action={this.props.highScoresPage} text={'???'}/>
+          <Button action={this.renderHelp.bind(this)} text={this.state.helpText}/>
         </Animated.View>
       </View>
     )
