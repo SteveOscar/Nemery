@@ -39,11 +39,12 @@ class Logo extends React.Component {
     const first = this.randomIndex(0, 5)
     const second = this.randomIndex(0, 5, first)
 
-    setTimeout(() => { this.moveTile(first) }, 400)
-    setTimeout(() => { this.moveTileBack(first) }, 1200);
+    setTimeout(() => { this.moveTile(first) }, 800)
+    setTimeout(() => { this.moveTileBack(first) }, 1600);
 
-    setTimeout(() => { this.moveTile(second) }, 1300)
-    setTimeout(() => { this.moveTileBack(second) }, 2200);
+    // setTimeout(() => { this.spinTile(second) }, 400)
+    setTimeout(() => { this.moveTile(second) }, 1700)
+    setTimeout(() => { this.moveTileBack(second) }, 2600);
   }
 
   randomIndex(min, max, first) {
@@ -81,13 +82,13 @@ class Logo extends React.Component {
         var letter = this.state.numbers[id]
         var tilt = this.state.board.tilt[id].interpolate({
           inputRange: [0, 1],
-          outputRange: ['0deg', '-180deg']
+          outputRange: ['0deg', '-360deg']
         })
         var style = {
           left: row * CELL_SIZE + CELL_PADDING,
           top: CELL_SIZE + CELL_PADDING,
           transform: [{perspective: CELL_SIZE * .9},
-                       {rotateX: tilt}]
+                       {rotateY: tilt}]
         }
         result.push(this.renderTile(id, style, letter))
     }
@@ -107,19 +108,28 @@ class Logo extends React.Component {
     var tilt = this.state.board.tilt[id];
     tilt.setValue(0);
     Animated.timing(tilt, {
-      toValue: .3,
+      toValue: .15,
       duration: 800,
       easing: Easing.spring
     }).start();
   }
 
   moveTileBack(id) {
-    // setTimeout(() => { this.setState({ numbers: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
     var tilt = this.state.board.tilt[id];
-    tilt.setValue(.3);
+    tilt.setValue(.15);
     Animated.timing(tilt, {
       toValue: 0,
       duration: 400,
+      easing: Easing.spring
+    }).start();
+  }
+
+  spinTile(id) {
+    var tilt = this.state.board.tilt[id];
+    tilt.setValue(0);
+    Animated.timing(tilt, {
+      toValue: 1,
+      duration: 4000,
       easing: Easing.spring
     }).start();
   }

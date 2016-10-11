@@ -62,7 +62,6 @@ class Menu extends React.Component {
       }
     ).start();
     this.spin()
-    // this.playButton()
   }
 
   playButton() {
@@ -128,14 +127,20 @@ class Menu extends React.Component {
     return (
       <View>
         <View style={styles.spinner}>
-          <Animated.Image
+          {/*<Animated.Image
             style={{
               width: 50,
               height: 50,
               opacity: .7,
               transform: [{rotate: spin}] }}
               source={require('./gear.png')}
-          />
+          />*/}
+          <Animated.Text style={{
+            color: Scheme.color1,
+            fontSize: width * .3,
+            fontFamily: 'American Typewriter',
+            opacity: .8,
+            transform: [{rotate: spin}] }}>?</Animated.Text>
         </View>
         {this.renderButtons()}
       </View>

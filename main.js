@@ -335,6 +335,6 @@ var styles = StyleSheet.create({
     fontFamily: 'American Typewriter',
     paddingTop: height*.1
   }
-});
+})
 
 module.exports = Main;
