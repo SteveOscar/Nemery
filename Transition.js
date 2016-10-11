@@ -11,6 +11,11 @@ import {
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
+const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
+const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
+const BORDER_RADIUS = CELL_PADDING * 1;
+const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
+const LETTER_SIZE = Math.floor(TILE_SIZE * .6);
 
 class Transition extends React.Component {
   constructor(props) {
@@ -65,15 +70,26 @@ class Transition extends React.Component {
         )
   }
 
+  renderTile(char) {
+    return (
+      <View style={[styles.tile]}>
+        <Text style={{ fontFamily: 'American Typewriter', fontSize: width * .07 }}>{char}</Text>
+      </View>
+    )
+  }
+
   renderStats() {
     const { level, score } = this.props
     const bonus = this.getBonus()
     return (
       <View style={styles.container}>
-        <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.userText}>Difficulty Bonus: {bonus + 'X'}</Text>
-          <Text style={styles.userText}>Level: {level}</Text>
-          <Text style={styles.userText}>Score: {score}</Text>
+        <Animated.View style={{opacity: this.state.fadeAnim2, flexDirection: 'column', alignItems: 'center', flex: 1}}>
+          <Text style={styles.headerText}>Difficulty Bonus:</Text>
+          <Text style={styles.headerText}>{bonus + 'X'}</Text>
+          <Text style={styles.userText}>Level:</Text>
+          {this.renderTile(level)}
+          <Text style={styles.userText}>Score:</Text>
+          {this.renderTile(score)}
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           <Button action={this.props.continue} text={'Continue'}/>
@@ -100,18 +116,29 @@ var styles = StyleSheet.create({
   },
   headerText: {
     alignSelf: 'center',
-    margin: 20,
-    fontSize: 40,
-    color: 	'black',
+    marginBottom: width * .02,
+    fontSize: width * .07,
+    color: Scheme.color5,
     fontFamily: 'American Typewriter'
   },
   userText: {
     alignSelf: 'center',
     margin: 10,
-    fontSize: 30,
-    color: 	'yellow',
+    fontSize: width * .07,
+    color: 	Scheme.color3,
     fontFamily: 'American Typewriter'
-  }
+  },
+  tile: {
+    width: TILE_SIZE,
+    height: TILE_SIZE,
+    borderRadius: BORDER_RADIUS,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Scheme.color3,
+    borderColor: Scheme.color5,
+    borderWidth: 3,
+    marginBottom: width * .1
+  },
 });
 
 export default Transition;

@@ -1,7 +1,7 @@
 
 var quotes = function() {
   const words = [
-    'Believe in yoself',
+    'Believe in U',
     'Let it goooo',
     'Nobody is perfect',
     'Live the moment',

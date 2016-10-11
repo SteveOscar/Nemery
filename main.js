@@ -242,8 +242,9 @@ var Main = React.createClass({
   },
 
   showMessage(didWin) {
+    const overScore = 'Game Over: ' + this.state.score
     Vibration.vibrate()
-    if(!didWin) { this.setState({ txt: 'Game Over' }) }
+    if(!didWin) { this.setState({ txt: overScore }) }
     if(didWin) { this.setState({ txt: 'Next Level' }) }
   },
 
@@ -294,6 +295,7 @@ var Main = React.createClass({
     if(currentUser && showingScores) { component = scoreBoard }
     if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
+
     return <View style={styles.container}>
              {component}
              <View style={styles.messageBox}>
