@@ -8,6 +8,7 @@ import ScoreBoard from './ScoreBoard.js'
 import Transition from './Transition.js'
 import quotes from './quotes.js'
 import Scheme from './colorScheme.js'
+import Sound from 'react-native-sound'
 import DeviceUUID from "react-native-device-uuid"
 var DeviceInfo = require('react-native-device-info');
 
@@ -51,16 +52,16 @@ var Main = React.createClass({
         let person = JSON.parse(user)
         const greeting = (person && person.name) ? person.name : ''
         this.setState({isLoading: false, currentUser: person, txt: 'Welcome ' + greeting}, this.getScores())
-        console.log(JSON.parse(user))
+        console.log("USER FOUND LOCALLY ", JSON.parse(user))
       }else {
         this.checkForUser()
       }
-    }).done();
+    })
   },
 
   checkForUser() {
     const uuid = DeviceInfo.getUniqueID()
-    fetch("https://lit-hollows-82917.herokuapp.com/users/" + uuid)
+    fetch("http://localhost:3000/users/" + uuid)
       .then(response => response.json())
       .then((response) => {
         this._handleResponse(response);
@@ -69,7 +70,7 @@ var Main = React.createClass({
          this.setState({
           isLoading: false,
           currentUser: 'Anonymous',
-          txt: 'Offline Mode'
+          txt: 'Login unavailable :('
        })
      })
   },
@@ -84,7 +85,7 @@ var Main = React.createClass({
     }
   },
 
-  scoreFetchCheck(justLoaded) {
+  scoreFetchCheck(justLoaded = false) {
     let { lastScore, highScores } = this.state
     if(justLoaded) { return true }
     if(lastScore > highScores.high_scores[4][1]) { return true }
@@ -101,9 +102,10 @@ var Main = React.createClass({
     let shouldGetScores = this.scoreFetchCheck(justLoaded)
     if(!justLoaded && !shouldGetScores) { return }
     const uuid = DeviceInfo.getUniqueID()
-    fetch("https://lit-hollows-82917.herokuapp.com/scores/" + uuid)
+    fetch("http://localhost:3000/scores/" + uuid)
       .then(response => response.json())
       .then((response) => {
+        console.log('SCORE RESPONSE!!: ', response)
         this._handleScoreResponse(response);
       })
       .catch(error => {
@@ -127,7 +129,7 @@ var Main = React.createClass({
     if(response === null || response === undefined) {
       AsyncStorage.getItem("highScores").then((scores) => {
         if (scores !== null){ this.setState({ highScores: JSON.parse(scores) }) }
-        if (scores === null){ this.setState({ highScores: [] }) }
+        if (scores === null){ this.setState({ highScores: {high_scores: [], user_score: 0} }) }
       })
     } else {
       if(this.state.localScore > this.state.highScores.user_score) {
@@ -146,7 +148,7 @@ var Main = React.createClass({
   scoreNotWorthy(points) {
     let { lastScore, highScores } = this.state
     if(!highScores.high_scores) { return false }
-    if((points < highScores.high_scores[4][1]) && (points < highScores.user_score)) { return true }
+    if((highScores.high_scores.length > 4) && (points < highScores.high_scores[4][1]) && (points < highScores.user_score)) { return true }
     return false
   },
 
@@ -155,7 +157,7 @@ var Main = React.createClass({
     const uuid = DeviceInfo.getUniqueID()
     if(this.scoreNotWorthy(points)) { return }
     this.setState({ lastScore: points, txt: 'Ya done good' })
-    fetch("https://lit-hollows-82917.herokuapp.com/scores/new/" + uuid, {
+    fetch("http://localhost:3000/scores/new/" + uuid, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -166,11 +168,12 @@ var Main = React.createClass({
       console.log('SCORE SAVED ', response)
       this.getScores(false)
     })
-    .catch(error =>
+    .catch(error => {
        this.setState({
         isLoading: false,
-        txt: 'Offline Mode'
-     }))
+        txt: 'Score reported'
+     })
+   })
   },
 
   setUser(response) {
@@ -207,6 +210,7 @@ var Main = React.createClass({
     }else if (this.state.difficulty === 'Medium') {
       newDiff = 'Hard'
     }else if (this.state.difficulty === 'Hard') {
+      this.playScream()
       newDiff = 'Extreme'
     }else {
       newDiff = 'Easy'
@@ -221,12 +225,27 @@ var Main = React.createClass({
     this.setState({ score: currentScore, txt: "Score " + (this.state.score + added) })
     const win = this.checkForWin(tilesTurned)
     if(win) {
+      setTimeout(() => { this.playBell() }, 500)
       Vibration.vibrate()
       this.setState({ txt: 'Level Passed' })
       setTimeout(() => {
         this.setState({ level: this.state.level + 1, playing: false, showingTransition: true })
       }, 500)
     }
+  },
+
+  playBell() {
+    var s = new Sound('bell.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.5)
+      s.play()
+    })
+  },
+
+  playScream() {
+    var s = new Sound('scream.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.3)
+      s.play()
+    })
   },
 
   continueGame() {
@@ -318,13 +337,13 @@ var styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: 'white',
+    color: Scheme.color4,
     fontFamily: 'American Typewriter'
   },
   messageBox: {
     height: height * .1,
     width: width,
-    backgroundColor: '#3c2f2f',
+    backgroundColor: Scheme.color3,
     bottom: 0,
     position: 'absolute',
     justifyContent: 'center',

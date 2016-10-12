@@ -64,12 +64,6 @@ class Menu extends React.Component {
     this.spin()
   }
 
-  playButton() {
-    var s = new Sound('button.mp3', Sound.MAIN_BUNDLE, (e) => {
-        s.play();
-    });
-  }
-
   spin () {
     this.state.spinValue.setValue(0)
     Animated.timing(

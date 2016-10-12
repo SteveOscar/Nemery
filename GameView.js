@@ -38,8 +38,11 @@ class BoardView extends React.Component {
     }
   }
 
-  playClick() {
-    var s = new Sound('click.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+  playTap() {
+    var s = new Sound('tap.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.7)
+      s.play()
+    })
   }
 
   playWhoosh() {
@@ -198,6 +201,7 @@ class BoardView extends React.Component {
     const levelFactor = (this.props.level / 10) * baseTime
     const difficultyFactor = this.timeAdjustment()
     const timer = (baseTime * difficultyFactor) - levelFactor
+    this.playBeep()
     Animated.timing(
       this.state.progress,
       {toValue: 0, duration: timer }
@@ -313,7 +317,7 @@ class BoardView extends React.Component {
   clickTile(id) {
     if(!this.state.inPlay) { return }
     if(this.alreadyClicked(id)) { return }
-    this.playClick()
+    this.playTap()
     setTimeout(() => { this.setState({ numbers: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
     var tilt = this.state.board.tilt[id];
     tilt.setValue(1);
@@ -330,11 +334,34 @@ class BoardView extends React.Component {
       this.setState({ prevSelection: selected })
       this.props.updateScore(this.state.numbers.filter((n) => n !== "").length)
     }else {
+      setTimeout(() => { this.playSigh() }, 1000)
+      this.playBuzzer()
       this.props.deliverVerdict(false)
       this.setState({ inPlay: false })
       this.showTiles(false)
       this.endGame()
     }
+  }
+
+  playSigh() {
+    var s = new Sound('exhale.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.3)
+      s.play()
+    })
+  }
+
+  playBuzzer() {
+    var s = new Sound('buzzer.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.3)
+      s.play()
+    })
+  }
+
+  playBeep() {
+    var s = new Sound('beep.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.4)
+      s.play()
+    })
   }
 
   hiddenValue(id) {

@@ -17,7 +17,10 @@ var {width, height} = require('Dimensions').get('window');
 class Button extends React.Component {
 
   playButton() {
-    var s = new Sound('click.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
+    var s = new Sound('button.mp3', Sound.MAIN_BUNDLE, (e) => {
+      s.setVolume(.4)
+      s.play()
+    })
   }
 
   handlePress() {
@@ -36,7 +39,6 @@ class Button extends React.Component {
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-      // backgroundColor: 'rgba(0, 0, 0, 0.48)',
       backgroundColor: Scheme.color4,
       borderRadius: 5,
       borderWidth: 0,

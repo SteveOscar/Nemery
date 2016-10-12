@@ -73,7 +73,7 @@ class Login extends React.Component {
   _executeQuery() {
   const uuid = DeviceInfo.getUniqueID()
   this.setState({isLoading: true});
-    fetch("https://lit-hollows-82917.herokuapp.com/users", {method: "POST", body: JSON.stringify({name: this.state.text, device: uuid})})
+    fetch("http://localhost:3000/users", {method: "POST", body: JSON.stringify({name: this.state.text, device: uuid})})
       .then(response => response.json())
       .then((response) => {
         this._handleResponse(response);
