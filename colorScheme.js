@@ -40,8 +40,8 @@ const Scheme = {
 //   color1: 'blue',
 //   color2: 'black',
 //   color3: 'white',
-//   color4: 'teal',
-//   color5: 'blue'
+//   color4: 'grey',
+//   color5: 'teal'
 // }
 
 export default Scheme;

@@ -334,7 +334,7 @@ class BoardView extends React.Component {
       this.setState({ prevSelection: selected })
       this.props.updateScore(this.state.numbers.filter((n) => n !== "").length)
     }else {
-      setTimeout(() => { this.playSigh() }, 1000)
+      setTimeout(() => { this.playSigh() }, 1500)
       this.playBuzzer()
       this.props.deliverVerdict(false)
       this.setState({ inPlay: false })

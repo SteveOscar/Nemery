@@ -24,6 +24,8 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2DA36E2FA7BC4284A68A9511 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73290D9ADB7C4797A588445D /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8C3E20631DB287E600670BFB /* bell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20621DB287E600670BFB /* bell2.mp3 */; };
+		8C3E20711DB287ED00670BFB /* bell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20701DB287ED00670BFB /* bell3.mp3 */; };
 		8C4B76B01DADD072003F860C /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C4B76AF1DADD072003F860C /* bell.mp3 */; };
 		8C4B76BE1DADD087003F860C /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C4B76BD1DADD087003F860C /* beep.mp3 */; };
 		8C7708A61DADC810006AB6D0 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708A51DADC810006AB6D0 /* tap.mp3 */; };
@@ -158,6 +160,8 @@
 		73290D9ADB7C4797A588445D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8C3E20621DB287E600670BFB /* bell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell2.mp3; path = ../../../../Desktop/Apps/Numery/bell2.mp3; sourceTree = "<group>"; };
+		8C3E20701DB287ED00670BFB /* bell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell3.mp3; path = ../../../../Desktop/Apps/Numery/bell3.mp3; sourceTree = "<group>"; };
 		8C4B76AF1DADD072003F860C /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell.mp3; path = ../../../../Desktop/Apps/Numery/bell.mp3; sourceTree = "<group>"; };
 		8C4B76BD1DADD087003F860C /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../../../../Desktop/Apps/Numery/beep.mp3; sourceTree = "<group>"; };
 		8C7708A51DADC810006AB6D0 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tap.mp3; path = ../../../../Desktop/Apps/Numery/tap.mp3; sourceTree = "<group>"; };
@@ -354,6 +358,8 @@
 				8C4B76BD1DADD087003F860C /* beep.mp3 */,
 				8C7708BD1DADCF09006AB6D0 /* scream.mp3 */,
 				8C4B76AF1DADD072003F860C /* bell.mp3 */,
+				8C3E20701DB287ED00670BFB /* bell3.mp3 */,
+				8C3E20621DB287E600670BFB /* bell2.mp3 */,
 				8C7708B31DADC9E7006AB6D0 /* tap.mp3 */,
 				8C7708B71DADCB8D006AB6D0 /* exhale.mp3 */,
 				8CFD6F6B1DA49F33004E8397 /* click.mp3 */,
@@ -448,7 +454,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AlphaReflex" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Numery" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -620,10 +626,12 @@
 				8C7708BA1DADCD45006AB6D0 /* buzzer.mp3 in Resources */,
 				8C7708C01DADD044006AB6D0 /* tap.mp3 in Resources */,
 				8C4B76B01DADD072003F860C /* bell.mp3 in Resources */,
+				8C3E20711DB287ED00670BFB /* bell3.mp3 in Resources */,
 				8C7708BE1DADCF09006AB6D0 /* scream.mp3 in Resources */,
 				8C7708B81DADCB8D006AB6D0 /* exhale.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8C7708A61DADC810006AB6D0 /* tap.mp3 in Resources */,
+				8C3E20631DB287E600670BFB /* bell2.mp3 in Resources */,
 				8C7708B41DADC9E7006AB6D0 /* tap.mp3 in Resources */,
 				8CFD6F6E1DA49FFB004E8397 /* whoosh.mp3 in Resources */,
 				8CFD6F6A1DA49805004E8397 /* Wood_Rattle.mp3 in Resources */,
@@ -901,7 +909,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AlphaReflex" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Numery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

@@ -61,7 +61,7 @@ var Main = React.createClass({
 
   checkForUser() {
     const uuid = DeviceInfo.getUniqueID()
-    fetch("http://localhost:3000/users/" + uuid)
+    fetch("https://lit-hollows-82917.herokuapp.com/users/" + uuid)
       .then(response => response.json())
       .then((response) => {
         this._handleResponse(response);
@@ -102,7 +102,7 @@ var Main = React.createClass({
     let shouldGetScores = this.scoreFetchCheck(justLoaded)
     if(!justLoaded && !shouldGetScores) { return }
     const uuid = DeviceInfo.getUniqueID()
-    fetch("http://localhost:3000/scores/" + uuid)
+    fetch("https://lit-hollows-82917.herokuapp.com/scores/" + uuid)
       .then(response => response.json())
       .then((response) => {
         console.log('SCORE RESPONSE!!: ', response)
@@ -157,7 +157,7 @@ var Main = React.createClass({
     const uuid = DeviceInfo.getUniqueID()
     if(this.scoreNotWorthy(points)) { return }
     this.setState({ lastScore: points, txt: 'Ya done good' })
-    fetch("http://localhost:3000/scores/new/" + uuid, {
+    fetch("https://lit-hollows-82917.herokuapp.com/scores/new/" + uuid, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -235,7 +235,8 @@ var Main = React.createClass({
   },
 
   playBell() {
-    var s = new Sound('bell.mp3', Sound.MAIN_BUNDLE, (e) => {
+    let bells = ['bell.mp3', 'bell2.mp3', 'bell3.mp3']
+    var s = new Sound(bells[Math.round(Math.random() * 3)], Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.5)
       s.play()
     })
@@ -243,7 +244,7 @@ var Main = React.createClass({
 
   playScream() {
     var s = new Sound('scream.mp3', Sound.MAIN_BUNDLE, (e) => {
-      s.setVolume(.3)
+      s.setVolume(.2)
       s.play()
     })
   },
