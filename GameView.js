@@ -148,7 +148,7 @@ class BoardView extends React.Component {
 
   hideTiles() {
     const { difficulty } = this.props
-    const difficultyFactor = this.timeAdjustment()
+    const difficultyFactor = this.timeAdjustment() * 1.2
     const gameDelay = (difficulty === "Easy" || difficulty === "Medium") ? difficultyFactor : difficultyFactor + .2
     // shows timer bar first
     setTimeout(() => {
@@ -197,7 +197,7 @@ class BoardView extends React.Component {
   }
 
   startTimer() {
-    const baseTime = 3500
+    const baseTime = 4000
     const levelFactor = (this.props.level / 10) * baseTime
     const difficultyFactor = this.timeAdjustment()
     const timer = (baseTime * difficultyFactor) - levelFactor
