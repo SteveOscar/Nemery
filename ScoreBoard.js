@@ -101,24 +101,24 @@ class ScoreBoard extends React.Component {
 var styles = StyleSheet.create({
   buttonText: {
     alignSelf: 'center',
-    margin: 10,
-    fontSize: 30,
+    margin: height * .013,
+    fontSize: height * .04,
     color: Scheme.color3,
-    fontFamily: 'American Typewriter'
+    fontFamily: 'Iowan Old Style'
   },
   headerText: {
     alignSelf: 'center',
-    margin: 20,
-    fontSize: 40,
+    margin: height * .026,
+    fontSize: height * .07,
     color: Scheme.color4,
     fontFamily: 'American Typewriter'
   },
   userText: {
     alignSelf: 'center',
-    margin: 10,
-    fontSize: 30,
+    margin: height * .013,
+    fontSize: height * .04,
     color: Scheme.color5,
-    fontFamily: 'American Typewriter'
+    fontFamily: 'Apple SD Gothic Neo'
   }
 });
 

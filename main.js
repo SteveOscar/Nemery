@@ -316,6 +316,7 @@ var Main = React.createClass({
     if(currentUser && showingScores) { component = scoreBoard }
     if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
+    component = scoreBoard
 
     return <View style={styles.container}>
              {component}
