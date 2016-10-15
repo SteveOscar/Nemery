@@ -133,7 +133,7 @@ class Menu extends React.Component {
             color: Scheme.color1,
             fontSize: width * .3,
             fontFamily: 'American Typewriter',
-            opacity: .8,
+            opacity: .9,
             transform: [{rotate: spin}] }}>?</Animated.Text>
         </View>
         {this.renderButtons()}

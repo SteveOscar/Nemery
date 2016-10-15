@@ -274,7 +274,6 @@ var Main = React.createClass({
   },
 
   render() {
-    console.log('CURRENT USER :', this.state.currentUser)
     var uuid = DeviceInfo.getUniqueID()
     let boardSize = ["Easy", "Medium", "Hard", "Extreme"].indexOf(this.state.difficulty) + 2
     boardSize = boardSize < 4 ? boardSize : 4
@@ -316,7 +315,6 @@ var Main = React.createClass({
     if(currentUser && showingScores) { component = scoreBoard }
     if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
-    component = scoreBoard
 
     return <View style={styles.container}>
              {component}

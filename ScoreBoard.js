@@ -18,7 +18,8 @@ class ScoreBoard extends React.Component {
     this.state = {
       fadeAnim1: new Animated.Value(0),
       fadeAnim2: new Animated.Value(0),
-      fadeAnim3: new Animated.Value(0)
+      fadeAnim3: new Animated.Value(0),
+      spinValue: new Animated.Value(0),
     }
   }
 
@@ -46,6 +47,19 @@ class ScoreBoard extends React.Component {
         delay: 1000
       }
     ).start();
+    this.spin()
+  }
+
+  spin () {
+    this.state.spinValue.setValue(1)
+    Animated.timing(
+      this.state.spinValue,
+      {
+        toValue: 0,
+        duration: 10000,
+        easing: Easing.easeInEaseOut
+      }
+    ).start(() => this.spin())
   }
 
   render() {
@@ -79,8 +93,20 @@ class ScoreBoard extends React.Component {
 
   renderButtons() {
     const { highScores } = this.props
+    const spin = this.state.spinValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg']
+    })
     return (
       <View>
+        <View style={styles.spinner}>
+          <Animated.Text style={{
+            color: 'gold',
+            fontSize: width * .25,
+            fontFamily: 'American Typewriter',
+            opacity: .9,
+            transform: [{rotate: spin}] }}>{"\u2B50"}</Animated.Text>
+        </View>
         {/*<Logo />*/}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
           <Text style={styles.headerText}>The Legends</Text>
@@ -101,7 +127,7 @@ class ScoreBoard extends React.Component {
 var styles = StyleSheet.create({
   buttonText: {
     alignSelf: 'center',
-    margin: height * .013,
+    margin: height * .01,
     fontSize: height * .04,
     color: Scheme.color3,
     fontFamily: 'Iowan Old Style'
@@ -111,7 +137,8 @@ var styles = StyleSheet.create({
     margin: height * .026,
     fontSize: height * .07,
     color: Scheme.color4,
-    fontFamily: 'American Typewriter'
+    fontFamily: 'American Typewriter',
+    backgroundColor: 'transparent'
   },
   userText: {
     alignSelf: 'center',
@@ -119,6 +146,13 @@ var styles = StyleSheet.create({
     fontSize: height * .04,
     color: Scheme.color5,
     fontFamily: 'Apple SD Gothic Neo'
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height * .08,
+    marginBottom: height * .01
   }
 });
 
