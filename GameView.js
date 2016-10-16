@@ -66,10 +66,18 @@ class BoardView extends React.Component {
     return results.length > 1 || !results[0]
   }
 
+  maxNumber(difficulty, length) {
+    if(difficulty === "Extreme") { return 99 }
+    if(difficulty === "Hard") { return 15 }
+    if(difficulty === "Medium") { return 8 }
+    if(difficulty === "Easy") { return 99 }
+    return 29
+  }
+
   generateNumbers() {
     const { size, difficulty } = this.props
     const length = size * size
-    const max = difficulty === "Extreme" ? 99 : length * 2
+    const max = this.maxNumber(difficulty, length)
     // return [...new Array(length)].map((_, i) => Math.round(Math.random() * max + 1));
     let random = []
     for (var i = 0; i < length; i++){
@@ -85,7 +93,7 @@ class BoardView extends React.Component {
 
   timeAdjustment() {
     const { difficulty } = this.props
-    if(difficulty === "Easy") { return 1 }
+    if(difficulty === "Easy") { return .9 }
     if(difficulty === "Medium") { return 2 }
     if(difficulty === "Hard") { return 3 }
     if(difficulty === "Extreme") { return 2.5 }
@@ -199,7 +207,7 @@ class BoardView extends React.Component {
   startTimer() {
     const baseTime = 4000
     const levelFactor = (this.props.level / 10) * baseTime
-    const difficultyFactor = this.timeAdjustment()
+    const difficultyFactor = this.timeAdjustment() * 1.2
     const timer = (baseTime * difficultyFactor) - levelFactor
     this.playBeep()
     Animated.timing(
