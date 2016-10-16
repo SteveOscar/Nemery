@@ -257,8 +257,8 @@ var Main = React.createClass({
   checkForWin(num) {
     const { difficulty } = this.state
     if(difficulty === "Easy") { return num === 4 }
-    if(difficulty === "Medium") { return num === 9 }
-    if(difficulty === "Hard") { return num === 16 }
+    if(difficulty === "Medium") { return num === 6 }
+    if(difficulty === "Hard") { return num === 9 }
     if(difficulty === "Extreme") { return num === 16 }
   },
 
@@ -273,10 +273,15 @@ var Main = React.createClass({
     this.setState({ score: points })
   },
 
+  getBoardSize() {
+    const index = ["Easy", "Medium", "Hard", "Extreme"].indexOf(this.state.difficulty)
+    const sizes = [[2, 2], [3, 2], [3, 3], [4, 4]]
+    return sizes[index]
+  },
+
   render() {
     var uuid = DeviceInfo.getUniqueID()
-    let boardSize = ["Easy", "Medium", "Hard", "Extreme"].indexOf(this.state.difficulty) + 2
-    boardSize = boardSize < 4 ? boardSize : 4
+    let boardSize = this.getBoardSize()
     let { currentUser, highScores, showingScores, showingTransition, playing } = this.state
     const loginScreen = <Login setUser={this.setUser}/>
 
@@ -296,7 +301,7 @@ var Main = React.createClass({
                                 updateScore={this.updateScore}
                                 endGame={this.endGame}
                                 deliverVerdict={this.showMessage}
-                                size={[3, 2]}
+                                size={boardSize}
                                 level={this.state.level}
                       />
     const menu = <Menu startGame={this.startGame}
