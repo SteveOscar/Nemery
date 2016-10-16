@@ -78,7 +78,6 @@ class BoardView extends React.Component {
     const { size, difficulty } = this.props
     const length = size * size
     const max = this.maxNumber(difficulty, length)
-    // return [...new Array(length)].map((_, i) => Math.round(Math.random() * max + 1));
     let random = []
     for (var i = 0; i < length; i++){
       var temp = Math.floor(Math.random()*max);

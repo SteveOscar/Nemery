@@ -56,7 +56,7 @@ class Transition extends React.Component {
 
   getBonus() {
     const { difficulty } = this.props
-    if(difficulty === 'Easy') { return 1.5 }
+    if(difficulty === 'Easy') { return 1.3 }
     if(difficulty === 'Medium') { return 2 }
     if(difficulty === 'Hard') { return 3 }
     if(difficulty === 'Extreme') { return 4 }
@@ -85,7 +85,7 @@ class Transition extends React.Component {
       <View style={styles.container}>
         <Animated.View style={{opacity: this.state.fadeAnim2, flexDirection: 'column', alignItems: 'center', flex: 1}}>
           <Text style={styles.headerText}>Difficulty Bonus:</Text>
-          <Text style={styles.headerText}>{bonus + 'X'}</Text>
+          <Text style={styles.headerText}>{Math.floor((bonus - 1) * 100) + '%'}</Text>
           <Text style={styles.userText}>Level:</Text>
           {this.renderTile(level)}
           <Text style={styles.userText}>Score:</Text>
