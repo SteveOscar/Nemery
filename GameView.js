@@ -57,9 +57,9 @@ class BoardView extends React.Component {
     const { beenClicked } = this.state
     if(beenClicked.length === 0 ) { return true }
 
-    let rowAdjustment = (row === 1 ? 0 : (row - 1) * this.props.size)
+    let rowAdjustment = (row === 1 ? 0 : (row - 1) * this.props.size[1])
     let clicked = []
-    for (var i = 0; i < this.props.size; i++) {
+    for (var i = 0; i < this.props.size[1]; i++) {
       clicked.push((beenClicked.indexOf(i + rowAdjustment) !== -1))
     }
     let results = [...new Set(clicked)]
@@ -76,7 +76,7 @@ class BoardView extends React.Component {
 
   generateNumbers() {
     const { size, difficulty } = this.props
-    const length = size * size
+    const length = size[0] * size[1]
     const max = this.maxNumber(difficulty, length)
     let random = []
     for (var i = 0; i < length; i++){
@@ -118,34 +118,34 @@ class BoardView extends React.Component {
     const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
       this.playWhoosh2(1)
-      for (var i = 0; i < this.props.size; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = 0; i < this.props.size[0]; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 500);
     setTimeout(() => {
       this.playWhoosh2(2)
-      for (var i = this.props.size; i < this.props.size*2; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = this.props.size[0]; i < this.props.size[0]*2; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 1200);
     setTimeout(() => {
-      if(this.props.size < 3) { return }
+      if(this.props.size[1] < 3) { return }
       this.playWhoosh2(3)
-      for (var i = this.props.size*2; i < this.props.size*3; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = this.props.size[0]*2; i < this.props.size[0]*3; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.initialSingleTileShow(i)
         }
       }
     }, 1700);
     setTimeout(() => {
-      if(this.props.size < 4) { return }
+      if(this.props.size[1] < 4) { return }
       this.playWhoosh2(4)
-      for (var i = this.props.size*3; i < this.props.size*4; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = this.props.size[0]*3; i < this.props.size[0]*4; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.initialSingleTileShow(i)
         }
       }
@@ -165,34 +165,34 @@ class BoardView extends React.Component {
         {toValue: height * .05, duration: 1800}
       ).start();
 
-      for (var i = 0; i < this.props.size; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = 0; i < this.props.size[0]; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.tileHide(i)
         }
       }
     }, 2500 * difficultyFactor);
     setTimeout(() => {
       this.playWhoosh()
-      for (var i = this.props.size; i < this.props.size*2; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = this.props.size[0]; i < this.props.size[0]*2; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.tileHide(i)
         }
       }
     }, 3200 * difficultyFactor);
     setTimeout(() => {
-      if(this.props.size < 3) { return }
+      if(this.props.size[1] < 3) { return }
       this.playWhoosh()
-      for (var i = this.props.size*2; i < this.props.size*3; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = this.props.size[0]*2; i < this.props.size[0]*3; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.tileHide(i)
         }
       }
     }, 3700 * difficultyFactor);
     setTimeout(() => {
-      if(this.props.size < 4) { return }
+      if(this.props.size[1] < 4) { return }
       this.playWhoosh()
-      for (var i = this.props.size*3; i < this.props.size*4; i++) {
-        for (var j = 0; j < this.props.size; j++) {
+      for (var i = this.props.size[0]*3; i < this.props.size[0]*4; i++) {
+        for (var j = 0; j < this.props.size[1]; j++) {
           this.tileHide(i)
         }
       }
@@ -255,13 +255,13 @@ class BoardView extends React.Component {
   }
 
   makeSomeNumbers(id) {
-    let numbers = this.state.numbers || new Array(this.props.size * this.props.size)
+    let numbers = this.state.numbers || new Array(this.props.size[0] * this.props.size[1])
     numbers[id] = this.state.hiddenLetters[id]
     return numbers
   }
 
   makeBoard() {
-    var tilt = new Array(this.props.size * this.props.size)
+    var tilt = new Array(this.props.size[0] * this.props.size[1])
     for (var i = 0; i < tilt.length; i++) {
       tilt[i] = new Animated.Value(0)
     }
@@ -269,14 +269,15 @@ class BoardView extends React.Component {
   }
 
   render() {
-    const dimension = CELL_SIZE * this.props.size
+    const dimensionWidth = CELL_SIZE * this.props.size[0]
+    const dimensionHeight = CELL_SIZE * this.props.size[1]
     const time = this.state.progress
     return (
       <View style={{width: width}}>
         <Animated.View style={{opacity: this.state.fadeAnim}}>
           <Animated.View style={[ styles.timer, { height: this.state.timerHeight, width: this.state.progress}]}>
           </Animated.View>
-          <View style={{width: dimension, height: dimension, alignSelf: 'center'}}>
+          <View style={{width: dimensionWidth, height: dimensionHeight, alignSelf: 'center'}}>
             {this.renderTiles()}
           </View>
         </Animated.View>
@@ -286,9 +287,9 @@ class BoardView extends React.Component {
 
   renderTiles() {
     var result = []
-    for (var row = 0; row < this.props.size; row++) {
-      for (var col = 0; col < this.props.size; col++) {
-        var id = row * this.props.size + col
+    for (var row = 0; row < this.props.size[1]; row++) {
+      for (var col = 0; col < this.props.size[0]; col++) {
+        var id = row * this.props.size[0] + col
         var letter = this.state.numbers[id]
         var tilt = this.state.board.tilt[id].interpolate({
           inputRange: [0, 1],
@@ -379,7 +380,7 @@ class BoardView extends React.Component {
 
   handleTimerEnd() {
     // if(!this.state.inPlay) { return }
-    const length = this.props.size * this.props.size
+    const length = this.props.size[0] * this.props.size[1]
     if(!this.state.inPlay || this.state.beenClicked.length == length) { return }
     this.props.deliverVerdict(false)
     this.setState({ inPlay: false })

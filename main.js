@@ -296,7 +296,7 @@ var Main = React.createClass({
                                 updateScore={this.updateScore}
                                 endGame={this.endGame}
                                 deliverVerdict={this.showMessage}
-                                size={boardSize}
+                                size={[3, 2]}
                                 level={this.state.level}
                       />
     const menu = <Menu startGame={this.startGame}
