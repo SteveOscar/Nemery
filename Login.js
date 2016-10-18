@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import Logo from './Logo.js'
+import Button from './Button.js'
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
 import Scheme from './colorScheme.js'
 const DeviceInfo = require('react-native-device-info');
@@ -56,6 +58,7 @@ class Login extends React.Component {
   }
 
   textInputFocused() {
+    this.setState({ message: '' })
     this.refs.scroll.scrollTo({x: 0, y: 100, animated: true})
   }
 
@@ -65,9 +68,17 @@ class Login extends React.Component {
   }
 
   onButtonPressed() {
-    if(this.state.isLoading) { return }
-    this.setState({ isLoading: true })
-    this._executeQuery()
+    const overage = this.state.text.length - 10
+    if(this.state.text.length === 0) {
+      this.setState({ message: 'Enter a name' })
+    } else if(overage > 0) {
+      const warning = 'Name is ' + overage + ' too long'
+      this.setState({ message: warning })
+    } else {
+      if(this.state.isLoading) { return }
+      this.setState({ isLoading: true })
+      this._executeQuery()
+    }
   }
 
   _executeQuery() {
@@ -109,10 +120,11 @@ class Login extends React.Component {
       <ScrollView ref='scroll' style={styles.scrollContainer}>
                   {spinner}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.buttonText} onPress={this.props.startGame}>Welcome to Numery</Text>
+          <Text style={styles.headerText2} onPress={this.props.startGame}>Welcome to</Text>
+          <Logo />
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText}>Create a User Name:</Text>
+          <Text style={styles.headerText}>Create a User Name:</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <TextInput
@@ -121,16 +133,17 @@ class Login extends React.Component {
             value={this.state.text}
             autoCorrect={false}
             maxLength={20}
-            selectionColor={'#fff4e6'}
+            selectionColor={Scheme.color3}
             keyboardType={'default'}
             onFocus={this.textInputFocused.bind(this)}
             onBlur={this.textInputBlur.bind(this)}
             />
-            <TouchableHighlight onPress={this.onButtonPressed.bind(this)}
+            {/*<TouchableHighlight onPress={this.onButtonPressed.bind(this)}
                       style={styles.button}
                       underlayColor='#99d9f4'>
               <Text style={styles.buttonText2}>Submit</Text>
-            </TouchableHighlight>
+            </TouchableHighlight>*/}
+            <Button sound={false} action={this.onButtonPressed.bind(this)} text={'Submit'}/>
         </Animated.View>
         <Text style={styles.message}>{this.state.message}</Text>
       </ScrollView>
@@ -148,7 +161,7 @@ var styles = StyleSheet.create({
     // flexDirection: 'column',
   },
   scrollContainer: {
-    paddingTop: height*.3,
+    paddingTop: height*.1,
   },
   inputStyle: {
     height: 40,
@@ -156,40 +169,49 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
     padding: 4,
-    color: 'white',
-    justifyContent: 'center'
+    color: Scheme.color1,
+    textAlign:"center",
+    marginBottom: 20
   },
-  buttonText: {
+  headerText2: {
+    fontFamily: 'American Typewriter',
+    alignSelf: 'center',
+    marginBottom: -10,
+    fontSize: height * .045,
+    color: Scheme.color5
+  },
+  headerText: {
     alignSelf: 'center',
     margin: 10,
-    fontSize: 30,
-    color: Scheme.color3
+    fontSize: height * .03,
+    color: Scheme.color4
   },
-  buttonText2: {
-    alignSelf: 'center',
-    margin: 10,
-    fontSize: 25,
-    color: Scheme.color2
-  },
-  button: {
-    height: 36,
-    flexDirection: 'row',
-    backgroundColor: Scheme.color3,
-    borderColor: 'white',
-    borderWidth: 3,
-    borderRadius: 8,
-    marginTop: 10,
-    justifyContent: 'center',
-    width: 250,
-    alignSelf: 'center'
-  },
+  // buttonText2: {
+  //   alignSelf: 'center',
+  //   margin: 10,
+  //   fontSize: height * .045,
+  //   color: Scheme.color1
+  // },
+  // button: {
+  //   height: 36,
+  //   flexDirection: 'row',
+  //   backgroundColor: Scheme.color3,
+  //   borderColor: 'white',
+  //   borderWidth: 3,
+  //   borderRadius: 8,
+  //   marginTop: 10,
+  //   justifyContent: 'center',
+  //   width: 250,
+  //   alignSelf: 'center'
+  // },
   spinner: {
   },
   message: {
     alignSelf: 'center',
-    margin: 10,
-    fontSize: 25,
-    color: 'white'
+    fontFamily: 'American Typewriter',
+    marginTop: height * .025,
+    fontSize: height * .035,
+    color: Scheme.color5
   }
 });
 

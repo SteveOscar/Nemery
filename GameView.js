@@ -442,7 +442,7 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: -(height*.2),
-    backgroundColor: Scheme.color3,
+    backgroundColor: Scheme.color5,
     borderRadius: 5,
     opacity: .5,
   }

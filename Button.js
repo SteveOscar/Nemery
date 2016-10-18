@@ -40,7 +40,7 @@ class Button extends React.Component {
   var styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: Scheme.color4,
+      backgroundColor: Scheme.color5,
       borderRadius: 5,
       borderWidth: 0,
       borderColor: Scheme.color3,
@@ -51,7 +51,7 @@ class Button extends React.Component {
     },
     buttonText: {
       fontSize: height * .045,
-      color: Scheme.color3,
+      color: Scheme.color2,
       fontFamily: 'American Typewriter'
     },
   });
