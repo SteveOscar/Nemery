@@ -275,7 +275,7 @@ var Main = React.createClass({
 
   getBoardSize() {
     const index = ["Easy", "Medium", "Hard", "Extreme"].indexOf(this.state.difficulty)
-    const sizes = [[2, 2], [3, 2], [3, 3], [4, 4]]
+    const sizes = [[3, 2], [3, 3], [4, 3], [4, 4]]
     return sizes[index]
   },
 
