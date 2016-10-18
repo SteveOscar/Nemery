@@ -144,21 +144,26 @@ class Menu extends React.Component {
   renderButtons() {
     let howHard = this.renderDifficulty()
     let { helpText } = this.state
+    let { sound } = this.props
+    let soundSetting = sound ? 'ON' : 'OFF'
 
     return (
       <View style={styles.container}>
         <Logo />
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
-          <Button action={this.props.startGame} text={'Start'}/>
+          <Button sound={sound} action={this.props.startGame} text={'Start'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Button action={this.props.upDifficulty} text={'Difficulty: ' + howHard}/>
+          <Button sound={sound} action={this.props.upDifficulty} text={'Difficulty: ' + howHard}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
-          <Button action={this.props.highScoresPage} text={'High Scores'}/>
+          <Button sound={sound} action={this.props.highScoresPage} text={'High Scores'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
-          <Button action={this.renderHelp.bind(this)} text={this.state.helpText}/>
+          <Button sound={sound} action={this.renderHelp.bind(this)} text={this.state.helpText}/>
+        </Animated.View>
+        <Animated.View style={{opacity: this.state.fadeAnim4}}>
+          <Button sound={!sound} action={this.props.setSound} text={'Sound: ' + soundSetting}/>
         </Animated.View>
       </View>
     )

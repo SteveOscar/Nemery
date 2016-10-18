@@ -17,6 +17,7 @@ var {width, height} = require('Dimensions').get('window');
 class Button extends React.Component {
 
   playButton() {
+    if(!this.props.sound) { return }
     var s = new Sound('button.mp3', Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.4)
       s.play()

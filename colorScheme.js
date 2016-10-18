@@ -1,11 +1,19 @@
 
 // // // cappuciono
+// const Scheme = {
+//   color1: '#4b3832',
+//   color2: '#854442',
+//   color3: '#fff4e6',
+//   color4: '#3c2f2f',
+//   color5: '#be9b7b'
+// }
+// // custom clean
 const Scheme = {
-  color1: '#4b3832',
-  color2: '#854442',
-  color3: '#fff4e6',
-  color4: '#3c2f2f',
-  color5: '#be9b7b'
+  color1: '#910000',
+  color2: 'white',
+  color3: 'skyblue',
+  color4: 'black',
+  color5: '#071571'
 }
 //
 // // summer to fall

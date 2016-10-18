@@ -39,7 +39,8 @@ var Main = React.createClass({
       showingScores: false,
       showingTransition: false,
       lastScore: 0,
-      localScore: 0
+      localScore: 0,
+      sound: true
     };
   },
 
@@ -192,10 +193,15 @@ var Main = React.createClass({
     this.setState({ showingScores: false })
   },
 
+  setSound() {
+    const { sound } = this.state
+    this.setState({ sound: !sound })
+  },
+
   endGame() {
     const random = quotes()
     this.saveScore(this.state.score)
-    this.setState({ playing: false, score: 0, txt: random, level: 0, showingTransition: false })
+    this.setState({ playing: false, score: 0, txt: random, level: 1, showingTransition: false })
   },
 
   showScore() {
@@ -235,14 +241,16 @@ var Main = React.createClass({
   },
 
   playBell() {
+    if(!this.state.sound) { return }
     let bells = ['bell.mp3', 'bell2.mp3', 'bell3.mp3']
     var s = new Sound(bells[Math.round(Math.random() * 3)], Sound.MAIN_BUNDLE, (e) => {
-      s.setVolume(.5)
+      s.setVolume(.4)
       s.play()
     })
   },
 
   playScream() {
+    if(!this.state.sound) { return }
     var s = new Sound('scream.mp3', Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.2)
       s.play()
@@ -256,9 +264,9 @@ var Main = React.createClass({
 
   checkForWin(num) {
     const { difficulty } = this.state
-    if(difficulty === "Easy") { return num === 4 }
-    if(difficulty === "Medium") { return num === 6 }
-    if(difficulty === "Hard") { return num === 9 }
+    if(difficulty === "Easy") { return num === 6 }
+    if(difficulty === "Medium") { return num === 9 }
+    if(difficulty === "Hard") { return num === 12 }
     if(difficulty === "Extreme") { return num === 16 }
   },
 
@@ -287,6 +295,7 @@ var Main = React.createClass({
 
     const scoreBoard = <ScoreBoard highScores={highScores}
                                    backToMenu={this.backToMenu}
+                                   sound={this.state.sound}
                                    />
 
     const transitionScreen = <Transition level={this.state.level}
@@ -295,6 +304,7 @@ var Main = React.createClass({
                                          quit={this.endGame}
                                          difficulty={this.state.difficulty}
                                          addBonus={this.levelBonus}
+                                         sound={this.state.sound}
                                    />
 
     const gameBoard = <GameView difficulty={this.state.difficulty}
@@ -303,11 +313,14 @@ var Main = React.createClass({
                                 deliverVerdict={this.showMessage}
                                 size={boardSize}
                                 level={this.state.level}
+                                sound={this.state.sound}
                       />
     const menu = <Menu startGame={this.startGame}
                        highScoresPage={this.highScoresPage}
                        difficulty={this.state.difficulty}
                        upDifficulty={this.upDifficulty}
+                       setSound={this.setSound}
+                       sound={this.state.sound}
                        />
 
     let spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)

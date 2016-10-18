@@ -11,8 +11,6 @@ import {
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
-// const this.props.size = 2; // four-by-four grid
-// const COUNT = this.props.size * this.props.size
 const CELL_SIZE = Math.floor(width * .2); // 20% of the screen width
 const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
@@ -31,7 +29,6 @@ class BoardView extends React.Component {
       hiddenLetters: this.generateNumbers(),
       beenClicked: [],
       size: this.props.size,
-      delay: 500,
       inPlay: false,
       progress: new Animated.Value(width),
       timerHeight: new Animated.Value(0)
@@ -39,6 +36,7 @@ class BoardView extends React.Component {
   }
 
   playTap() {
+    if(!this.props.sound) { return }
     var s = new Sound('tap.mp3', Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.7)
       s.play()
@@ -46,10 +44,12 @@ class BoardView extends React.Component {
   }
 
   playWhoosh() {
+    if(!this.props.sound) { return }
     var s = new Sound('whoosh.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() })
   }
 
   playWhoosh2(row) {
+    if(!this.props.sound) { return }
     if(this.confirmSoundEffect(row)) { var s = new Sound('whoosh2.mp3', Sound.MAIN_BUNDLE, (e) => { s.play() }) }
   }
 
@@ -69,9 +69,9 @@ class BoardView extends React.Component {
   maxNumber(difficulty, length) {
     let { level } = this.props
     if(difficulty === "Extreme") { return 99 }
-    if(difficulty === "Hard") { return (16 * level) < 99 ? 16 * level : 99 }
+    if(difficulty === "Hard") { return (12 * level) < 99 ? 12 * level : 99 }
     if(difficulty === "Medium") { return (9 * level) < 99 ? 9 * level : 99 }
-    if(difficulty === "Easy") { return (4 * level) +6 < 99 ? 4 * level + 6 : 99 }
+    if(difficulty === "Easy") { return (6 * level) < 99 ? 6 * level : 99 }
     return 29
   }
 
@@ -93,7 +93,7 @@ class BoardView extends React.Component {
 
   timeAdjustment() {
     const { difficulty } = this.props
-    if(difficulty === "Easy") { return .9 }
+    if(difficulty === "Easy") { return 1.5 }
     if(difficulty === "Medium") { return 2 }
     if(difficulty === "Hard") { return 3 }
     if(difficulty === "Extreme") { return 2.5 }
@@ -115,8 +115,8 @@ class BoardView extends React.Component {
   }
 
   showTiles(shouldHide) {
-    const { delay } = this.state
-    const difficultyFactor = this.timeAdjustment()
+    const delay = 500
+    // const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
       this.playWhoosh2(1)
       for (var i = 0; i < this.props.size[0]; i++) {
@@ -204,11 +204,19 @@ class BoardView extends React.Component {
     }, 4000 * gameDelay);
   }
 
+  levelTimeAdjustment(baseTime) {
+    let result = 100
+    const L = this.props.level
+    for (i = 0; i < L; i++) {
+      result = result * .9
+    }
+    return  result/100
+  }
+
   startTimer() {
-    const baseTime = 4000
-    const levelFactor = (this.props.level / 10) * baseTime
+    const baseTime = 3000
     const difficultyFactor = this.timeAdjustment() * 1.2
-    const timer = (baseTime * difficultyFactor) - levelFactor
+    const timer = (baseTime * difficultyFactor) * this.levelTimeAdjustment(baseTime)
     this.playBeep()
     Animated.timing(
       this.state.progress,
@@ -353,6 +361,7 @@ class BoardView extends React.Component {
   }
 
   playSigh() {
+    if(!this.props.sound) { return }
     var s = new Sound('exhale.mp3', Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.3)
       s.play()
@@ -360,6 +369,7 @@ class BoardView extends React.Component {
   }
 
   playBuzzer() {
+    if(!this.props.sound) { return }
     var s = new Sound('buzzer.mp3', Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.3)
       s.play()
@@ -367,6 +377,7 @@ class BoardView extends React.Component {
   }
 
   playBeep() {
+    if(!this.props.sound) { return }
     var s = new Sound('beep.mp3', Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.4)
       s.play()
