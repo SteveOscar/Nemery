@@ -9,7 +9,7 @@
 // }
 // // custom clean
 const Scheme = {
-  color1: '#910000',
+  color1: 'red',
   color2: 'floralwhite',
   color3: 'skyblue',
   color4: 'black',

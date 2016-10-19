@@ -226,7 +226,7 @@ var Main = React.createClass({
 
   updateScore(tilesTurned) {
     const { difficulty } = this.state
-    const added = difficulty === 'Extreme' ? 2 : 1
+    const added = ["Easy", "Medium", "Hard", "Extreme"].indexOf(difficulty) + 1
     const currentScore = this.state.score + added
     this.setState({ score: currentScore, txt: "Score " + (this.state.score + added) })
     const win = this.checkForWin(tilesTurned)
