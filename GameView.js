@@ -394,6 +394,7 @@ class BoardView extends React.Component {
     // if(!this.state.inPlay) { return }
     const length = this.props.size[0] * this.props.size[1]
     if(!this.state.inPlay || this.state.beenClicked.length == length) { return }
+    this.playBuzzer()
     this.props.deliverVerdict(false)
     this.setState({ inPlay: false })
     this.showTiles(false)
@@ -444,7 +445,7 @@ var styles = StyleSheet.create({
     top: -(height*.2),
     backgroundColor: Scheme.color5,
     borderRadius: 5,
-    opacity: .5,
+    opacity: .9,
   }
 });
 

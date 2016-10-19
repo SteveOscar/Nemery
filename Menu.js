@@ -23,6 +23,7 @@ class Menu extends React.Component {
       fadeAnim2: new Animated.Value(0),
       fadeAnim3: new Animated.Value(0),
       fadeAnim4: new Animated.Value(0),
+      fadeAnim5: new Animated.Value(0),
       spinValue: new Animated.Value(0),
       pressed: false,
       helpText: '???'
@@ -34,31 +35,39 @@ class Menu extends React.Component {
       this.state.fadeAnim1,
       {
         toValue: 1,
-        duration: 1000
+        duration: 700
       }
     ).start();
     Animated.timing(
       this.state.fadeAnim2,
       {
         toValue: 1,
-        duration: 1000,
-        delay: 500
+        duration: 600,
+        delay: 250
       }
     ).start();
     Animated.timing(
       this.state.fadeAnim3,
       {
         toValue: 1,
-        duration: 1000,
-        delay: 1000
+        duration: 500,
+        delay: 500
       }
     ).start();
     Animated.timing(
       this.state.fadeAnim4,
       {
         toValue: 1,
-        duration: 1000,
-        delay: 1500
+        duration: 400,
+        delay: 650
+      }
+    ).start();
+    Animated.timing(
+      this.state.fadeAnim5,
+      {
+        toValue: 1,
+        duration: 300,
+        delay: 750
       }
     ).start();
     this.spin()
@@ -149,7 +158,9 @@ class Menu extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Logo />
+        <Animated.View style={{opacity: this.state.fadeAnim1}} >
+          <Logo />
+        </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
           <Button sound={sound} action={this.props.startGame} text={'Start'}/>
         </Animated.View>
@@ -162,7 +173,7 @@ class Menu extends React.Component {
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
           <Button sound={sound} action={this.renderHelp.bind(this)} text={this.state.helpText}/>
         </Animated.View>
-        <Animated.View style={{opacity: this.state.fadeAnim4}}>
+        <Animated.View style={{opacity: this.state.fadeAnim5}}>
           <Button sound={!sound} action={this.props.setSound} text={'Sound: ' + soundSetting}/>
         </Animated.View>
       </View>

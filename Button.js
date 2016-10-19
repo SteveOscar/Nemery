@@ -31,7 +31,7 @@ class Button extends React.Component {
 
   render() {
     return (
-      <TouchableHighlight style={styles.container} onPress={this.handlePress.bind(this)} underlayColor={Scheme.color1}>
+      <TouchableHighlight style={styles.container} onPress={this.handlePress.bind(this)} underlayColor={Scheme.color4}>
         <Text style={styles.buttonText} >{this.props.text}</Text>
       </TouchableHighlight>
     )
