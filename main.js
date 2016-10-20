@@ -20,7 +20,8 @@ import {
     Vibration,
     ActivityIndicator,
     AsyncStorage,
-    StatusBar
+    StatusBar,
+    AppState
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -46,6 +47,9 @@ var Main = React.createClass({
   },
 
   componentDidMount() {
+    AppState.addEventListener('change', state =>
+      codePush.sync()
+    )
     codePush.sync()
     AsyncStorage.getItem("highScores").then((s) => {
       if(s) { this.setState({ localScore: (JSON.parse(s)).user_score }) }
