@@ -70,7 +70,7 @@ class BoardView extends React.Component {
     let { level } = this.props
     if(difficulty === "Extreme") { return 99 }
     if(difficulty === "Hard") { return (12 * level) < 99 ? 12 * level : 99 }
-    if(difficulty === "Medium") { return (9 * level) < 99 ? 9 * level : 99 }
+    if(difficulty === "Medium") { return 9 }
     if(difficulty === "Easy") { return (6 * level) < 99 ? 6 * level : 99 }
     return 29
   }
@@ -96,7 +96,7 @@ class BoardView extends React.Component {
     if(difficulty === "Easy") { return 1.5 }
     if(difficulty === "Medium") { return 2 }
     if(difficulty === "Hard") { return 3 }
-    if(difficulty === "Extreme") { return 2.5 }
+    if(difficulty === "Extreme") { return 3 }
   }
 
   componentDidMount() {
@@ -154,18 +154,26 @@ class BoardView extends React.Component {
     if(shouldHide) { this.hideTiles() }
   }
 
+  gameStartDelay(difficulty, difficultyFactor) {
+    if(difficulty === "Easy") { return difficultyFactor }
+    if(difficulty === "Medium") { return difficultyFactor - .2 }
+    if(difficulty === "Hard") { return difficultyFactor - .5 }
+    if(difficulty === "Extreme") { return difficultyFactor - .3 }
+  }
+
   hideTiles() {
     const { difficulty } = this.props
-    const difficultyFactor = this.timeAdjustment() * 1.2
-    const gameDelay = (difficulty === "Easy" || difficulty === "Medium") ? difficultyFactor : difficultyFactor + .2
+    const difficultyFactor = this.timeAdjustment() * 1.3
+    const gameDelay = this.gameStartDelay(difficulty, difficultyFactor)
     // shows timer bar first
     setTimeout(() => {
-      this.playWhoosh()
       Animated.timing(
         this.state.timerHeight,
         {toValue: height * .05, duration: 1800}
       ).start();
-
+    }, 2500 * difficultyFactor)
+    setTimeout(() => {
+      this.playWhoosh()
       for (var i = 0; i < this.props.size[0]; i++) {
         for (var j = 0; j < this.props.size[1]; j++) {
           this.tileHide(i)
@@ -179,7 +187,7 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 3200 * difficultyFactor);
+    }, 2700 * difficultyFactor);
     setTimeout(() => {
       if(this.props.size[1] < 3) { return }
       this.playWhoosh()
@@ -188,7 +196,7 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 3700 * difficultyFactor);
+    }, 2900 * difficultyFactor);
     setTimeout(() => {
       if(this.props.size[1] < 4) { return }
       this.playWhoosh()
@@ -197,11 +205,11 @@ class BoardView extends React.Component {
           this.tileHide(i)
         }
       }
-    }, 4200 * difficultyFactor);
+    }, 3000 * difficultyFactor);
     setTimeout(() => {
       this.setState({ inPlay: true })
       this.startTimer()
-    }, 4000 * gameDelay);
+    }, 3500 * gameDelay);
   }
 
   levelTimeAdjustment(baseTime) {
@@ -214,7 +222,7 @@ class BoardView extends React.Component {
   }
 
   startTimer() {
-    const baseTime = 3000
+    const baseTime = 3500
     const difficultyFactor = this.timeAdjustment() * 1.2
     const timer = (baseTime * difficultyFactor) * this.levelTimeAdjustment(baseTime)
     this.playBeep()
