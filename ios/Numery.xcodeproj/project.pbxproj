@@ -23,6 +23,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2DA36E2FA7BC4284A68A9511 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73290D9ADB7C4797A588445D /* libRNDeviceInfo.a */; };
+		372476AF899845D491B05F9A /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82391E29E5C444F689FC2ADE /* libCodePush.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8C3E20631DB287E600670BFB /* bell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20621DB287E600670BFB /* bell2.mp3 */; };
 		8C3E20711DB287ED00670BFB /* bell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20701DB287ED00670BFB /* bell3.mp3 */; };
@@ -41,6 +42,7 @@
 		8CFD6F6E1DA49FFB004E8397 /* whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */; };
 		8CFD6F701DA4A071004E8397 /* whoosh2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */; };
 		8CFD6F721DA4A314004E8397 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F711DA4A314004E8397 /* button.mp3 */; };
+		B9B96724D4294AEDB20E221C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90EF1023F1BA4FA8AFB2BC59 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		8C9A35131DB7B7EE00475B86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F742AFC2EBD4EDF85C69D6E /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = CodePush;
+		};
 		8CE3634F1D9785CC0083D6C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A63F8CB930704569BC6407DF /* RNDeviceInfo.xcodeproj */;
@@ -157,8 +166,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AlphaReflex/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AlphaReflex/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		3F742AFC2EBD4EDF85C69D6E /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		73290D9ADB7C4797A588445D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		82391E29E5C444F689FC2ADE /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCodePush.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8C3E20621DB287E600670BFB /* bell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell2.mp3; path = ../../../../Desktop/Apps/Numery/bell2.mp3; sourceTree = "<group>"; };
 		8C3E20701DB287ED00670BFB /* bell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell3.mp3; path = ../../../../Desktop/Apps/Numery/bell3.mp3; sourceTree = "<group>"; };
@@ -178,6 +189,7 @@
 		8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whoosh.mp3; path = ../../../../Downloads/whoosh.mp3; sourceTree = "<group>"; };
 		8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whoosh2.mp3; path = ../../../../Downloads/whoosh2.mp3; sourceTree = "<group>"; };
 		8CFD6F711DA4A314004E8397 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = button.mp3; path = ../../../../Downloads/button.mp3; sourceTree = "<group>"; };
+		90EF1023F1BA4FA8AFB2BC59 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A63F8CB930704569BC6407DF /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9B96724D4294AEDB20E221C /* libz.tbd in Frameworks */,
 				8CFD6F681DA495E3004E8397 /* libRNSound.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -206,6 +219,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				2DA36E2FA7BC4284A68A9511 /* libRNDeviceInfo.a in Frameworks */,
+				372476AF899845D491B05F9A /* libCodePush.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +323,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		579326718CA6476FA188586A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90EF1023F1BA4FA8AFB2BC59 /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +354,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				A63F8CB930704569BC6407DF /* RNDeviceInfo.xcodeproj */,
+				3F742AFC2EBD4EDF85C69D6E /* CodePush.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -366,6 +389,7 @@
 				8C7708A51DADC810006AB6D0 /* tap.mp3 */,
 				8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */,
 				8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */,
+				579326718CA6476FA188586A /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -376,6 +400,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* AlphaReflex.app */,
 				00E356EE1AD99517003FC87E /* AlphaReflexTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C9A35101DB7B7EE00475B86 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C9A35141DB7B7EE00475B86 /* libCodePush.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -466,6 +498,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 8C9A35101DB7B7EE00475B86 /* Products */;
+					ProjectRef = 3F742AFC2EBD4EDF85C69D6E /* CodePush.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -594,6 +630,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8C9A35141DB7B7EE00475B86 /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 8C9A35131DB7B7EE00475B86 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8CE363501D9785CC0083D6C4 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -718,6 +761,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -737,6 +781,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -755,6 +800,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
 				);
 				INFOPLIST_FILE = AlphaReflex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -778,6 +824,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
 				);
 				INFOPLIST_FILE = AlphaReflex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -835,6 +882,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -880,6 +928,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
