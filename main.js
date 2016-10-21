@@ -47,9 +47,11 @@ var Main = React.createClass({
   },
 
   componentDidMount() {
-    AppState.addEventListener('change', state =>
-      codePush.sync()
-    )
+    // AppState.addEventListener('change', state =>
+    //   codePush.sync()
+    //   console.log('SHOULD PUSH!!!!')
+    // )
+    AppState.addEventListener('change', this._handleAppStateChange)
     codePush.sync()
     AsyncStorage.getItem("highScores").then((s) => {
       if(s) { this.setState({ localScore: (JSON.parse(s)).user_score }) }
@@ -64,6 +66,11 @@ var Main = React.createClass({
         this.checkForUser()
       }
     })
+  },
+
+  _handleAppStateChange: function(currentAppState) {
+    codePush.sync()
+    console.log('SHOULD PUSH!!!!')
   },
 
   checkForUser() {

@@ -162,7 +162,7 @@ class Menu extends React.Component {
           <Logo />
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
-          <Button sound={sound} action={this.props.startGame} text={'Carl wz here'}/>
+          <Button sound={sound} action={this.props.startGame} text={'Start'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           <Button sound={sound} action={this.props.upDifficulty} text={'Difficulty: ' + howHard}/>
