@@ -26,7 +26,7 @@ class Menu extends React.Component {
       fadeAnim4: new Animated.Value(0),
       fadeAnim5: new Animated.Value(0),
       spinValue: new Animated.Value(0),
-      board: this.makeBoard(),
+      iconTilt: new Animated.Value(0),
       pressed: false,
       helpText: '???'
     }
@@ -73,39 +73,34 @@ class Menu extends React.Component {
       }
     ).start();
     // this.spin()
-    this.moveTile(0)
+    this.moveTile()
   }
 
-  makeBoard() {
-    var tilt = new Array(1)
-    for (var i = 0; i < tilt.length; i++) {
-      tilt[i] = new Animated.Value(0)
-    }
-    return {tilt}
-  }
-
-  moveTile(id) {
+  moveTile() {
+    const time = Math.floor((Math.random()*6000) + 800)
+    const delay = Math.floor((Math.random()*2000) + 100)
     // setTimeout(() => { this.setState({ letters: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
-    var tilt = this.state.board.tilt[id];
+    var tilt = this.state.iconTilt
     tilt.setValue(0);
     Animated.timing(tilt, {
-      toValue: .15,
-      duration: 800,
+      toValue: 1,
+      duration: time,
       easing: Easing.spring
-    }).start();
+    }).start()
+    setTimeout(() => { this.moveTile() }, time + delay)
   }
 
-  spin () {
-    this.state.spinValue.setValue(0)
-    Animated.timing(
-      this.state.spinValue,
-      {
-        toValue: 1,
-        duration: 5000,
-        easing: Easing.spring
-      }
-    ).start(() => this.spin())
-  }
+  // spin () {
+  //   this.state.spinValue.setValue(0)
+  //   Animated.timing(
+  //     this.state.spinValue,
+  //     {
+  //       toValue: 1,
+  //       duration: 5000,
+  //       easing: Easing.spring
+  //     }
+  //   ).start(() => this.spin())
+  // }
 
   handlePress() {
     this.setState({ pressed: true })
@@ -148,10 +143,11 @@ class Menu extends React.Component {
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg']
     })
-    var tilt = this.state.board.tilt[0].interpolate({
+    const tilt = this.state.iconTilt.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '-360deg']
     })
+    const perspectiveAmount = (Math.random() * (0.3 - .12) + .12) * width
     return (
       <View>
         <View style={styles.spinner}>
@@ -161,7 +157,7 @@ class Menu extends React.Component {
               height: width * .25,
               opacity: .7,
               // transform: [{rotate: spin}] }}
-              transform: [{perspective: width * .25},
+              transform: [{perspective: perspectiveAmount},
                            {rotateY: tilt}]}}
               source={require('./icon_logo.png')}
           />
