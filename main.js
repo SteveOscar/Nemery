@@ -5,6 +5,7 @@ import GameView from './GameView.js'
 import Menu from './Menu.js'
 import Login from './Login.js'
 import ScoreBoard from './ScoreBoard.js'
+import Help from './Help.js'
 import Transition from './Transition.js'
 import quotes from './quotes.js'
 import Scheme from './colorScheme.js'
@@ -40,6 +41,7 @@ var Main = React.createClass({
       highScores: '',
       showingScores: false,
       showingTransition: false,
+      showingHelp: false,
       lastScore: 0,
       localScore: 0,
       sound: true
@@ -202,8 +204,12 @@ var Main = React.createClass({
     this.setState({ showingScores: true })
   },
 
+  helpPage() {
+    this.setState({ showingHelp: true })
+  },
+
   backToMenu() {
-    this.setState({ showingScores: false })
+    this.setState({ showingScores: false, showingHelp: false })
   },
 
   setSound() {
@@ -303,13 +309,17 @@ var Main = React.createClass({
   render() {
     var uuid = DeviceInfo.getUniqueID()
     let boardSize = this.getBoardSize()
-    let { currentUser, highScores, showingScores, showingTransition, playing } = this.state
+    let { currentUser, highScores, showingScores, showingHelp, showingTransition, playing } = this.state
     const loginScreen = <Login setUser={this.setUser}/>
 
     const scoreBoard = <ScoreBoard highScores={highScores}
                                    backToMenu={this.backToMenu}
                                    sound={this.state.sound}
                                    />
+
+    const helpScreen = <Help backToMenu={this.backToMenu}
+                             sound={this.state.sound}
+                             />
 
     const transitionScreen = <Transition level={this.state.level}
                                          score={this.state.score}
@@ -330,6 +340,7 @@ var Main = React.createClass({
                       />
     const menu = <Menu startGame={this.startGame}
                        highScoresPage={this.highScoresPage}
+                       helpPage={this.helpPage}
                        difficulty={this.state.difficulty}
                        upDifficulty={this.upDifficulty}
                        setSound={this.setSound}
@@ -344,8 +355,10 @@ var Main = React.createClass({
     if(!playing && !this.state.currentUser) { component = loginScreen }
     if(!currentUser) { component = loginScreen }
     if(currentUser && showingScores) { component = scoreBoard }
+    if(currentUser && showingHelp) { component = helpScreen }
     if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
+    component = helpScreen
 
     return <View style={styles.container}>
              {component}

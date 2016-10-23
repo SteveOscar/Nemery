@@ -23,7 +23,7 @@ class Logo extends React.Component {
     this.state = {
       board: this.makeBoard(),
       fadeAnim: new Animated.Value(0),
-      numbers: ['N', 'U', 'M', 'E', 'R', 'Y']
+      letters: this.props.letters.split('')
     }
   }
 
@@ -76,10 +76,11 @@ class Logo extends React.Component {
   }
 
   renderTiles() {
+    const { letters } = this.state
     var result = []
-    for (var row = 0; row < 6; row++) {
+    for (var row = 0; row < letters.length; row++) {
         var id = row
-        var letter = this.state.numbers[id]
+        var letter = this.state.letters[id]
         var tilt = this.state.board.tilt[id].interpolate({
           inputRange: [0, 1],
           outputRange: ['0deg', '-360deg']
@@ -104,7 +105,7 @@ class Logo extends React.Component {
   }
 
   moveTile(id) {
-    // setTimeout(() => { this.setState({ numbers: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
+    // setTimeout(() => { this.setState({ letters: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
     var tilt = this.state.board.tilt[id];
     tilt.setValue(0);
     Animated.timing(tilt, {
@@ -139,9 +140,9 @@ class Logo extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // alignSelf: 'center',
     paddingBottom: height * .25
   },
   tile: {

@@ -41,10 +41,10 @@ class Button extends React.Component {
     container: {
       flex: 1,
       backgroundColor: Scheme.color5,
-      borderRadius: 5,
+      borderRadius: 10,
       borderWidth: 0,
-      borderColor: Scheme.color3,
-      marginBottom: height * .01,
+      borderColor: 'darkorange',
+      marginBottom: height * .015,
       height: height * .07,
       alignItems:'center',
       justifyContent:'center'

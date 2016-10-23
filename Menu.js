@@ -159,7 +159,7 @@ class Menu extends React.Component {
     return (
       <View style={styles.container}>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
-          <Logo />
+          <Logo letters={'NUMERY'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
           <Button sound={sound} action={this.props.startGame} text={'Start'}/>
@@ -171,7 +171,7 @@ class Menu extends React.Component {
           <Button sound={sound} action={this.props.highScoresPage} text={'High Scores'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim4}}>
-          <Button sound={sound} action={this.renderHelp.bind(this)} text={this.state.helpText}/>
+          <Button sound={sound} action={this.props.helpPage} text={this.state.helpText}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim5}}>
           <Button sound={!sound} action={this.props.setSound} text={'Sound: ' + soundSetting}/>
