@@ -25,6 +25,7 @@
 		2DA36E2FA7BC4284A68A9511 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73290D9ADB7C4797A588445D /* libRNDeviceInfo.a */; };
 		372476AF899845D491B05F9A /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82391E29E5C444F689FC2ADE /* libCodePush.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8C283D1E1DBD3ADD00532357 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C283D1D1DBD3ADD00532357 /* icon.png */; };
 		8C3E20631DB287E600670BFB /* bell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20621DB287E600670BFB /* bell2.mp3 */; };
 		8C3E20711DB287ED00670BFB /* bell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20701DB287ED00670BFB /* bell3.mp3 */; };
 		8C4B76B01DADD072003F860C /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C4B76AF1DADD072003F860C /* bell.mp3 */; };
@@ -171,6 +172,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		82391E29E5C444F689FC2ADE /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCodePush.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8C283D1D1DBD3ADD00532357 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../Downloads/Numery_Icon12/ios/AppIcon.appiconset/icon.png; sourceTree = "<group>"; };
 		8C3E20621DB287E600670BFB /* bell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell2.mp3; path = ../../../../Desktop/Apps/Numery/bell2.mp3; sourceTree = "<group>"; };
 		8C3E20701DB287ED00670BFB /* bell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell3.mp3; path = ../../../../Desktop/Apps/Numery/bell3.mp3; sourceTree = "<group>"; };
 		8C4B76AF1DADD072003F860C /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell.mp3; path = ../../../../Desktop/Apps/Numery/bell.mp3; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				8C7708BF1DADD044006AB6D0 /* tap.mp3 */,
 				8C7708B91DADCD45006AB6D0 /* buzzer.mp3 */,
 				8C4B76BD1DADD087003F860C /* beep.mp3 */,
+				8C283D1D1DBD3ADD00532357 /* icon.png */,
 				8C7708BD1DADCF09006AB6D0 /* scream.mp3 */,
 				8C4B76AF1DADD072003F860C /* bell.mp3 */,
 				8C3E20701DB287ED00670BFB /* bell3.mp3 */,
@@ -676,6 +679,7 @@
 				8C7708A61DADC810006AB6D0 /* tap.mp3 in Resources */,
 				8C3E20631DB287E600670BFB /* bell2.mp3 in Resources */,
 				8C7708B41DADC9E7006AB6D0 /* tap.mp3 in Resources */,
+				8C283D1E1DBD3ADD00532357 /* icon.png in Resources */,
 				8CFD6F6E1DA49FFB004E8397 /* whoosh.mp3 in Resources */,
 				8CFD6F6A1DA49805004E8397 /* Wood_Rattle.mp3 in Resources */,
 				8C4B76BE1DADD087003F860C /* beep.mp3 in Resources */,

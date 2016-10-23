@@ -130,20 +130,20 @@ class Menu extends React.Component {
     return (
       <View>
         <View style={styles.spinner}>
-          {/*<Animated.Image
+          <Animated.Image
             style={{
-              width: 50,
-              height: 50,
+              width: width * .25,
+              height: width * .25,
               opacity: .7,
               transform: [{rotate: spin}] }}
-              source={require('./gear.png')}
-          />*/}
-          <Animated.Text style={{
+              source={require('./icon_logo.png')}
+          />
+          {/*<Animated.Text style={{
             color: Scheme.color1,
             fontSize: width * .3,
             fontFamily: 'American Typewriter',
             opacity: .9,
-            transform: [{rotate: spin}] }}>?</Animated.Text>
+            transform: [{rotate: spin}] }}>?</Animated.Text>*/}
         </View>
         {this.renderButtons()}
       </View>
