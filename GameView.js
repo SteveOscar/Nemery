@@ -32,7 +32,8 @@ class BoardView extends React.Component {
       size: this.props.size,
       inPlay: false,
       progress: new Animated.Value(width),
-      timerHeight: new Animated.Value(0)
+      timerHeight: new Animated.Value(0),
+      timerText: new Animated.Value(0)
     }
   }
 
@@ -169,6 +170,13 @@ class BoardView extends React.Component {
     // shows timer bar first
     setTimeout(() => {
       Animated.timing(
+        this.state.timerText,
+        {
+          toValue: 1,
+          duration: 1000
+        }
+      ).start();
+      Animated.timing(
         this.state.timerHeight,
         {toValue: height * .05, duration: 1800}
       ).start();
@@ -223,6 +231,13 @@ class BoardView extends React.Component {
   }
 
   startTimer() {
+    Animated.timing(
+      this.state.timerText,
+      {
+        toValue: 0,
+        duration: 1000
+      }
+    ).start()
     const baseTime = 3500
     const difficultyFactor = this.timeAdjustment() * 1.2
     const timer = (baseTime * difficultyFactor) * this.levelTimeAdjustment(baseTime)
@@ -296,6 +311,7 @@ class BoardView extends React.Component {
         <Image source={require('./backgroundTop.png')} style={styles.backgroundTop} />
           <Animated.View style={{opacity: this.state.fadeAnim}}>
             <Animated.View style={[ styles.timer, { height: this.state.timerHeight, width: this.state.progress}]}>
+              <Animated.Text style={[styles.timerText, { opacity: this.state.timerText}]}>TIMER</Animated.Text>
             </Animated.View>
             <View style={{width: dimensionWidth, height: dimensionHeight, alignSelf: 'center'}}>
               {this.renderTiles()}
@@ -450,13 +466,24 @@ var styles = StyleSheet.create({
     fontFamily: 'American Typewriter'
   },
   timer: {
+    flex: 1,
     position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
     left: 0,
     right: 0,
     top: -(height*.2),
-    backgroundColor: Scheme.color5,
+    backgroundColor: Scheme.color6,
     borderRadius: 5,
     opacity: .9,
+  },
+  timerText: {
+    color: Scheme.color2,
+    backgroundColor: 'transparent',
+    fontFamily: 'American Typewriter',
+    fontSize: width * .05,
+    textShadowColor: 'red',
+    textShadowOffset: {width: 1, height: 1}
   },
   backgroundBottom: {
     position: 'absolute',

@@ -13,7 +13,8 @@ const Scheme = {
   color2: 'floralwhite',
   color3: 'skyblue',
   color4: 'black',
-  color5: '#071571'
+  color5: '#071571',
+  color6: '#5246ff'
 }
 //
 // // summer to fall
