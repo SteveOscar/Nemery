@@ -72,14 +72,12 @@ class Menu extends React.Component {
         delay: 750
       }
     ).start();
-    // this.spin()
     this.moveTile()
   }
 
   moveTile() {
-    const time = Math.floor((Math.random()*6000) + 800)
-    const delay = Math.floor((Math.random()*2000) + 100)
-    // setTimeout(() => { this.setState({ letters: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
+    const time = Math.floor((Math.random()*6000) + 2000)
+    const delay = Math.floor((Math.random()*2000) + 500)
     var tilt = this.state.iconTilt
     tilt.setValue(0);
     Animated.timing(tilt, {

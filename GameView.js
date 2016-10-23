@@ -7,7 +7,8 @@ import {
     View,
     StyleSheet,
     Animated,
-    Easing
+    Easing,
+    Image
 } from 'react-native';
 
 var {width, height} = require('Dimensions').get('window');
@@ -291,13 +292,15 @@ class BoardView extends React.Component {
     const time = this.state.progress
     return (
       <View style={{width: width}}>
-        <Animated.View style={{opacity: this.state.fadeAnim}}>
-          <Animated.View style={[ styles.timer, { height: this.state.timerHeight, width: this.state.progress}]}>
+        <Image source={require('./backgroundBottom.png')} style={styles.backgroundBottom} />
+        <Image source={require('./backgroundTop.png')} style={styles.backgroundTop} />
+          <Animated.View style={{opacity: this.state.fadeAnim}}>
+            <Animated.View style={[ styles.timer, { height: this.state.timerHeight, width: this.state.progress}]}>
+            </Animated.View>
+            <View style={{width: dimensionWidth, height: dimensionHeight, alignSelf: 'center'}}>
+              {this.renderTiles()}
+            </View>
           </Animated.View>
-          <View style={{width: dimensionWidth, height: dimensionHeight, alignSelf: 'center'}}>
-            {this.renderTiles()}
-          </View>
-        </Animated.View>
       </View>
     )
   }
@@ -454,6 +457,20 @@ var styles = StyleSheet.create({
     backgroundColor: Scheme.color5,
     borderRadius: 5,
     opacity: .9,
+  },
+  backgroundBottom: {
+    position: 'absolute',
+    width: width,
+    left: 0,
+    right: 0,
+    bottom: height * -.2
+  },
+  backgroundTop: {
+    position: 'absolute',
+    width: width,
+    left: 0,
+    right: 0,
+    top: height * -.3
   }
 });
 

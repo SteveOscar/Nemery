@@ -62,7 +62,7 @@ var Main = React.createClass({
       if (user !== null && user !== "null"){
         let person = JSON.parse(user)
         const greeting = (person && person.name) ? person.name : ''
-        this.setState({isLoading: false, currentUser: person, txt: 'Welcome ' + greeting}, this.getScores())
+        this.setState({isLoading: false, currentUser: person, txt: 'Heya ' + greeting}, this.getScores())
         console.log("USER FOUND LOCALLY ", JSON.parse(user))
       }else {
         this.checkForUser()
