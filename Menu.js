@@ -12,6 +12,7 @@ import {
     LayoutAnimation,
     TouchableHighlight
 } from 'react-native';
+const CELL_SIZE = Math.floor(width * .15); // 15% of the screen width
 
 var {width, height} = require('Dimensions').get('window');
 
@@ -25,6 +26,7 @@ class Menu extends React.Component {
       fadeAnim4: new Animated.Value(0),
       fadeAnim5: new Animated.Value(0),
       spinValue: new Animated.Value(0),
+      board: this.makeBoard(),
       pressed: false,
       helpText: '???'
     }
@@ -70,7 +72,27 @@ class Menu extends React.Component {
         delay: 750
       }
     ).start();
-    this.spin()
+    // this.spin()
+    this.moveTile(0)
+  }
+
+  makeBoard() {
+    var tilt = new Array(1)
+    for (var i = 0; i < tilt.length; i++) {
+      tilt[i] = new Animated.Value(0)
+    }
+    return {tilt}
+  }
+
+  moveTile(id) {
+    // setTimeout(() => { this.setState({ letters: this.hiddenValue(id) }, this.checkSelection(id)) }, 200);
+    var tilt = this.state.board.tilt[id];
+    tilt.setValue(0);
+    Animated.timing(tilt, {
+      toValue: .15,
+      duration: 800,
+      easing: Easing.spring
+    }).start();
   }
 
   spin () {
@@ -126,7 +148,10 @@ class Menu extends React.Component {
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg']
     })
-
+    var tilt = this.state.board.tilt[0].interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '-360deg']
+    })
     return (
       <View>
         <View style={styles.spinner}>
@@ -135,7 +160,9 @@ class Menu extends React.Component {
               width: width * .25,
               height: width * .25,
               opacity: .7,
-              transform: [{rotate: spin}] }}
+              // transform: [{rotate: spin}] }}
+              transform: [{perspective: width * .25},
+                           {rotateY: tilt}]}}
               source={require('./icon_logo.png')}
           />
           {/*<Animated.Text style={{
