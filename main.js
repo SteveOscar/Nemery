@@ -348,7 +348,7 @@ var Main = React.createClass({
                        />
 
     let spinner = this.state.isLoading ? (<ActivityIndicator size='large' color='white' style={styles.spinner}/>) : (<View style={{height: 35}} />)
-    let component
+    // let component
 
     if(playing) { component = gameBoard }
     if(!playing && this.state.currentUser) { component = menu }
