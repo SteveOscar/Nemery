@@ -61,7 +61,7 @@ class Help extends React.Component {
             <Text style={styles.helpText}>More fame  =  More problems</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.userText}> </Text>
+            <Text style={styles.userText}> </Text>
             <Text style={styles.userText}>Comments or Questions:</Text>
             <Text style={styles.userText}>support@StevenOscarOlson.com</Text>
             <Text style={styles.userText}> </Text>
@@ -86,17 +86,17 @@ var styles = StyleSheet.create({
   },
   userText: {
     marginTop: height * .02,
-    alignSelf: 'center',
+    textAlign: 'center',
     margin: height * .013,
     fontSize: width * .05,
     color: Scheme.color5,
     fontFamily: 'American Typewriter'
   },
   smallText: {
-    marginBottom: height * .02,
-    alignSelf: 'center',
+    marginBottom: height * .03,
+    textAlign: 'center',
     margin: height * .013,
-    fontSize: width * .03,
+    fontSize: width * .035,
     color: Scheme.color5,
     fontFamily: 'American Typewriter'
   }

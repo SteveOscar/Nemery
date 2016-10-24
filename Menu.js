@@ -76,12 +76,14 @@ class Menu extends React.Component {
   }
 
   moveTile() {
-    const time = Math.floor((Math.random()*6000) + 2000)
+    const time = Math.floor((Math.random()*2000) + 6000)
     const delay = Math.floor((Math.random()*2000) + 500)
+    const dir1 = Math.floor((Math.random()*2))
+    const dir2 = dir1 === 1 ? 0 : 1
     var tilt = this.state.iconTilt
-    tilt.setValue(0);
+    tilt.setValue(dir1);
     Animated.timing(tilt, {
-      toValue: 1,
+      toValue: dir2,
       duration: time,
       easing: Easing.spring
     }).start()
