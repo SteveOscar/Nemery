@@ -129,7 +129,7 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: height * .01,
     fontSize: height * .04,
-    color: Scheme.color3,
+    color: Scheme.color5,
     fontFamily: 'Iowan Old Style'
   },
   headerText: {
@@ -144,8 +144,8 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: height * .013,
     fontSize: height * .04,
-    color: Scheme.color5,
-    fontFamily: 'Apple SD Gothic Neo'
+    color: Scheme.color1,
+    fontFamily: 'American Typewriter'
   },
   spinner: {
     flex: 1,

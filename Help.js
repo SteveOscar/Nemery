@@ -55,10 +55,10 @@ class Help extends React.Component {
           <Logo letters={'*HELP*'}/>
           <Animated.View style={{opacity: this.state.fadeAnim1}}>
             <Text style={styles.helpText}>Turn the tiles over in order</Text>
-            <Text style={styles.helpText}>Higher levels  =  less time</Text>
-            <Text style={styles.helpText}>More difficutly  =  more points</Text>
-            <Text style={styles.helpText}>More points  =  more fame</Text>
-            <Text style={styles.helpText}>More fame  =  more problems</Text>
+            <Text style={styles.helpText}>Higher levels  =  Less time</Text>
+            <Text style={styles.helpText}>More difficutly  =  More points</Text>
+            <Text style={styles.helpText}>More points  =  More fame</Text>
+            <Text style={styles.helpText}>More fame  =  More problems</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim2}}>
             <Text style={styles.userText}>Comments or Questions:</Text>

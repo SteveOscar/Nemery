@@ -261,7 +261,7 @@ var Main = React.createClass({
 
   playBell() {
     if(!this.state.sound) { return }
-    let bells = ['bell.mp3', 'bell2.mp3', 'bell3.mp3']
+    let bells = ['bell.mp3', 'bell3.mp3', 'bell3.mp3']
     var s = new Sound(bells[Math.round(Math.random() * 3)], Sound.MAIN_BUNDLE, (e) => {
       s.setVolume(.4)
       s.play()
@@ -358,7 +358,7 @@ var Main = React.createClass({
     if(currentUser && showingHelp) { component = helpScreen }
     if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
-    // component = helpScreen
+    // component = transitionScreen
 
     return <View style={styles.container}>
              {component}

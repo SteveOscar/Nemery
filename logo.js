@@ -38,13 +38,15 @@ class Logo extends React.Component {
 
     const first = this.randomIndex(0, 5)
     const second = this.randomIndex(0, 5, first)
+    const delay1 = Math.floor((Math.random()*(4000 - 2000)) + 2000)
+    const delay2 = Math.floor((Math.random()*(6000 - 3000)) + 3000)
 
-    setTimeout(() => { this.moveTile(first) }, 800)
-    setTimeout(() => { this.moveTileBack(first) }, 1600);
+    setTimeout(() => { this.moveTile(first) }, delay1)
+    setTimeout(() => { this.moveTileBack(first) }, delay1 + 800);
 
     // setTimeout(() => { this.spinTile(second) }, 400)
-    setTimeout(() => { this.moveTile(second) }, 1700)
-    setTimeout(() => { this.moveTileBack(second) }, 2600);
+    setTimeout(() => { this.moveTile(second) }, delay2)
+    setTimeout(() => { this.moveTileBack(second) }, delay2 + 800);
   }
 
   randomIndex(min, max, first) {

@@ -463,7 +463,9 @@ var styles = StyleSheet.create({
     color: Scheme.color2,
     fontSize: LETTER_SIZE,
     backgroundColor: 'transparent',
-    fontFamily: 'American Typewriter'
+    fontFamily: 'American Typewriter',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 1, height: 1}
   },
   timer: {
     flex: 1,
@@ -482,7 +484,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontFamily: 'American Typewriter',
     fontSize: width * .05,
-    textShadowColor: 'red',
+    textShadowColor: Scheme.color1,
     textShadowOffset: {width: 1, height: 1}
   },
   backgroundBottom: {

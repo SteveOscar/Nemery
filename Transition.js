@@ -16,6 +16,7 @@ const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 const LETTER_SIZE = Math.floor(TILE_SIZE * .6);
+const conatinerWidth = width > 400 ? 300 : width * .8
 
 class Transition extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Transition extends React.Component {
   }
 
   componentDidMount() {
+    console.log('WDITH:  ', width)
     this.props.addBonus(Math.floor(this.getBonus() * this.props.score))
     Animated.timing(
       this.state.fadeAnim1,
@@ -94,7 +96,7 @@ class Transition extends React.Component {
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           <Button action={this.props.continue} text={'Continue'}/>
         </Animated.View>
-        <Animated.View style={{opacity: this.state.fadeAnim3}}>
+        <Animated.View style={{opacity: this.state.fadeAnim3, paddingBottom: 40}}>
           <Button action={this.props.quit} text={'Quit'}/>
         </Animated.View>
       </View>
@@ -105,7 +107,7 @@ class Transition extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
-    width: width
+    width: conatinerWidth
   },
   buttonText: {
     alignSelf: 'center',
@@ -129,7 +131,7 @@ var styles = StyleSheet.create({
     fontFamily: 'American Typewriter'
   },
   tile: {
-    width: TILE_SIZE,
+    width: TILE_SIZE * 2,
     height: TILE_SIZE,
     borderRadius: BORDER_RADIUS,
     justifyContent: 'center',
