@@ -62,7 +62,7 @@ class Help extends React.Component {
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim2}}>
             <Text style={styles.userText}>Comments or Questions:</Text>
-            <Text style={styles.userText}>SteveOscarGames@gmail.com</Text>
+            <Text style={styles.userText}>support@StevenOscarOlson.com</Text>
             <Text style={styles.userText}> </Text>
             <Text style={styles.userText}> </Text>
           </Animated.View>
