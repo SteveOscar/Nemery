@@ -185,7 +185,7 @@ class Menu extends React.Component {
           <Logo letters={'NUMERY'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
-          <Button sound={sound} action={this.props.startGame} text={'Start'}/>
+          <Button sound={sound} action={this.props.startGame} text={'Start!!'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           <Button sound={sound} action={this.props.upDifficulty} text={'Difficulty: ' + howHard}/>
