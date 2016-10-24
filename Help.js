@@ -61,10 +61,11 @@ class Help extends React.Component {
             <Text style={styles.helpText}>More fame  =  More problems</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim2}}>
+          <Text style={styles.userText}> </Text>
             <Text style={styles.userText}>Comments or Questions:</Text>
             <Text style={styles.userText}>support@StevenOscarOlson.com</Text>
             <Text style={styles.userText}> </Text>
-            <Text style={styles.userText}> </Text>
+            <Text style={styles.smallText}>If you enjoy this game, please leave a review in the app store :)</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim3, paddingBottom: 40}}>
             <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>
@@ -88,6 +89,14 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     margin: height * .013,
     fontSize: width * .05,
+    color: Scheme.color5,
+    fontFamily: 'American Typewriter'
+  },
+  smallText: {
+    marginBottom: height * .02,
+    alignSelf: 'center',
+    margin: height * .013,
+    fontSize: width * .03,
     color: Scheme.color5,
     fontFamily: 'American Typewriter'
   }
