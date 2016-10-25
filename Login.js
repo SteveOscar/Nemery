@@ -100,7 +100,6 @@ class Login extends React.Component {
         this.props.setUser(response)
       }
     } else {
-      console.log(response)
       this.setState({isLoading: false, message: 'Server error'});
     }
   }
@@ -158,7 +157,6 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-    // flexDirection: 'column',
   },
   scrollContainer: {
     paddingTop: height*.1,
@@ -186,24 +184,6 @@ var styles = StyleSheet.create({
     fontSize: height * .03,
     color: Scheme.color4
   },
-  // buttonText2: {
-  //   alignSelf: 'center',
-  //   margin: 10,
-  //   fontSize: height * .045,
-  //   color: Scheme.color1
-  // },
-  // button: {
-  //   height: 36,
-  //   flexDirection: 'row',
-  //   backgroundColor: Scheme.color3,
-  //   borderColor: 'white',
-  //   borderWidth: 3,
-  //   borderRadius: 8,
-  //   marginTop: 10,
-  //   justifyContent: 'center',
-  //   width: 250,
-  //   alignSelf: 'center'
-  // },
   spinner: {
   },
   message: {

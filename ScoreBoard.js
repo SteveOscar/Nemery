@@ -107,7 +107,6 @@ class ScoreBoard extends React.Component {
             opacity: .9,
             transform: [{rotate: spin}] }}>{"\u2B50"}</Animated.Text>
         </View>
-        {/*<Logo />*/}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
           <Text style={styles.headerText}>The Legends</Text>
         </Animated.View>

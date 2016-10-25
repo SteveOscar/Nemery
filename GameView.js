@@ -70,8 +70,8 @@ class BoardView extends React.Component {
 
   maxNumber(difficulty, length) {
     let { level } = this.props
-    if(difficulty === "Extreme") { return 99 }
-    if(difficulty === "Hard") { return (12 * level) < 99 ? 12 * level : 99 }
+    if(difficulty === "Extreme") { return (12 * level) < 99 ? 12 * level : 99 }
+    if(difficulty === "Hard") { return 12 }
     if(difficulty === "Medium") { return 9 }
     if(difficulty === "Easy") { return (6 * level) < 99 ? 6 * level : 99 }
     return 29
@@ -87,7 +87,7 @@ class BoardView extends React.Component {
       if(random.indexOf(temp) == -1){
         random.push(temp);
       } else {
-        i--;
+        i--
       }
     }
     return random
@@ -118,7 +118,6 @@ class BoardView extends React.Component {
 
   showTiles(shouldHide) {
     const delay = 500
-    // const difficultyFactor = this.timeAdjustment()
     setTimeout(() => {
       this.playWhoosh2(1)
       for (var i = 0; i < this.props.size[0]; i++) {
@@ -398,7 +397,7 @@ class BoardView extends React.Component {
   playBuzzer() {
     if(!this.props.sound) { return }
     var s = new Sound('buzzer.mp3', Sound.MAIN_BUNDLE, (e) => {
-      s.setVolume(.3)
+      s.setVolume(.2)
       s.play()
     })
   }
@@ -406,7 +405,7 @@ class BoardView extends React.Component {
   playBeep() {
     if(!this.props.sound) { return }
     var s = new Sound('beep.mp3', Sound.MAIN_BUNDLE, (e) => {
-      s.setVolume(.4)
+      s.setVolume(.3)
       s.play()
     })
   }
@@ -434,17 +433,6 @@ class BoardView extends React.Component {
       this.props.endGame()
     }, delay)
   }
-
-  // showAllTiles() {
-  //   this.endGame()
-  //   setTimeout(() => {
-  //     for (var i = 0; i < this.props.size * this.props.size; i++) {
-  //       for (var j = 0; j < this.props.size * this.props.size; j++) {
-  //         this.initialSingleTileShow(i)
-  //       }
-  //     }
-  //   }, 500);
-  // }
 }
 
 var styles = StyleSheet.create({

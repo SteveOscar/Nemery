@@ -29,7 +29,6 @@ class Transition extends React.Component {
   }
 
   componentDidMount() {
-    console.log('WDITH:  ', width)
     this.props.addBonus(Math.floor(this.getBonus() * this.props.score))
     Animated.timing(
       this.state.fadeAnim1,

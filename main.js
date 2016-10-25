@@ -49,10 +49,6 @@ var Main = React.createClass({
   },
 
   componentDidMount() {
-    // AppState.addEventListener('change', state =>
-    //   codePush.sync()
-    //   console.log('SHOULD PUSH!!!!')
-    // )
     AppState.addEventListener('change', this._handleAppStateChange)
     codePush.sync()
     AsyncStorage.getItem("highScores").then((s) => {
@@ -63,7 +59,6 @@ var Main = React.createClass({
         let person = JSON.parse(user)
         const greeting = (person && person.name) ? person.name : ''
         this.setState({isLoading: false, currentUser: person, txt: 'Heya ' + greeting}, this.getScores())
-        console.log("USER FOUND LOCALLY ", JSON.parse(user))
       }else {
         this.checkForUser()
       }
@@ -121,7 +116,6 @@ var Main = React.createClass({
     fetch("https://lit-hollows-82917.herokuapp.com/scores/" + uuid)
       .then(response => response.json())
       .then((response) => {
-        console.log('SCORE RESPONSE!!: ', response)
         this._handleScoreResponse(response);
       })
       .catch(error => {
@@ -181,7 +175,6 @@ var Main = React.createClass({
       },
       body: JSON.stringify({ user: currentUser.id, score: points })
     }).then((response) => {
-      console.log('SCORE SAVED ', response)
       this.getScores(false)
     })
     .catch(error => {
@@ -358,18 +351,16 @@ var Main = React.createClass({
     if(currentUser && showingHelp) { component = helpScreen }
     if(showingTransition) { component = transitionScreen }
     if(this.state.isLoading) { component = spinner }
-    // component = transitionScreen
 
     return <View style={styles.container}>
              {component}
              <View style={styles.messageBox}>
                <StatusBar hidden={true} />
                <Text style={styles.text}>{this.state.txt}</Text>
-               {/*<Text style={styles.user}>{currentUser ? 'Good Day , '+ this.state.score : ''}</Text>*/}
              </View>
            </View>
   },
-});
+})
 
 var styles = StyleSheet.create({
   container: {

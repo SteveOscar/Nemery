@@ -52,7 +52,7 @@ class Help extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <Logo letters={'*HELP*'}/>
+          <Text style={styles.bigText}>HELP</Text>
           <Animated.View style={{opacity: this.state.fadeAnim1}}>
             <Text style={styles.helpText}>Turn the tiles over in order</Text>
             <Text style={styles.helpText}>Higher levels  =  Less time</Text>
@@ -67,7 +67,7 @@ class Help extends React.Component {
             <Text style={styles.userText}> </Text>
             <Text style={styles.smallText}>If you enjoy this game, please leave a review in the app store :)</Text>
           </Animated.View>
-          <Animated.View style={{opacity: this.state.fadeAnim3, paddingBottom: 40}}>
+          <Animated.View style={{opacity: this.state.fadeAnim3, paddingBottom: 80, width: width * .7}}>
             <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>
           </Animated.View>
         </View>
@@ -76,6 +76,9 @@ class Help extends React.Component {
 }
 
 var styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
   helpText: {
     alignSelf: 'center',
     margin: height * .006,
@@ -97,6 +100,14 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     margin: height * .013,
     fontSize: width * .035,
+    color: Scheme.color5,
+    fontFamily: 'American Typewriter'
+  },
+  bigText: {
+    marginBottom: height * .03,
+    textAlign: 'center',
+    margin: height * .013,
+    fontSize: width * .1,
     color: Scheme.color5,
     fontFamily: 'American Typewriter'
   }

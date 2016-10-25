@@ -142,9 +142,6 @@ class Logo extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // alignSelf: 'center',
     paddingBottom: height * .25
   },
   tile: {
