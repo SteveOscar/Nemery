@@ -65,7 +65,7 @@ class Help extends React.Component {
             <Text style={styles.userText}>Comments or Questions:</Text>
             <Text style={styles.userText}>support@StevenOscarOlson.com</Text>
             <Text style={styles.userText}> </Text>
-            <Text style={styles.smallText}>If you enjoy this game, please leave a review in the app store :)</Text>
+            <Text style={styles.smallText}>If you enjoy this game, please leave a review in the app store {`\uD83D\uDC4C`}</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim3, paddingBottom: 80, width: width * .7}}>
             <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>

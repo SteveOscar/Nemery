@@ -116,28 +116,6 @@ class Menu extends React.Component {
     if(difficulty === "Extreme") { return "\uD83D\uDC80" }
   }
 
-  renderHelp() {
-    const { helpText } = this.state
-    newText = helpText
-    if(helpText === "???") { newText = "Turn" }
-    if(helpText === "Turn") { newText = "Tiles" }
-    if(helpText === "Tiles") { newText = "Over" }
-    if(helpText === "Over") { newText = "In" }
-    if(helpText === "In") { newText = "Order" }
-    if(helpText === "Order") { newText = "\uD83D\uDC4C" }
-    if(helpText === "\uD83D\uDC4C") { newText = "??" }
-    if(helpText === "??") { newText = "Don't" }
-    if(helpText === "Don't") { newText = "Make" }
-    if(helpText === "Make") { newText = "Me" }
-    if(helpText === "Me") { newText = "Repeat" }
-    if(helpText === "Repeat") { newText = "Myself" }
-    if(helpText === "Myself") { newText = "" }
-    if(helpText === "") { newText = "..." }
-    if(helpText === "...") { newText = "Okay..." }
-    if(helpText === "Okay...") { newText = "???" }
-    this.setState({ helpText: newText })
-  }
-
   render() {
     const spin = this.state.spinValue.interpolate({
       inputRange: [0, 1],
@@ -147,7 +125,7 @@ class Menu extends React.Component {
       inputRange: [0, 1],
       outputRange: ['0deg', '-360deg']
     })
-    const perspectiveAmount = (Math.random() * (0.3 - .12) + .12) * width
+    const perspectiveAmount = (Math.random() * (0.3 - .15) + .15) * width
     return (
       <View>
         <View style={styles.spinner}>
