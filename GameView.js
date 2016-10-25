@@ -70,7 +70,7 @@ class BoardView extends React.Component {
 
   maxNumber(difficulty, length) {
     let { level } = this.props
-    if(difficulty === "Extreme") { return (12 * level) < 99 ? 12 * level : 99 }
+    if(difficulty === "Extreme") { return (16 * level) < 99 ? 16 * level : 99 }
     if(difficulty === "Hard") { return 12 }
     if(difficulty === "Medium") { return 9 }
     if(difficulty === "Easy") { return (6 * level) < 99 ? 6 * level : 99 }

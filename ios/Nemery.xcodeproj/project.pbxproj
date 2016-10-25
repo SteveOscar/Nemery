@@ -30,12 +30,10 @@
 		8C3E20711DB287ED00670BFB /* bell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E20701DB287ED00670BFB /* bell3.mp3 */; };
 		8C4B76B01DADD072003F860C /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C4B76AF1DADD072003F860C /* bell.mp3 */; };
 		8C4B76BE1DADD087003F860C /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C4B76BD1DADD087003F860C /* beep.mp3 */; };
-		8C7708A61DADC810006AB6D0 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708A51DADC810006AB6D0 /* tap.mp3 */; };
-		8C7708B41DADC9E7006AB6D0 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708B31DADC9E7006AB6D0 /* tap.mp3 */; };
+		8C6556D61DBEE56C0012BF85 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C6556D51DBEE56C0012BF85 /* tap.mp3 */; };
 		8C7708B81DADCB8D006AB6D0 /* exhale.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708B71DADCB8D006AB6D0 /* exhale.mp3 */; };
 		8C7708BA1DADCD45006AB6D0 /* buzzer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708B91DADCD45006AB6D0 /* buzzer.mp3 */; };
 		8C7708BE1DADCF09006AB6D0 /* scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708BD1DADCF09006AB6D0 /* scream.mp3 */; };
-		8C7708C01DADD044006AB6D0 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C7708BF1DADD044006AB6D0 /* tap.mp3 */; };
 		8CF3D15E1D973E9500F63302 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF3D15D1D973E9500F63302 /* DeviceUtil.m */; };
 		8CFD6F681DA495E3004E8397 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFD6F671DA495A1004E8397 /* libRNSound.a */; };
 		8CFD6F6A1DA49805004E8397 /* Wood_Rattle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8CFD6F691DA49805004E8397 /* Wood_Rattle.mp3 */; };
@@ -177,12 +175,10 @@
 		8C3E20701DB287ED00670BFB /* bell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell3.mp3; path = ../../../../Desktop/Apps/Numery/bell3.mp3; sourceTree = "<group>"; };
 		8C4B76AF1DADD072003F860C /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bell.mp3; path = ../../../../Desktop/Apps/Numery/bell.mp3; sourceTree = "<group>"; };
 		8C4B76BD1DADD087003F860C /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = ../../../../Desktop/Apps/Numery/beep.mp3; sourceTree = "<group>"; };
-		8C7708A51DADC810006AB6D0 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tap.mp3; path = ../../../../Desktop/Apps/Numery/tap.mp3; sourceTree = "<group>"; };
-		8C7708B31DADC9E7006AB6D0 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tap.mp3; path = ../../../../Desktop/Apps/Numery/tap.mp3; sourceTree = "<group>"; };
+		8C6556D51DBEE56C0012BF85 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tap.mp3; path = ../../../../.Trash/tap.mp3; sourceTree = "<group>"; };
 		8C7708B71DADCB8D006AB6D0 /* exhale.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = exhale.mp3; path = ../../../../Desktop/Apps/Numery/exhale.mp3; sourceTree = "<group>"; };
 		8C7708B91DADCD45006AB6D0 /* buzzer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = buzzer.mp3; path = ../../../../Desktop/Apps/Numery/buzzer.mp3; sourceTree = "<group>"; };
 		8C7708BD1DADCF09006AB6D0 /* scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = scream.mp3; path = ../../../../Desktop/Apps/Numery/scream.mp3; sourceTree = "<group>"; };
-		8C7708BF1DADD044006AB6D0 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tap.mp3; path = ../../../../Desktop/Apps/Numery/tap.mp3; sourceTree = "<group>"; };
 		8CF3D15D1D973E9500F63302 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceUtil.m; path = AlphaReflex/DeviceUtil.m; sourceTree = "<group>"; };
 		8CF3D1691D973E9D00F63302 /* DeviceUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = "../node_modules/react-native-device/DeviceUtil.h"; sourceTree = "<group>"; };
 		8CFD6F571DA495A1004E8397 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
@@ -378,7 +374,6 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				8CFD6F691DA49805004E8397 /* Wood_Rattle.mp3 */,
 				8CFD6F711DA4A314004E8397 /* button.mp3 */,
-				8C7708BF1DADD044006AB6D0 /* tap.mp3 */,
 				8C7708B91DADCD45006AB6D0 /* buzzer.mp3 */,
 				8C4B76BD1DADD087003F860C /* beep.mp3 */,
 				8C283D1D1DBD3ADD00532357 /* icon.png */,
@@ -386,10 +381,9 @@
 				8C4B76AF1DADD072003F860C /* bell.mp3 */,
 				8C3E20701DB287ED00670BFB /* bell3.mp3 */,
 				8C3E20621DB287E600670BFB /* bell2.mp3 */,
-				8C7708B31DADC9E7006AB6D0 /* tap.mp3 */,
+				8C6556D51DBEE56C0012BF85 /* tap.mp3 */,
 				8C7708B71DADCB8D006AB6D0 /* exhale.mp3 */,
 				8CFD6F6B1DA49F33004E8397 /* click.mp3 */,
-				8C7708A51DADC810006AB6D0 /* tap.mp3 */,
 				8CFD6F6F1DA4A071004E8397 /* whoosh2.mp3 */,
 				8CFD6F6D1DA49FFB004E8397 /* whoosh.mp3 */,
 				579326718CA6476FA188586A /* Frameworks */,
@@ -476,7 +470,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 800;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -489,7 +483,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Numery" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Nemery" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -670,21 +664,19 @@
 			files = (
 				8CFD6F701DA4A071004E8397 /* whoosh2.mp3 in Resources */,
 				8C7708BA1DADCD45006AB6D0 /* buzzer.mp3 in Resources */,
-				8C7708C01DADD044006AB6D0 /* tap.mp3 in Resources */,
 				8C4B76B01DADD072003F860C /* bell.mp3 in Resources */,
 				8C3E20711DB287ED00670BFB /* bell3.mp3 in Resources */,
 				8C7708BE1DADCF09006AB6D0 /* scream.mp3 in Resources */,
 				8C7708B81DADCB8D006AB6D0 /* exhale.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				8C7708A61DADC810006AB6D0 /* tap.mp3 in Resources */,
 				8C3E20631DB287E600670BFB /* bell2.mp3 in Resources */,
-				8C7708B41DADC9E7006AB6D0 /* tap.mp3 in Resources */,
 				8C283D1E1DBD3ADD00532357 /* icon.png in Resources */,
 				8CFD6F6E1DA49FFB004E8397 /* whoosh.mp3 in Resources */,
 				8CFD6F6A1DA49805004E8397 /* Wood_Rattle.mp3 in Resources */,
 				8C4B76BE1DADD087003F860C /* beep.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8CFD6F721DA4A314004E8397 /* button.mp3 in Resources */,
+				8C6556D61DBEE56C0012BF85 /* tap.mp3 in Resources */,
 				8CFD6F6C1DA49F33004E8397 /* click.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -814,7 +806,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = stevenoscarolson.native.numery;
 				PRODUCT_NAME = AlphaReflex;
 			};
 			name = Debug;
@@ -839,7 +831,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = stevenoscarolson.native.numery;
 				PRODUCT_NAME = AlphaReflex;
 			};
 			name = Release;
@@ -964,7 +956,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Numery" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Nemery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

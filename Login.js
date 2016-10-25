@@ -120,7 +120,7 @@ class Login extends React.Component {
                   {spinner}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
           <Text style={styles.headerText2} onPress={this.props.startGame}>Welcome to</Text>
-          <Logo letters={'NUMERY'}/>
+          <Logo letters={'NEMERY'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           <Text style={styles.headerText}>Create a User Name:</Text>

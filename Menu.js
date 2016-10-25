@@ -160,7 +160,7 @@ class Menu extends React.Component {
     return (
       <View style={styles.container}>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
-          <Logo letters={'NUMERY'}/>
+          <Logo letters={'NEMERY'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim1}} >
           <Button sound={sound} action={this.props.startGame} text={'Start!!'}/>
