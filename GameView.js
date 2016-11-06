@@ -17,7 +17,7 @@ const CELL_PADDING = Math.floor(CELL_SIZE * .07); // 5% of the cell size
 const BORDER_RADIUS = CELL_PADDING * 1;
 const TILE_SIZE = CELL_SIZE - CELL_PADDING * 2;
 const LETTER_SIZE = Math.floor(TILE_SIZE * .70);
-const timer = require('react-native-timer');
+// const timer = require('react-native-timer');
 
 class BoardView extends React.Component {
   constructor(props) {
@@ -110,10 +110,6 @@ class BoardView extends React.Component {
       }
     ).start();
     this.showTiles(true)
-  }
-
-  componentWillUnmount() {
-    timer.clearInterval(this);
   }
 
   showTiles(shouldHide) {

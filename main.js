@@ -10,7 +10,6 @@ import Transition from './Transition.js'
 import quotes from './quotes.js'
 import Scheme from './colorScheme.js'
 import Sound from 'react-native-sound'
-import DeviceUUID from "react-native-device-uuid"
 import codePush from "react-native-code-push"
 var DeviceInfo = require('react-native-device-info');
 
