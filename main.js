@@ -355,7 +355,7 @@ var Main = React.createClass({
              {component}
              <View style={styles.messageBox}>
                <StatusBar hidden={true} />
-               <Text style={styles.text}>{this.state.txt}</Text>
+               <Text allowFontScaling={false} style={styles.text}>{this.state.txt}</Text>
              </View>
            </View>
   },

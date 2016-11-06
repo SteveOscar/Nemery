@@ -52,20 +52,20 @@ class Help extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <Text style={styles.bigText}>HELP</Text>
+          <Text allowFontScaling={false} style={styles.bigText}>HELP</Text>
           <Animated.View style={{opacity: this.state.fadeAnim1}}>
-            <Text style={styles.helpText}>Turn the tiles over in order</Text>
-            <Text style={styles.helpText}>Higher levels  =  Less time</Text>
-            <Text style={styles.helpText}>More difficutly  =  More points</Text>
-            <Text style={styles.helpText}>More points  =  More fame</Text>
-            <Text style={styles.helpText}>More fame  =  More problems</Text>
+            <Text allowFontScaling={false} style={styles.helpText}>Turn the tiles over in order</Text>
+            <Text allowFontScaling={false} style={styles.helpText}>Higher levels  =  Less time</Text>
+            <Text allowFontScaling={false} style={styles.helpText}>More difficutly  =  More points</Text>
+            <Text allowFontScaling={false} style={styles.helpText}>More points  =  More fame</Text>
+            <Text allowFontScaling={false} style={styles.helpText}>More fame  =  More problems</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim2}}>
-            <Text style={styles.userText}> </Text>
-            <Text style={styles.userText}>Comments or Questions:</Text>
-            <Text style={styles.userText}>support@StevenOscarOlson.com</Text>
-            <Text style={styles.userText}> </Text>
-            <Text style={styles.smallText}>If you enjoy this game, please leave a review in the app store {`\uD83D\uDC4C`}</Text>
+            <Text allowFontScaling={false} style={styles.userText}> </Text>
+            <Text allowFontScaling={false} style={styles.userText}>Comments or Questions:</Text>
+            <Text allowFontScaling={false} style={styles.userText}>support@StevenOscarOlson.com</Text>
+            <Text allowFontScaling={false} style={styles.userText}> </Text>
+            <Text allowFontScaling={false} style={styles.smallText}>If you enjoy this game, please leave a review in the app store {`\uD83D\uDC4C`}</Text>
           </Animated.View>
           <Animated.View style={{opacity: this.state.fadeAnim3, paddingBottom: 80, width: width * .7}}>
             <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>

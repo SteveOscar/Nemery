@@ -101,7 +101,7 @@ class Logo extends React.Component {
   renderTile(id, style, letter) {
     return (
       <Animated.View key={id} style={[styles.tile, style]}>
-        <Text style={styles.letter}>{letter}</Text>
+        <Text allowFontScaling={false} style={styles.letter}>{letter}</Text>
       </Animated.View>
     )
   }

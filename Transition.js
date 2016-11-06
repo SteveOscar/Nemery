@@ -74,7 +74,7 @@ class Transition extends React.Component {
   renderTile(char) {
     return (
       <View style={[styles.tile]}>
-        <Text style={{ fontFamily: 'American Typewriter', fontSize: width * .07 }}>{char}</Text>
+        <Text allowFontScaling={false} style={{ fontFamily: 'American Typewriter', fontSize: width * .07 }}>{char}</Text>
       </View>
     )
   }
@@ -85,11 +85,11 @@ class Transition extends React.Component {
     return (
       <View style={styles.container}>
         <Animated.View style={{opacity: this.state.fadeAnim2, flexDirection: 'column', alignItems: 'center', flex: 1}}>
-          <Text style={styles.headerText}>Difficulty Bonus:</Text>
-          <Text style={styles.headerText}>{Math.floor((bonus - 1) * 100) + '%'}</Text>
-          <Text style={styles.userText}>Level:</Text>
+          <Text allowFontScaling={false} style={styles.headerText}>Difficulty Bonus:</Text>
+          <Text allowFontScaling={false} style={styles.headerText}>{Math.floor((bonus - 1) * 100) + '%'}</Text>
+          <Text allowFontScaling={false} style={styles.userText}>Level:</Text>
           {this.renderTile(level)}
-          <Text style={styles.userText}>Score:</Text>
+          <Text allowFontScaling={false} style={styles.userText}>Score:</Text>
           {this.renderTile(score)}
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>

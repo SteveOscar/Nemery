@@ -60,10 +60,10 @@ class Scores extends React.Component {
       <View>
         {/*<Logo />*/}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.buttonText}>High Scores</Text>
+          <Text allowFontScaling={false} style={styles.buttonText}>High Scores</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.buttonText}>scores['user_score']</Text>
+          <Text allowFontScaling={false} style={styles.buttonText}>scores['user_score']</Text>
         </Animated.View>
       </View>
     )

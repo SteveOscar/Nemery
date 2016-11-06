@@ -77,14 +77,14 @@ class ScoreBoard extends React.Component {
       return toShow.map(function(score, index) {
         return (
           <View key={index}>
-            <Text style={styles.buttonText}>{score[0]}: {score[1]}</Text>
+            <Text allowFontScaling={false} style={styles.buttonText}>{score[0]}: {score[1]}</Text>
           </View>
         )
       })
     } else {
       return (
         <View key={1}>
-          <Text style={styles.buttonText}>Offline Mode</Text>
+          <Text allowFontScaling={false} style={styles.buttonText}>Offline Mode</Text>
         </View>
       )
     }
@@ -108,11 +108,11 @@ class ScoreBoard extends React.Component {
             transform: [{rotate: spin}] }}>{"\u2B50"}</Animated.Text>
         </View>
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.headerText}>The Legends</Text>
+          <Text allowFontScaling={false} style={styles.headerText}>The Legends</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
           {this.renderHighScores()}
-          <Text style={styles.userText}>You: {highScores['user_score'] ? highScores['user_score'] : 0}</Text>
+          <Text allowFontScaling={false} style={styles.userText}>You: {highScores['user_score'] ? highScores['user_score'] : 0}</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <Button action={this.props.backToMenu} text={'\u2190 \u2190 \u2190'}/>

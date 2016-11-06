@@ -119,11 +119,11 @@ class Login extends React.Component {
       <ScrollView ref='scroll' style={styles.scrollContainer}>
                   {spinner}
         <Animated.View style={{opacity: this.state.fadeAnim1}}>
-          <Text style={styles.headerText2} onPress={this.props.startGame}>Welcome to</Text>
+          <Text allowFontScaling={false} style={styles.headerText2} onPress={this.props.startGame}>Welcome to</Text>
           <Logo letters={'NEMERY'}/>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim2}}>
-          <Text style={styles.headerText}>Create a User Name:</Text>
+          <Text allowFontScaling={false} style={styles.headerText}>Create a User Name:</Text>
         </Animated.View>
         <Animated.View style={{opacity: this.state.fadeAnim3}}>
           <TextInput
@@ -140,11 +140,11 @@ class Login extends React.Component {
             {/*<TouchableHighlight onPress={this.onButtonPressed.bind(this)}
                       style={styles.button}
                       underlayColor='#99d9f4'>
-              <Text style={styles.buttonText2}>Submit</Text>
+              <Text allowFontScaling={false} style={styles.buttonText2}>Submit</Text>
             </TouchableHighlight>*/}
             <Button sound={false} action={this.onButtonPressed.bind(this)} text={'Submit'}/>
         </Animated.View>
-        <Text style={styles.message}>{this.state.message}</Text>
+        <Text allowFontScaling={false} style={styles.message}>{this.state.message}</Text>
       </ScrollView>
     )
   }
